@@ -9,7 +9,7 @@ const TaskList = () => {
 
   useEffect(() => {
     const tasks = getLocalStorage("TaskList");
-    tasks != taskList && setTaskList(tasks);
+    tasks !== taskList && setTaskList(tasks);
   }, [taskList]);
   return (
     <>

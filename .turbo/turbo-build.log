@@ -1,0 +1,32 @@
+
+> overseer@0.1.0 build
+> next build
+
+info  - Linting and checking validity of types...
+error - ESLint: Plugin "@next/next" was conflicted between ".eslintrc.json » eslint-config-next/core-web-vitals » plugin:@next/next/core-web-vitals" and "..\..\.eslintrc.js » eslint-config-custom » eslint-config-next » plugin:@next/next/recommended".
+info  - Creating an optimized production build...
+info  - Compiled successfully
+info  - Collecting page data...
+info  - Generating static pages (0/4)
+info  - Generating static pages (1/4)
+info  - Generating static pages (2/4)
+info  - Generating static pages (3/4)
+info  - Generating static pages (4/4)
+info  - Finalizing page optimization...
+
+Route (pages)                              Size     First Load JS
+┌ ○ /                                      308 B          73.6 kB
+├   /_app                                  0 B            73.3 kB
+├ ○ /404                                   181 B          73.5 kB
+├ λ /api/hello                             0 B            73.3 kB
+└ ○ /taskList (4463 ms)                    117 kB          191 kB
++ First Load JS shared by all              75 kB
+  ├ chunks/framework-2c79e2a64abdb08b.js   45.2 kB
+  ├ chunks/main-a0dca5a2ff5035f1.js        26.8 kB
+  ├ chunks/pages/_app-bf55c49910772dbb.js  297 B
+  ├ chunks/webpack-87b3a303122f2f0d.js     995 B
+  └ css/907303662c0f2e66.css               1.63 kB
+
+λ  (Server)  server-side renders at runtime (uses getInitialProps or getServerSideProps)
+○  (Static)  automatically rendered as static HTML (uses no initial props)
+

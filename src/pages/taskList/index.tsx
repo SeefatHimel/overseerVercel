@@ -9,6 +9,8 @@ const TaskList = () => {
 
   useEffect(() => {
     const tasks = getLocalStorage("TaskList");
+    console.log(tasks, taskList, tasks !== taskList);
+
     tasks !== taskList && setTaskList(tasks);
   }, [taskList]);
   return (

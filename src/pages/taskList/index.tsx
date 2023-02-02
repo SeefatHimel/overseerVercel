@@ -12,7 +12,7 @@ const TaskList = () => {
     console.log(tasks, taskList, tasks !== taskList);
 
     if (tasks?.length !== taskList?.length) setTaskList(tasks);
-  }, [taskList]);
+  }, []);
   return (
     <>
       <div className="w-96 mx-auto mt-52">

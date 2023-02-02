@@ -11,7 +11,7 @@ const TaskList = () => {
     const tasks = getLocalStorage("TaskList");
     console.log(tasks, taskList, tasks !== taskList);
 
-    tasks?.length !== taskList?.length && setTaskList(tasks);
+    if (tasks?.length !== taskList?.length) setTaskList(tasks);
   }, [taskList]);
   return (
     <>

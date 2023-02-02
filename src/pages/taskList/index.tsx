@@ -28,8 +28,8 @@ const TaskList = () => {
           )}
         </div>
         {/* <VerticalCard /> */}
-        {taskList?.map((task) => (
-          <VerticalCard key={Math.random()} task={task} />
+        {taskList?.map((task, index) => (
+          <VerticalCard key={index} task={task} />
         ))}
       </div>
     </>

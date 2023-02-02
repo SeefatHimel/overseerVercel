@@ -8,7 +8,7 @@ const VerticalCard = ({ task }: any) => {
       <Card>
         <div className="flex justify-between items-center">
           <div>{taskName}</div> stop
-          {/* <Stopwatch taskName={taskName} /> */}
+          <Stopwatch taskName={taskName} />
         </div>
       </Card>
     </>

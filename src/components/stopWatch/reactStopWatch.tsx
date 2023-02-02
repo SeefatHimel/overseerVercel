@@ -15,7 +15,7 @@ function StopWatch({ taskName }: any) {
   function getCurrentTimestamp() {
     return Math.floor(Date.now() / 1000);
   }
-  
+
   const start = () => {
     const taskDetails = getLocalStorage(taskName);
     console.log(
@@ -85,25 +85,25 @@ function StopWatch({ taskName }: any) {
   };
 
   const resume = () => start();
-  // useEffect(() => {
-  //   const initialTime = { ms: 0, s: 0, m: 0, h: 0 };
-  //   const taskDetails = getLocalStorage(taskName);
+  useEffect(() => {
+    const initialTime = { ms: 0, s: 0, m: 0, h: 0 };
+    const taskDetails = getLocalStorage(taskName);
 
-  //   if (taskDetails) {
-  //     let totalTime = taskDetails.total;
-  //     if (taskDetails.startTime) {
-  //       const currentTime = getCurrentTimestamp();
-  //       totalTime += currentTime - taskDetails.startTime;
-  //     }
-  //     initialTime.ms = 0;
-  //     initialTime.s = totalTime % 60;
-  //     totalTime = Math.floor(totalTime / 60);
-  //     initialTime.m = totalTime % 60;
-  //     totalTime = Math.floor(totalTime / 60);
-  //     initialTime.h = totalTime;
-  //   }
-  //   setTime(initialTime);
-  // }, []);
+    if (taskDetails) {
+      let totalTime = taskDetails.total;
+      if (taskDetails.startTime) {
+        const currentTime = getCurrentTimestamp();
+        totalTime += currentTime - taskDetails.startTime;
+      }
+      initialTime.ms = 0;
+      initialTime.s = totalTime % 60;
+      totalTime = Math.floor(totalTime / 60);
+      initialTime.m = totalTime % 60;
+      totalTime = Math.floor(totalTime / 60);
+      initialTime.h = totalTime;
+    }
+    setTime(initialTime);
+  }, []);
 
   return (
     <div className="flex items-center">

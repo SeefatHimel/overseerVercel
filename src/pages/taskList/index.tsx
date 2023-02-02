@@ -29,7 +29,7 @@ const TaskList = () => {
         </div>
         {/* <VerticalCard /> */}
         {taskList?.map((task) => (
-          <VerticalCard task={task} />
+          <VerticalCard key={Math.random()} task={task} />
         ))}
       </div>
     </>

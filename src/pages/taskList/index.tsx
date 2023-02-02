@@ -7,12 +7,12 @@ const TaskList = () => {
   const [taskList, setTaskList] = useState([]);
   const [addTask, setAddTask] = useState(false);
 
-  useEffect(() => {
-    const tasks = getLocalStorage("TaskList");
-    console.log(tasks, taskList, tasks !== taskList);
+  const tasks = getLocalStorage("TaskList");
+  // useEffect(() => {
+  //   console.log(tasks, taskList, tasks !== taskList);
 
-    if (tasks?.length !== taskList?.length) setTaskList(tasks);
-  }, []);
+  //   if (tasks?.length !== taskList?.length) setTaskList(tasks);
+  // }, []);
   return (
     <>
       <div className="w-96 mx-auto mt-52">
@@ -30,9 +30,13 @@ const TaskList = () => {
           )}
         </div>
         {/* <VerticalCard /> */}
-        {taskList?.map((task, index) => (
+        {tasks &&
+          tasks?.map((task: any, index: any) => (
+            <VerticalCard key={index} task={task} />
+          ))}
+        {/* {taskList?.map((task, index) => (
           <VerticalCard key={index} task={task} />
-        ))}
+        ))} */}
       </div>
     </>
   );

@@ -7,7 +7,7 @@ function StopWatch({ taskName }: any) {
   const [time, setTime] = useState({ ms: 0, s: 0, m: 0, h: 0 });
   const [interv, setInterv] = useState<any>();
   const [status, setStatus] = useState<any>(0);
-  const [startTime, setStartTime] = useState<any>();
+  const [resumeTime, setResumeTime] = useState<boolean>(false);
   // Not started = 0
   // started = 1
   // stopped = 2
@@ -23,7 +23,7 @@ function StopWatch({ taskName }: any) {
       taskDetails
     );
     const currentTime = getCurrentTimestamp();
-    setStartTime(currentTime);
+    // setStartTime(currentTime);
     setLocalStorage(taskName, {
       timeArray: taskDetails?.timeArray ? taskDetails.timeArray : [],
       startTime: currentTime,
@@ -85,13 +85,22 @@ function StopWatch({ taskName }: any) {
   };
 
   const resume = () => start();
+  const resumeTimeFunction = () => {
+    run();
+    setStatus(1);
+    setInterv(setInterval(run, 100));
+  };
   useEffect(() => {
     const initialTime = { ms: 0, s: 0, m: 0, h: 0 };
     const taskDetails = getLocalStorage(taskName);
+    console.log(
+      "🚀 ~ file: reactStopWatch.tsx:91 ~ useEffect ~ taskDetails",
+      taskDetails
+    );
 
     if (taskDetails) {
       let totalTime = taskDetails.total;
-      if (taskDetails.startTime) {
+      if (taskDetails?.startTime) {
         const currentTime = getCurrentTimestamp();
         totalTime += currentTime - taskDetails.startTime;
       }
@@ -103,7 +112,13 @@ function StopWatch({ taskName }: any) {
       initialTime.h = totalTime;
     }
     setTime(initialTime);
+    if (taskDetails?.startTime) {
+      setResumeTime(true);
+    }
   }, []);
+  useEffect(() => {
+    if (resumeTime) resumeTimeFunction();
+  }, [resumeTime]);
 
   return (
     <div className="flex items-center">

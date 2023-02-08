@@ -18,3 +18,11 @@ export const getLocalStorage = (key) => {
     // logout();
   }
 };
+
+export const deleteFromLocalStorage = (key) => {
+  try {
+    localStorage.removeItem(key);
+  } catch (e) {
+    // logout();
+  }
+};

@@ -22,8 +22,16 @@ const VerticalCard = ({ task }: any) => {
           >
             {taskName}
           </div>
-          {viewModalOpen ?? "open"}
-          <Stopwatch taskName={taskName} />
+          <div className="flex items-center gap-2">
+            <div>
+              {taskDetails
+                ? taskDetails.status
+                  ? taskDetails.status
+                  : "In Progress"
+                : "To-Do"}
+            </div>
+            <Stopwatch taskName={taskName} />
+          </div>
         </div>
       </Card>
       <TaskDetailsModal

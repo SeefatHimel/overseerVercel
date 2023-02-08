@@ -1,6 +1,7 @@
+import { updateTask } from "@/sevices/taskActions";
 import { getLocalStorage } from "@/storage/storage";
 import { EditOutlined, SaveOutlined } from "@ant-design/icons";
-import { Button, Modal } from "antd";
+import { Button, Input, Modal } from "antd";
 import { useState } from "react";
 
 type Props = {
@@ -10,8 +11,11 @@ type Props = {
 };
 
 const TaskDetailsModal = ({ taskName, isModalOpen, setIsModalOpen }: Props) => {
-  const taskDetails = getLocalStorage(taskName);
   const [editing, SetEditing] = useState(false);
+  const [currentTaskName, setCurrentTaskName] = useState(taskName);
+  const taskDetails = getLocalStorage(taskName)
+    ? getLocalStorage(taskName)
+    : {};
   console.log("🚀 ~ file: taskDetails.modal.tsx:14 ~ taskDetails", taskDetails);
   const handleOk = () => {
     setIsModalOpen(false);
@@ -58,12 +62,26 @@ const TaskDetailsModal = ({ taskName, isModalOpen, setIsModalOpen }: Props) => {
         footer={null}
       >
         <div className="flex gap-5 items-center">
-          <div>Task Name : {taskName} </div>
+          <div className="flex items-center">
+            <span className="pr-2">Task Name : </span>
+            {editing ? (
+              <Input
+                size="small"
+                className="h-5 w-36"
+                value={currentTaskName}
+                onChange={(e) => setCurrentTaskName(e.target.value)}
+              />
+            ) : (
+              currentTaskName
+            )}{" "}
+          </div>
           {editing ? (
             <SaveOutlined
               className="hover:text-green-600"
               onClick={() => {
-                SetEditing(false);
+                if (taskDetails) taskDetails.name = currentTaskName;
+                updateTask(taskDetails, taskName) ?? SetEditing(false);
+                handleCancel();
               }}
             />
           ) : (
@@ -75,10 +93,23 @@ const TaskDetailsModal = ({ taskName, isModalOpen, setIsModalOpen }: Props) => {
             />
           )}{" "}
         </div>
-        <div>Total Spent : {taskDetails.total} seconds </div>
+
+        <div>
+          Estimation :{" "}
+          {taskDetails?.estimation ? taskDetails?.estimation : "No estimation"}
+        </div>
+        <div>
+          Time Left :{" "}
+          {taskDetails?.estimation
+            ? taskDetails?.estimation - taskDetails.total
+            : "No estimation"}{" "}
+        </div>
+        <div>
+          Total Spent : {taskDetails?.total ? taskDetails?.total : 0} seconds{" "}
+        </div>
         <div className="w-full">
           <h3>Sessions</h3>
-          {taskDetails.timeArray?.map((time: any, index: number) => {
+          {taskDetails?.timeArray?.map((time: any, index: number) => {
             return (
               <div
                 className="flex gap-4 "

@@ -28,6 +28,7 @@ function StopWatch({ taskName }: any) {
       timeArray: taskDetails?.timeArray ? taskDetails.timeArray : [],
       startTime: currentTime,
       total: taskDetails?.total ? taskDetails.total : 0,
+      status: "In Progress",
     });
     run();
     setStatus(1);

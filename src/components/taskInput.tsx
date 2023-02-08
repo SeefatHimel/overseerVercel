@@ -1,6 +1,7 @@
 import { getLocalStorage, setLocalStorage } from "@/storage/storage";
 import { Button, Form, Input } from "antd";
 import React from "react";
+import { toast } from "react-toastify";
 
 const TaskInput = ({ taskList, setTaskList }: any) => {
   const [form] = Form.useForm();
@@ -15,6 +16,8 @@ const TaskInput = ({ taskList, setTaskList }: any) => {
       tasks.push(values?.TaskName);
       setLocalStorage("TaskList", tasks);
       tasks != taskList && setTaskList(tasks);
+    } else {
+      toast.error("TaskName Exists");
     }
   };
 

@@ -10,7 +10,7 @@ const SetCookie = (cookieName: string, value: any) => {
   console.log(cookieName, "set");
 };
 
-const CookieNames = ["user", "accessToken", "refreshToken", "activeUserID"];
+const CookieNames = ["access_token"];
 
 const RemoveCookie = (cookieName: string) => {
   try {

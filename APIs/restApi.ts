@@ -1,7 +1,8 @@
 import axios from "axios";
-import { LoginDto } from "models";
+import { LoginDto, RegisterDto } from "models";
 import { apiEndPoints } from "utils/apiEndPoints";
 import { toast } from "react-toastify";
+import { SetCookie } from "@/sevices/cookie.service";
 // var cookie = require("cookie");
 
 // export async function signUpRest(
@@ -15,27 +16,24 @@ import { toast } from "react-toastify";
 //   }
 // }
 
-export async function logInRest(data: LoginDto): Promise<LoginDto | undefined> {
+export async function loginRest(data: LoginDto): Promise<LoginDto | undefined> {
   console.log("🚀 ~ file: restApi.ts:19 ~ logInRest ~ data", data);
   try {
-    var config = {
-      method: "post",
-      url: "http://localhost:3000/users/login",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      data: data,
-    };
-
-    axios(config)
-      .then(function (response) {
-        console.log(JSON.stringify(response.data));
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-
     const res = await axios.post(`${apiEndPoints.login}`, data);
+    res?.data?.access_token &&
+      SetCookie("access_token", res?.data?.access_token);
+    return res.data;
+  } catch (error: any) {
+    return error;
+  }
+}
+
+export async function registerRest(
+  data: RegisterDto
+): Promise<RegisterDto | undefined> {
+  console.log("🚀 ~ file: restApi.ts:19 ~ logInRest ~ data", data);
+  try {
+    const res = await axios.post(`${apiEndPoints.register}`, data);
     return res.data;
   } catch (error: any) {
     return error;

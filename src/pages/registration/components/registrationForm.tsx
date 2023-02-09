@@ -2,8 +2,12 @@ import React from "react";
 import { Button, Form, Input } from "antd";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import { useRouter } from "next/router";
+import { userAPI } from "../../../../APIs/index";
 
 const RegistrationForm: React.FC = () => {
+  const router = useRouter();
+
   const [emailStatus, setEmailStatus] = useState<
     "" | "success" | "warning" | "error" | "validating" | undefined
   >("");
@@ -21,20 +25,23 @@ const RegistrationForm: React.FC = () => {
     // if (validEmail) setEmailStatus("success");
     // else setEmailStatus("error");
     // if (validEmail) {
-    //   const temp = {
-    //     email: values.email,
-    //     firstName: values.firstName,
-    //     lastName: values.lastName,
-    //     password: values.password,
-    //   };
+    //
     //   // console.log("Success:", values);
-    //   const userRegistered = await RegisterUser(temp);
-    //   if (userRegistered) navigate("/login");
-    // } else {
-    //   toast.error("email already Used", {
-    //     containerId: "top-right",
-    //   });
+    //
     // }
+    const temp = {
+      email: values.email,
+      firstName: values.firstName,
+      lastName: values.lastName,
+      password: values.password,
+    };
+    const userRegistered = await userAPI.registerUser(temp);
+    if (userRegistered) router.push("/login");
+    else {
+      toast.error("email already Used", {
+        containerId: "top-right",
+      });
+    }
   };
 
   const onFinishFailed = (errorInfo: any) => {

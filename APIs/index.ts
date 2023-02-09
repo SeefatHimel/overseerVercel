@@ -1,11 +1,15 @@
 import { config } from "config";
 import { apiFunction } from "utils/types";
-import { logInRest } from "./restApi";
+import { loginRest, registerRest } from "./restApi";
 
-const graphqlApi: apiFunction = { login: logInRest };
+const graphqlApi: apiFunction = {
+  login: loginRest,
+  registerUser: registerRest,
+};
 
 const restApi: apiFunction = {
-  login: logInRest,
+  login: loginRest,
+  registerUser: registerRest,
 };
 
 export const userAPI: apiFunction =

@@ -3,24 +3,21 @@ import { Button, Checkbox, Form, Input } from "antd";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 import { userAPI } from "APIs";
+import { GetCookie } from "@/sevices/cookie.service";
 
 const LoginForm: React.FC = () => {
   const router = useRouter();
   const signIn = async (values: any) => {
     console.log(values);
     const data = await userAPI.login(values);
-    // console.log("🚀 ~ file: loginForm.tsx:12 ~ signIn ~ data", data);
-    // if (data) {
-    //   const savedUserInfo = data && (await SaveUserInfo(data, dispatch));
-    //   savedUserInfo
-    //     ? console.log("saved user info")
-    //     : console.log(" failed to save user info");
 
-    //   toast.success(data?.message, {
-    //     containerId: "top-right",
-    //   });
-    //   navigate("/");
-    // }
+    console.log(
+      "🚀 ~ file: loginForm.tsx:12 ~ signIn ~ data",
+      data,
+      GetCookie("access_token")
+    );
+    if (GetCookie("access_token")) router.push("/");
+    
   };
 
   const onFinish = async (values: any) => {

@@ -2,12 +2,14 @@ import React from "react";
 import { Button, Checkbox, Form, Input } from "antd";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
+import { userAPI } from "APIs";
 
 const LoginForm: React.FC = () => {
   const router = useRouter();
   const signIn = async (values: any) => {
     console.log(values);
-    // const data = await SignIn(values);
+    const data = await userAPI.login(values);
+    // console.log("🚀 ~ file: loginForm.tsx:12 ~ signIn ~ data", data);
     // if (data) {
     //   const savedUserInfo = data && (await SaveUserInfo(data, dispatch));
     //   savedUserInfo
@@ -24,7 +26,7 @@ const LoginForm: React.FC = () => {
   const onFinish = async (values: any) => {
     console.log("Success:", values);
     await signIn(values);
-    router.push("/taskList");
+    // router.push("/taskList");
   };
 
   const onFinishFailed = (errorInfo: any) => {

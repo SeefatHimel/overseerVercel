@@ -94,10 +94,10 @@ function StopWatch({ taskName }: any) {
   useEffect(() => {
     const initialTime = { ms: 0, s: 0, m: 0, h: 0 };
     const taskDetails = getLocalStorage(taskName);
-    console.log(
-      "🚀 ~ file: reactStopWatch.tsx:91 ~ useEffect ~ taskDetails",
-      taskDetails
-    );
+    // console.log(
+    //   "🚀 ~ file: reactStopWatch.tsx:91 ~ useEffect ~ taskDetails",
+    //   taskDetails
+    // );
 
     if (taskDetails) {
       let totalTime = taskDetails.total;

@@ -16,7 +16,6 @@ const TaskDetailsModal = ({ taskName, isModalOpen, setIsModalOpen }: Props) => {
   const taskDetails = getLocalStorage(taskName)
     ? getLocalStorage(taskName)
     : {};
-  console.log("🚀 ~ file: taskDetails.modal.tsx:14 ~ taskDetails", taskDetails);
   const handleOk = () => {
     setIsModalOpen(false);
   };
@@ -27,7 +26,6 @@ const TaskDetailsModal = ({ taskName, isModalOpen, setIsModalOpen }: Props) => {
   const getTimeFromTimeStamp = (timestamp: any) => {
     const pad = (num: any) => ("0" + num).slice(-2); // or use padStart
     const date = new Date(timestamp * 1000);
-    console.log("🚀 ~ file: taskDetails.modal.tsx:24 ~ getTime ~ date", date);
     let hours = date.getHours(),
       minutes = date.getMinutes(),
       seconds = date.getSeconds(),

@@ -7,10 +7,6 @@ import { getLocalStorage } from "@/storage/storage";
 const VerticalCard = ({ task }: any) => {
   const taskName = task ? task : "Task 1";
   const [viewModalOpen, setViewModalOpen] = useState(false);
-  console.log(
-    "🚀 ~ file: verticalCard.tsx:8 ~ VerticalCard ~ viewModalOpen",
-    viewModalOpen
-  );
   const taskDetails = getLocalStorage(taskName);
   return (
     <>

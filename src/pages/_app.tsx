@@ -1,9 +1,12 @@
 import Navbar from "@/components/navbar";
 import "@/styles/globals.css";
+import Axios from "axios";
+import { config } from "config";
 import type { AppProps } from "next/app";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+Axios.defaults.baseURL = config?.restPrefix;
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <>

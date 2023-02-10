@@ -4,10 +4,12 @@ import LogOutButton from "../logOutButton";
 import { useRouter } from "next/router";
 
 function Navbar() {
-  const path = window.location.pathname;
+  const { asPath } = useRouter();
+
+  const router = useRouter();
+  const path = router.asPath;
   const btnText = path === "/login" ? "Register" : "Login";
   const access_token = GetCookie("access_token");
-  const router = useRouter();
   return (
     <div className="flex justify-between items-center px-4">
       <div className="text-2xl text-blue-500 py-6">Overseer </div>

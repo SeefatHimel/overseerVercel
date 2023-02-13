@@ -2,10 +2,9 @@ import axios from "axios";
 import { LoginDto, LoginResponseDto, RegisterDto } from "models/auth";
 import { apiEndPoints } from "utils/apiEndPoints";
 import { toast } from "react-toastify";
-import { RemoveCookie, SetCookie } from "@/sevices/cookie.service";
+import { GetCookie, RemoveCookie, SetCookie } from "@/sevices/cookie.service";
 import { CreateTaskDto } from "models/tasks";
 import { deleteFromLocalStorage, setLocalStorage } from "@/storage/storage";
-
 
 export async function loginRest(
   data: LoginDto
@@ -52,13 +51,30 @@ export async function logoutRest() {
 export async function createTaskRest(data: CreateTaskDto) {
   try {
     const res = await axios.post(`${apiEndPoints.tasks}`, data, {
-      withCredentials: true,
+      headers: {
+        Authorization: `Bearer ${GetCookie("access_token")}`,
+      },
     });
     console.log(res);
 
     return res.data;
   } catch (error: any) {
     toast.error("Failed to Create Task : " + error.message);
+    return false;
+  }
+}
+
+export async function getTasksRest() {
+  try {
+    const res = await axios.get(`${apiEndPoints.tasks}`, {
+      headers: {
+        Authorization: `Bearer ${GetCookie("access_token")}`,
+      },
+    });
+    console.log(res);
+    return res.data;
+  } catch (error: any) {
+    toast.error("Failed to Get Task : " + error.message);
     return false;
   }
 }

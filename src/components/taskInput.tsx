@@ -33,10 +33,33 @@ const TaskInput = ({ taskList, setTaskList }: any) => {
     <Form
       form={form}
       name="control-hooks"
+      labelCol={{ span: 7 }}
       onFinish={onFinish}
-      style={{ maxWidth: 600 }}
+      style={{ width: "500px" }}
     >
       <Form.Item name="title" label="Task Name" rules={[{ required: true }]}>
+        <Input />
+      </Form.Item>
+      <Form.Item
+        name="description"
+        label="Description"
+        rules={[{ required: true }]}
+      >
+        <Input />
+      </Form.Item>
+      <Form.Item
+        name="estimation"
+        label="Estimation (in hours)"
+        rules={[{ required: true }]}
+      >
+        <Input />
+      </Form.Item>
+
+      <Form.Item name="priority" label="Priority" rules={[{ required: true }]}>
+        <Input />
+      </Form.Item>
+
+      <Form.Item name="label" label="Label" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
 

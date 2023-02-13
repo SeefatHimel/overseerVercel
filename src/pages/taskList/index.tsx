@@ -4,9 +4,11 @@ import VerticalCard from "../../components/verticalCard";
 import { getLocalStorage } from "@/storage/storage";
 import { Button } from "antd";
 import TasksPage from "@/components/tasks";
+import GlobalMOdal from "../../components/modals/globalModal";
 const TaskList = () => {
   const [taskList, setTaskList] = useState([]);
-  const [addTask, setAddTask] = useState(false);
+  // const [addTask, setAddTask] = useState(false);
+  const [viewModalOpen, setViewModalOpen] = useState<boolean>(false);
 
   const tasks = getLocalStorage("TaskList");
   useEffect(() => {
@@ -17,17 +19,29 @@ const TaskList = () => {
   return (
     <div>
       <div className="w-96 mx-auto mt-20">
-        {/* <TasksPage /> */}
+        <TasksPage />
         <div className="py-2">
-          {!addTask && (
-            <Button onClick={() => setAddTask(true)}>Add Task</Button>
+          {!viewModalOpen && (
+            <Button
+              onClick={() => {
+                // setAddTask(true);
+                setViewModalOpen(true);
+              }}
+            >
+              Add Task
+            </Button>
           )}
-          {addTask && (
+          {viewModalOpen && (
             <>
-              <Button className="mb-2" onClick={() => setAddTask(false)}>
+              {/* <Button className="mb-2" onClick={() => setAddTask(false)}>
                 Cancel
-              </Button>
-              <TaskInput taskList={taskList} setTaskList={setTaskList} />
+              </Button> */}
+              <GlobalMOdal
+                isModalOpen={viewModalOpen}
+                setIsModalOpen={setViewModalOpen}
+              >
+                <TaskInput taskList={taskList} setTaskList={setTaskList} />
+              </GlobalMOdal>
             </>
           )}
         </div>

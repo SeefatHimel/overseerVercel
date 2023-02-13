@@ -1,24 +1,15 @@
 import axios from "axios";
-import { LoginDto, RegisterDto } from "models/auth";
+import { LoginDto, LoginResponseDto, RegisterDto } from "models/auth";
 import { apiEndPoints } from "utils/apiEndPoints";
 import { toast } from "react-toastify";
 import { RemoveCookie, SetCookie } from "@/sevices/cookie.service";
 import { CreateTaskDto } from "models/tasks";
 import { deleteFromLocalStorage, setLocalStorage } from "@/storage/storage";
-// var cookie = require("cookie");
 
-// export async function signUpRest(
-//   data: CreateCustomerRequest
-// ): Promise<CreateCustomerResponse | undefined> {
-//   try {
-//     const res = await axios.post(`${apiEndPoints.register}`, data);
-//     return res.data;
-//   } catch (error: any) {
-//     return error;
-//   }
-// }
 
-export async function loginRest(data: LoginDto): Promise<LoginDto | undefined> {
+export async function loginRest(
+  data: LoginDto
+): Promise<LoginResponseDto | undefined> {
   console.log("🚀 ~ file: restApi.ts:19 ~ logInRest ~ data", data);
   try {
     const res = await axios.post(`${apiEndPoints.login}`, data);
@@ -49,7 +40,6 @@ export async function registerRest(
 export async function logoutRest() {
   try {
     RemoveCookie("access_token");
-    // return res.data;
     deleteFromLocalStorage("userDetails");
     toast.success("Logged Out");
     return true;

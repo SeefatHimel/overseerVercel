@@ -15,9 +15,9 @@ const TaskList = () => {
     if (tasks?.length !== taskList?.length) setTaskList(tasks);
   }, [taskList]);
   return (
-    <>
+    <div>
       <div className="w-96 mx-auto mt-20">
-        <TasksPage />
+        {/* <TasksPage /> */}
         <div className="py-2">
           {!addTask && (
             <Button onClick={() => setAddTask(true)}>Add Task</Button>
@@ -36,7 +36,7 @@ const TaskList = () => {
           <VerticalCard key={Math.random()} task={task} />
         ))}
       </div>
-    </>
+    </div>
   );
 };
 

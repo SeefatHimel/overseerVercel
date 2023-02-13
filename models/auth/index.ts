@@ -2,6 +2,13 @@ export type LoginDto = {
   name: string;
   password: string;
 };
+export type LoginResponseDto = {
+  id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  access_token: string;
+};
 
 export type RegisterDto = {
   firstName: string;

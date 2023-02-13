@@ -4,6 +4,7 @@ import { apiEndPoints } from "utils/apiEndPoints";
 import { toast } from "react-toastify";
 import { RemoveCookie, SetCookie } from "@/sevices/cookie.service";
 import { CreateTaskDto } from "models/tasks";
+import { deleteFromLocalStorage, setLocalStorage } from "@/storage/storage";
 // var cookie = require("cookie");
 
 // export async function signUpRest(
@@ -23,6 +24,7 @@ export async function loginRest(data: LoginDto): Promise<LoginDto | undefined> {
     const res = await axios.post(`${apiEndPoints.login}`, data);
     if (res?.data?.access_token) {
       SetCookie("access_token", res?.data?.access_token);
+      setLocalStorage("userDetails", res.data);
       toast.success("Successfully Logged in");
     }
     return res.data;
@@ -48,6 +50,7 @@ export async function logoutRest() {
   try {
     RemoveCookie("access_token");
     // return res.data;
+    deleteFromLocalStorage("userDetails");
     toast.success("Logged Out");
     return true;
   } catch (error: any) {

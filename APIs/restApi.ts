@@ -68,7 +68,7 @@ export async function createTaskRest(data: CreateTaskDto) {
 
     return res.data;
   } catch (error: any) {
-    toast.error("Failed to Log Out");
+    toast.error("Failed to Create Task : " + error.message);
     return false;
   }
 }

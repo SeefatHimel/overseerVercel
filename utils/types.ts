@@ -7,5 +7,5 @@ export interface apiFunction {
   logout: () => {};
   registerUser: (data: RegisterDto) => Promise<RegisterDto | undefined>;
   createTask: (data: CreateTaskDto) => Promise<CreateTaskDto | undefined>;
-  getTasks: () => Promise<any>;
+  getTasks: (token?: string) => Promise<any>;
 }

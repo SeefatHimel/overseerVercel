@@ -4,7 +4,11 @@ import { apiEndPoints } from "utils/apiEndPoints";
 import { toast } from "react-toastify";
 import { GetCookie, RemoveCookie, SetCookie } from "@/sevices/cookie.service";
 import { CreateTaskDto } from "models/tasks";
-import { deleteFromLocalStorage, setLocalStorage } from "@/storage/storage";
+import {
+  deleteFromLocalStorage,
+  getLocalStorage,
+  setLocalStorage,
+} from "@/storage/storage";
 
 export async function loginRest(
   data: LoginDto
@@ -14,6 +18,7 @@ export async function loginRest(
     const res = await axios.post(`${apiEndPoints.login}`, data);
     if (res?.data?.access_token) {
       SetCookie("access_token", res?.data?.access_token);
+      setLocalStorage("access_token", res?.data?.access_token);
       setLocalStorage("userDetails", res.data);
       toast.success("Successfully Logged in");
     }
@@ -55,7 +60,7 @@ export async function createTaskRest(data: CreateTaskDto) {
         Authorization: `Bearer ${GetCookie("access_token")}`,
       },
     });
-    console.log(res);
+    // console.log(res);
 
     return res.data;
   } catch (error: any) {
@@ -64,14 +69,17 @@ export async function createTaskRest(data: CreateTaskDto) {
   }
 }
 
-export async function getTasksRest() {
+export async function getTasksRest(token?: string) {
+  console.log("🚀 ~ file: restApi.ts:73 ~ getTasksRest ~ token", token);
+  console.log("<><><>", getLocalStorage("access_token"));
+
   try {
     const res = await axios.get(`${apiEndPoints.tasks}`, {
       headers: {
-        Authorization: `Bearer ${GetCookie("access_token")}`,
+        Authorization: `Bearer ${token ? token : GetCookie("access_token")}`,
       },
     });
-    console.log(res);
+    console.log("getTasksRest", res);
     return res.data;
   } catch (error: any) {
     toast.error("Failed to Get Task : " + error.message);

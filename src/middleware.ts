@@ -11,14 +11,14 @@ export default async function middleware(req: any) {
   const url = req.url;
   const cookies = req.headers.get("cookie");
   const access_token = cookies;
-  console.log(
-    "🚀 ~ file: _middleware.js:6 ~ middleware ~ cookies",
-    access_token,
-    url
-  );
+  // console.log(
+  //   "🚀 ~ file: _middleware.js:6 ~ middleware ~ cookies",
+  //   access_token,
+  //   url
+  // );
   if (!url.includes("/_next"))
     if (!url.includes("/login") && !url.includes("/registration")) {
-      console.log("inf", access_token);
+      // console.log("inf", access_token);
       if (!access_token) return NextResponse.redirect(loginUrl);
       else return NextResponse.next();
     } else {

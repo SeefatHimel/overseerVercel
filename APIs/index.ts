@@ -1,17 +1,19 @@
 import { config } from "config";
 import { apiFunction } from "utils/types";
-import { loginRest, logoutRest, registerRest } from "./restApi";
+import { createTaskRest, loginRest, logoutRest, registerRest } from "./restApi";
 
 const graphqlApi: apiFunction = {
   login: loginRest,
   registerUser: registerRest,
   logout: logoutRest,
+  createTask: createTaskRest,
 };
 
 const restApi: apiFunction = {
   login: loginRest,
   registerUser: registerRest,
   logout: logoutRest,
+  createTask: createTaskRest,
 };
 
 export const userAPI: apiFunction =

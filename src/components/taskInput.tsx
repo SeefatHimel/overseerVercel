@@ -1,19 +1,23 @@
 import { getLocalStorage, setLocalStorage } from "@/storage/storage";
 import { Button, Form, Input } from "antd";
+import { userAPI } from "APIs";
 import React from "react";
 import { toast } from "react-toastify";
 
 const TaskInput = ({ taskList, setTaskList }: any) => {
   const [form] = Form.useForm();
 
-  const onFinish = (values: any) => {
+  const onFinish = async (values: any) => {
     console.log(values);
+    const res = await userAPI.createTask(values);
+    console.log("🚀 ~ file: taskInput.tsx:13 ~ onFinish ~ res", res);
+
     let tasks = getLocalStorage("TaskList");
     if (!tasks) tasks = [];
-    if (tasks.includes(values?.TaskName)) console.log("Ache");
+    if (tasks.includes(values?.title)) console.log("Ache");
 
-    if (values?.TaskName && !tasks.includes(values?.TaskName)) {
-      tasks.push(values?.TaskName);
+    if (values?.title && !tasks.includes(values?.title)) {
+      tasks.push(values?.title);
       setLocalStorage("TaskList", tasks);
       tasks != taskList && setTaskList(tasks);
     } else {
@@ -32,7 +36,7 @@ const TaskInput = ({ taskList, setTaskList }: any) => {
       onFinish={onFinish}
       style={{ maxWidth: 600 }}
     >
-      <Form.Item name="TaskName" label="Task Name" rules={[{ required: true }]}>
+      <Form.Item name="title" label="Task Name" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
 

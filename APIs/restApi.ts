@@ -1,8 +1,9 @@
 import axios from "axios";
-import { LoginDto, RegisterDto } from "models";
+import { LoginDto, RegisterDto } from "models/auth";
 import { apiEndPoints } from "utils/apiEndPoints";
 import { toast } from "react-toastify";
 import { RemoveCookie, SetCookie } from "@/sevices/cookie.service";
+import { CreateTaskDto } from "models/tasks";
 // var cookie = require("cookie");
 
 // export async function signUpRest(
@@ -49,6 +50,20 @@ export async function logoutRest() {
     // return res.data;
     toast.success("Logged Out");
     return true;
+  } catch (error: any) {
+    toast.error("Failed to Log Out");
+    return false;
+  }
+}
+
+export async function createTaskRest(data: CreateTaskDto) {
+  try {
+    const res = await axios.post(`${apiEndPoints.tasks}`, data, {
+      withCredentials: true,
+    });
+    console.log(res);
+
+    return res.data;
   } catch (error: any) {
     toast.error("Failed to Log Out");
     return false;

@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import VerticalCard from "../../components/verticalCard";
 import { getLocalStorage } from "@/storage/storage";
 import { Button } from "antd";
+import TasksPage from "@/components/tasks";
 const TaskList = () => {
   const [taskList, setTaskList] = useState([]);
   const [addTask, setAddTask] = useState(false);
@@ -15,7 +16,8 @@ const TaskList = () => {
   }, [taskList]);
   return (
     <>
-      <div className="w-96 mx-auto mt-52">
+      <div className="w-96 mx-auto mt-20">
+        <TasksPage />
         <div className="py-2">
           {!addTask && (
             <Button onClick={() => setAddTask(true)}>Add Task</Button>

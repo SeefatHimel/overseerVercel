@@ -9,28 +9,18 @@ import {
 } from "antd";
 import { SizeType } from "antd/es/config-provider/SizeContext";
 import { userAPI } from "APIs";
+import { log } from "console";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 
-const TaskInput = ({ taskList, setTaskList }: any) => {
+const TaskInput = ({ taskList, createTask }: any) => {
   const [form] = Form.useForm();
 
   const onFinish = async (values: any) => {
     console.log(values);
-    const res = await userAPI.createTask(values);
-    console.log("🚀 ~ file: taskInput.tsx:13 ~ onFinish ~ res", res);
 
-    let tasks = getLocalStorage("TaskList");
-    if (!tasks) tasks = [];
-    if (tasks.includes(values?.title)) console.log("Ache");
-
-    if (values?.title && !tasks.includes(values?.title)) {
-      tasks.push(values?.title);
-      setLocalStorage("TaskList", tasks);
-      tasks != taskList && setTaskList(tasks);
-    } else {
-      toast.error("TaskName Exists");
-    }
+    const res = createTask(values);
+    console.log("🚀 ~ file: taskInput copy.tsx:23 ~ onFinish ~ res", res);
   };
 
   const onReset = () => {

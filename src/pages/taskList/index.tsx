@@ -12,6 +12,7 @@ export const TaskContext = createContext<any>({ taskList: [] });
 const TaskList: NextPage = ({ allTask }: any) => {
   console.log("🚀 ~ file: index.tsx:11 ~ tasksList", allTask);
   const [taskList, setTaskList] = useState([]);
+  const [allTaskList, setAllTaskList] = useState(allTask || []);
   // const [addTask, setAddTask] = useState(false);
   const [viewModalOpen, setViewModalOpen] = useState<boolean>(false);
 
@@ -22,11 +23,11 @@ const TaskList: NextPage = ({ allTask }: any) => {
     if (tasks?.length !== taskList?.length) setTaskList(tasks);
   }, [taskList]);
   return (
-    <TaskContext.Provider value={{ tasklist: allTask }}>
+    <TaskContext.Provider value={{ tasklist: allTaskList }}>
       <div>
         <div className="w-96 mx-auto mt-20">
           <TasksPage />
-          <div className="py-2">
+          {/* <div className="py-2">
             {!viewModalOpen && (
               <Button
                 onClick={() => {
@@ -39,22 +40,27 @@ const TaskList: NextPage = ({ allTask }: any) => {
             )}
             {viewModalOpen && (
               <>
-                {/* <Button className="mb-2" onClick={() => setAddTask(false)}>
-                Cancel
-              </Button> */}
                 <GlobalMOdal
                   isModalOpen={viewModalOpen}
                   setIsModalOpen={setViewModalOpen}
                 >
-                  <TaskInput taskList={taskList} setTaskList={setTaskList} />
+                  <TaskInput
+                    taskList={allTaskList}
+                    setTaskList={setAllTaskList}
+                  />
                 </GlobalMOdal>
               </>
             )}
-          </div>
+          </div> */}
           {/* <VerticalCard /> */}
-          {taskList?.map((task) => (
+          {/* {allTaskList?.map((task: any) => {
+            console.log("🚀 ~ file: index.tsx:60 ~ task", task);
+            return <VerticalCard key={Math.random()} task={task.title} />;
+            // ))}
+          })} */}
+          {/* {taskList?.map((task) => (
             <VerticalCard key={Math.random()} task={task} />
-          ))}
+          ))} */}
         </div>
       </div>
     </TaskContext.Provider>

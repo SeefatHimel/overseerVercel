@@ -2,20 +2,19 @@ import { updateTask } from "@/sevices/taskActions";
 import { getLocalStorage } from "@/storage/storage";
 import { EditOutlined, SaveOutlined } from "@ant-design/icons";
 import { Button, Input, Modal } from "antd";
+import { TaskDto } from "models/tasks";
 import { useState } from "react";
 
 type Props = {
-  taskName: string;
+  task: TaskDto;
   isModalOpen: boolean;
   setIsModalOpen: Function;
 };
 
-const TaskDetailsModal = ({ taskName, isModalOpen, setIsModalOpen }: Props) => {
+const TaskDetailsModal = ({ task, isModalOpen, setIsModalOpen }: Props) => {
   const [editing, SetEditing] = useState(false);
-  const [currentTaskName, setCurrentTaskName] = useState(taskName);
-  const taskDetails = getLocalStorage(taskName)
-    ? getLocalStorage(taskName)
-    : {};
+  const [currentTaskName, setCurrentTaskName] = useState(task?.title);
+  const taskDetails = task;
   const handleOk = () => {
     setIsModalOpen(false);
   };
@@ -77,8 +76,8 @@ const TaskDetailsModal = ({ taskName, isModalOpen, setIsModalOpen }: Props) => {
             <SaveOutlined
               className="hover:text-green-600"
               onClick={() => {
-                if (taskDetails) taskDetails.name = currentTaskName;
-                updateTask(taskDetails, taskName) ?? SetEditing(false);
+                if (taskDetails) taskDetails.title = currentTaskName;
+                updateTask(task, taskDetails.title) ?? SetEditing(false);
                 handleCancel();
               }}
             />
@@ -89,25 +88,31 @@ const TaskDetailsModal = ({ taskName, isModalOpen, setIsModalOpen }: Props) => {
                 SetEditing(true);
               }}
             />
-          )}{" "}
+          )}
         </div>
-
+        <div>
+          Description :{" "}
+          {taskDetails?.description ? taskDetails?.description : ""}
+        </div>
         <div>
           Estimation :{" "}
           {taskDetails?.estimation ? taskDetails?.estimation : "No estimation"}
         </div>
-        <div>
+        {/* <div>
           Time Left :{" "}
           {taskDetails?.estimation
             ? taskDetails?.estimation - taskDetails.total
             : "No estimation"}{" "}
-        </div>
-        <div>
+        </div> */}
+
+        <div>Status : {taskDetails?.status ? taskDetails?.status : ""}</div>
+
+        {/* <div>
           Total Spent : {taskDetails?.total ? taskDetails?.total : 0} seconds{" "}
-        </div>
+        </div> */}
         <div className="w-full">
           <h3>Sessions</h3>
-          {taskDetails?.timeArray?.map((time: any, index: number) => {
+          {/* {taskDetails?.timeArray?.map((time: any, index: number) => {
             return (
               <div
                 className="flex gap-4 "
@@ -128,7 +133,7 @@ const TaskDetailsModal = ({ taskName, isModalOpen, setIsModalOpen }: Props) => {
                 </div>
               </div>
             );
-          })}
+          })} */}
         </div>
       </Modal>
     </>

@@ -3,11 +3,19 @@ import DisplayComponent from "./Components/DisplayComponent";
 import BtnComponent from "./Components/BtnComponent";
 import { getLocalStorage, setLocalStorage } from "../../storage/storage";
 import { userAPI } from "APIs";
-import { log } from "console";
+import {
+  getFormattedTime,
+  getFormattedTotalTime,
+  getTotalSpentTime,
+} from "@/sevices/timeActions";
+import { toast } from "react-toastify";
 
-function StopWatch({ task }: any) {
+function StopWatch({ task, addSession, addEndTime }: any) {
   const { sessions } = task;
+  const [currentSession, setCurrentSession] = useState(null);
+
   const [time, setTime] = useState({ ms: 0, s: 0, m: 0, h: 0 });
+  const [sessionTime, setSessionTime] = useState({ ms: 0, s: 0, m: 0, h: 0 });
   const [interv, setInterv] = useState<any>();
   const [status, setStatus] = useState<any>(0);
   const [resumeTime, setResumeTime] = useState<boolean>(false);
@@ -18,12 +26,15 @@ function StopWatch({ task }: any) {
   const startSession = async () => {
     console.log("start");
     const res = await userAPI.createSession(task.id);
+    res && addSession(res);
+    res && toast.success("Session Started");
     console.log("🚀 ~ file: reactStopWatch.tsx:19 ~ startSession ~ res", res);
   };
   const stopSession = async () => {
     console.log("stop");
-
     const res = await userAPI.stopSession(task.id);
+    res && addEndTime(res);
+    res && toast.success("Session Ended");
     console.log("🚀 ~ file: reactStopWatch.tsx:19 ~ startSession ~ res", res);
   };
 
@@ -32,53 +43,66 @@ function StopWatch({ task }: any) {
   }
 
   const start = async () => {
-    await startSession();
+    startSession();
+    setSessionTime({ ms: 0, s: 0, m: 0, h: 0 });
+    (updatedSessionMs = 0),
+      (updatedSessionS = 0),
+      (updatedSessionM = 0),
+      (updatedSessionH = 0);
     run();
     setStatus(1);
     setInterv(setInterval(run, 100));
   };
-
+  // console.log(time);
   var updatedMs = time.ms,
     updatedS = time.s,
     updatedM = time.m,
     updatedH = time.h;
 
+  var updatedSessionMs = sessionTime.ms,
+    updatedSessionS = sessionTime.s,
+    updatedSessionM = sessionTime.m,
+    updatedSessionH = sessionTime.h;
+
   const run = () => {
-    if (updatedM === 60) {
+    if (updatedM >= 60) {
       updatedH++;
       updatedM = 0;
     }
-    if (updatedS === 60) {
+    if (updatedS >= 60) {
       updatedM++;
       updatedS = 0;
     }
-    if (updatedMs === 10) {
+    if (updatedMs >= 10) {
       updatedS++;
       updatedMs = 0;
     }
     updatedMs++;
-    return setTime({ ms: updatedMs, s: updatedS, m: updatedM, h: updatedH });
+    setTime({ ms: updatedMs, s: updatedS, m: updatedM, h: updatedH });
+    if (updatedSessionM >= 60) {
+      updatedSessionH++;
+      updatedSessionM = 0;
+    }
+    if (updatedSessionS >= 60) {
+      updatedSessionM++;
+      updatedSessionS = 0;
+    }
+    if (updatedSessionMs >= 10) {
+      updatedSessionS++;
+      updatedSessionMs = 0;
+    }
+    updatedSessionMs++;
+    setSessionTime({
+      ms: updatedSessionMs,
+      s: updatedSessionS,
+      m: updatedSessionM,
+      h: updatedSessionH,
+    });
   };
 
   const stop = () => {
     stopSession();
     const currentTime = getCurrentTimestamp();
-    // const taskDetails = getLocalStorage(taskName);
-    // console.log(
-    //   taskDetails.startTime,
-    //   currentTime,
-    //   currentTime - taskDetails.startTime
-    // );
-    // taskDetails.total += currentTime - taskDetails.startTime;
-    // taskDetails.timeArray?.push({
-    //   startTime: taskDetails.startTime,
-    //   endTime: currentTime,
-    // });
-    // setLocalStorage(taskName, {
-    //   timeArray: taskDetails.timeArray,
-    //   startTime: null,
-    //   total: taskDetails.total,
-    // });
     const res = clearInterval(interv);
     setStatus(2);
   };
@@ -97,8 +121,56 @@ function StopWatch({ task }: any) {
   };
   useEffect(() => {
     const initialTime = { ms: 0, s: 0, m: 0, h: 0 };
-
+    let totalTime: number = getTotalSpentTime(sessions);
+    if (totalTime > 0) {
+      initialTime.ms += totalTime % 1000;
+      totalTime = Math.floor(totalTime / 1000);
+      if (totalTime > 0) {
+        initialTime.s += totalTime % 60;
+        totalTime = Math.floor(totalTime / 60);
+        if (totalTime > 0) {
+          initialTime.m += totalTime % 60;
+          totalTime = Math.floor(totalTime / 60);
+          if (totalTime > 0) {
+            initialTime.h += totalTime;
+          }
+        }
+      }
+    }
     setTime(initialTime);
+    // console.log(
+    //   "🚀 ~ file: reactStopWatch.tsx:122 ~ useEffect ~ initialTime",
+    //   initialTime
+    // );
+
+    sessions.forEach((session: any) => {
+      if (session.startTime && !session.endTime) {
+        setCurrentSession(session);
+        const initialTime = { ms: 0, s: 0, m: 0, h: 0 };
+
+        const sessionStartTime: any = new Date(session.startTime);
+
+        let totalTime: number = Date.now() - sessionStartTime;
+        if (totalTime > 0) {
+          initialTime.ms += totalTime % 1000;
+          totalTime = Math.floor(totalTime / 1000);
+          if (totalTime > 0) {
+            initialTime.s += totalTime % 60;
+            totalTime = Math.floor(totalTime / 60);
+            if (totalTime > 0) {
+              initialTime.m += totalTime % 60;
+              totalTime = Math.floor(totalTime / 60);
+              if (totalTime > 0) {
+                initialTime.h += totalTime;
+              }
+            }
+          }
+        }
+        setSessionTime(initialTime);
+        setResumeTime(true);
+      }
+    });
+
     // if (taskDetails?.startTime) {
     //   setResumeTime(true);
     // }
@@ -108,8 +180,8 @@ function StopWatch({ task }: any) {
   }, [resumeTime]);
 
   return (
-    <div className="flex items-center">
-      <DisplayComponent time={time} />
+    <div className="flex items-center w-max">
+      <DisplayComponent time={time} sessionTime={sessionTime} />
       <BtnComponent
         status={status}
         resume={resume}

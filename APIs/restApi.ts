@@ -111,13 +111,18 @@ export async function createSessionRest(taskId: string) {
 
 export async function stopSessionRest(taskId: string) {
   console.log("🚀 ~ file: restApi.ts:91 ~ stopSessionRest ~ taskID", taskId);
-  console.log("<><><>", getLocalStorage("access_token"));
+  console.log(
+    "<><><>",
+    getLocalStorage("access_token"),
+    GetCookie("access_token")
+  );
 
   try {
-    const res = await axios.post(`${apiEndPoints.sessions}/${taskId}`, {
+    const res = await axios.post(`${apiEndPoints.sessions}/${taskId}`, {}, {
       headers: {
         Authorization: `Bearer ${GetCookie("access_token")}`,
       },
+      
     });
     console.log("getTasksRest", res);
     return res.data;

@@ -4,7 +4,6 @@ import {
   getFormattedTotalTime,
   getTotalSpentTime,
 } from "@/sevices/timeActions";
-import { getLocalStorage } from "@/storage/storage";
 import { EditOutlined, SaveOutlined } from "@ant-design/icons";
 import { Button, Input, Modal } from "antd";
 import { TaskDto } from "models/tasks";
@@ -16,9 +15,10 @@ type Props = {
   setIsModalOpen: Function;
 };
 
-const TaskDetailsModal = ({ task, isModalOpen, setIsModalOpen }: Props) => {
+const TaskDetailsModal = ({ task, isModalOpen, setIsModalOpen  }: Props) => {
   const [editing, SetEditing] = useState(false);
   const [currentTaskName, setCurrentTaskName] = useState(task?.title);
+  const [currentSession, setCurrentSession] = useState(null);
   const taskDetails = task;
 
   const handleOk = () => {
@@ -87,7 +87,10 @@ const TaskDetailsModal = ({ task, isModalOpen, setIsModalOpen }: Props) => {
 
         <div>Status : {taskDetails?.status ? taskDetails?.status : ""}</div>
 
-        <div>Total Spent : {getTotalSpentTime(task.sessions)} seconds </div>
+        <div>
+          Total Spent :{" "}
+          {getFormattedTotalTime(getTotalSpentTime(task.sessions))} seconds{" "}
+        </div>
         <div className="w-full">
           <h3>Sessions</h3>
           {taskDetails?.sessions?.map((session: any, index: number) => {
@@ -111,26 +114,26 @@ const TaskDetailsModal = ({ task, isModalOpen, setIsModalOpen }: Props) => {
                   </div>
                 </div>
               );
+            else !currentSession && setCurrentSession(session);
           })}
         </div>
-        <div className="w-full">
-          <p>Current Session</p>
-          {taskDetails?.sessions?.map((session: any, index: number) => {
-            const startTime: any = new Date(session.startTime);
-            const endTime: any = session.endTime
-              ? new Date(session.endTime)
-              : null;
-
-            if (!endTime)
-              return (
-                <div className="flex gap-4 " key={session.id}>
+        {taskDetails?.sessions?.map((session: any, index: number) => {
+          const startTime: any = new Date(session.startTime);
+          const endTime: any = session.endTime
+            ? new Date(session.endTime)
+            : null;
+          if (!endTime)
+            return (
+              <div className="w-full" key={session.id}>
+                <p>Current Session</p>
+                <div className="flex gap-4 ">
                   <div className="flex">
                     {`${index + 1} > Start : ${getFormattedTime(startTime)}`}
                   </div>
                 </div>
-              );
-          })}
-        </div>
+              </div>
+            );
+        })}
       </Modal>
     </>
   );

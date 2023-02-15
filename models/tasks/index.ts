@@ -6,7 +6,7 @@ export type TaskDto = {
   id: any;
   title: string;
   description: string;
-  estimation: 2;
+  estimation: number;
   status: string;
   due: any;
   priority: string;

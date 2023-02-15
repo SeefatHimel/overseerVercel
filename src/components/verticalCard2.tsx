@@ -11,6 +11,16 @@ type Props = {
 
 const VerticalCard2 = ({ task }: Props) => {
   const taskName = task ? task.title : "Task 1";
+  task.estimation = 12;
+  const addSession = (session: any) => {
+    task.sessions.push(session);
+  };
+  const addEndTime = (session: any) => {
+    task.sessions = task.sessions.map((_session: any) => {
+      if (_session.id === session.id) return session;
+      else return _session;
+    });
+  };
   const [viewModalOpen, setViewModalOpen] = useState(false);
   return (
     <>
@@ -22,9 +32,13 @@ const VerticalCard2 = ({ task }: Props) => {
           >
             {taskName}
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex w-max items-center gap-2">
             <div>{task?.status ? task.status : "To-Do"}</div>
-            <Stopwatch task={task} />
+            <Stopwatch
+              task={task}
+              addSession={addSession}
+              addEndTime={addEndTime}
+            />
           </div>
         </div>
       </Card>

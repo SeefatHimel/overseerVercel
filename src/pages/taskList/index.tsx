@@ -25,7 +25,7 @@ const TaskList: NextPage = ({ allTask }: any) => {
   return (
     <TaskContext.Provider value={{ tasklist: allTaskList }}>
       <div>
-        <div className="w-96 mx-auto mt-20">
+        <div className="w-[720px] mx-auto mt-20">
           <TasksPage />
           {/* <div className="py-2">
             {!viewModalOpen && (

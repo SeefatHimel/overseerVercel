@@ -12,7 +12,6 @@ type Props = {
 const VerticalCard2 = ({ task }: Props) => {
   const taskName = task ? task.title : "Task 1";
   const [viewModalOpen, setViewModalOpen] = useState(false);
-  const taskDetails = getLocalStorage(taskName);
   return (
     <>
       <Card>
@@ -24,8 +23,8 @@ const VerticalCard2 = ({ task }: Props) => {
             {taskName}
           </div>
           <div className="flex items-center gap-2">
-            <div>{taskDetails?.status ? taskDetails.status : "To-Do"}</div>
-            <Stopwatch taskName={taskName} />
+            <div>{task?.status ? task.status : "To-Do"}</div>
+            <Stopwatch task={task} />
           </div>
         </div>
       </Card>

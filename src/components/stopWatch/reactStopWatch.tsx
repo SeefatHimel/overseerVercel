@@ -2,8 +2,11 @@ import React, { useEffect, useState } from "react";
 import DisplayComponent from "./Components/DisplayComponent";
 import BtnComponent from "./Components/BtnComponent";
 import { getLocalStorage, setLocalStorage } from "../../storage/storage";
+import { userAPI } from "APIs";
+import { log } from "console";
 
-function StopWatch({ taskName }: any) {
+function StopWatch({ task }: any) {
+  const { sessions } = task;
   const [time, setTime] = useState({ ms: 0, s: 0, m: 0, h: 0 });
   const [interv, setInterv] = useState<any>();
   const [status, setStatus] = useState<any>(0);
@@ -12,24 +15,24 @@ function StopWatch({ taskName }: any) {
   // started = 1
   // stopped = 2
 
+  const startSession = async () => {
+    console.log("start");
+    const res = await userAPI.createSession(task.id);
+    console.log("🚀 ~ file: reactStopWatch.tsx:19 ~ startSession ~ res", res);
+  };
+  const stopSession = async () => {
+    console.log("stop");
+
+    const res = await userAPI.stopSession(task.id);
+    console.log("🚀 ~ file: reactStopWatch.tsx:19 ~ startSession ~ res", res);
+  };
+
   function getCurrentTimestamp() {
     return Math.floor(Date.now() / 1000);
   }
 
-  const start = () => {
-    const taskDetails = getLocalStorage(taskName);
-    console.log(
-      "🚀 ~ file: reactStopWatch.tsx:20 ~ start ~ taskDetails",
-      taskDetails
-    );
-    const currentTime = getCurrentTimestamp();
-    // setStartTime(currentTime);
-    setLocalStorage(taskName, {
-      timeArray: taskDetails?.timeArray ? taskDetails.timeArray : [],
-      startTime: currentTime,
-      total: taskDetails?.total ? taskDetails.total : 0,
-      status: "In Progress",
-    });
+  const start = async () => {
+    await startSession();
     run();
     setStatus(1);
     setInterv(setInterval(run, 100));
@@ -58,24 +61,25 @@ function StopWatch({ taskName }: any) {
   };
 
   const stop = () => {
+    stopSession();
     const currentTime = getCurrentTimestamp();
-    const taskDetails = getLocalStorage(taskName);
-    console.log(
-      taskDetails.startTime,
-      currentTime,
-      currentTime - taskDetails.startTime
-    );
-    taskDetails.total += currentTime - taskDetails.startTime;
-    taskDetails.timeArray?.push({
-      startTime: taskDetails.startTime,
-      endTime: currentTime,
-    });
-    setLocalStorage(taskName, {
-      timeArray: taskDetails.timeArray,
-      startTime: null,
-      total: taskDetails.total,
-    });
-    clearInterval(interv);
+    // const taskDetails = getLocalStorage(taskName);
+    // console.log(
+    //   taskDetails.startTime,
+    //   currentTime,
+    //   currentTime - taskDetails.startTime
+    // );
+    // taskDetails.total += currentTime - taskDetails.startTime;
+    // taskDetails.timeArray?.push({
+    //   startTime: taskDetails.startTime,
+    //   endTime: currentTime,
+    // });
+    // setLocalStorage(taskName, {
+    //   timeArray: taskDetails.timeArray,
+    //   startTime: null,
+    //   total: taskDetails.total,
+    // });
+    const res = clearInterval(interv);
     setStatus(2);
   };
 
@@ -93,29 +97,11 @@ function StopWatch({ taskName }: any) {
   };
   useEffect(() => {
     const initialTime = { ms: 0, s: 0, m: 0, h: 0 };
-    const taskDetails = getLocalStorage(taskName);
-    // console.log(
-    //   "🚀 ~ file: reactStopWatch.tsx:91 ~ useEffect ~ taskDetails",
-    //   taskDetails
-    // );
 
-    if (taskDetails) {
-      let totalTime = taskDetails.total;
-      if (taskDetails?.startTime) {
-        const currentTime = getCurrentTimestamp();
-        totalTime += currentTime - taskDetails.startTime;
-      }
-      initialTime.ms = 0;
-      initialTime.s = totalTime % 60;
-      totalTime = Math.floor(totalTime / 60);
-      initialTime.m = totalTime % 60;
-      totalTime = Math.floor(totalTime / 60);
-      initialTime.h = totalTime;
-    }
     setTime(initialTime);
-    if (taskDetails?.startTime) {
-      setResumeTime(true);
-    }
+    // if (taskDetails?.startTime) {
+    //   setResumeTime(true);
+    // }
   }, []);
   useEffect(() => {
     if (resumeTime) resumeTimeFunction();

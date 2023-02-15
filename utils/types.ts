@@ -8,4 +8,6 @@ export interface apiFunction {
   registerUser: (data: RegisterDto) => Promise<RegisterDto | undefined>;
   createTask: (data: CreateTaskDto) => Promise<CreateTaskDto | undefined>;
   getTasks: (token?: string) => Promise<any>;
+  createSession: (taskID: string) => Promise<any>;
+  stopSession: (taskID: string) => Promise<any>;
 }

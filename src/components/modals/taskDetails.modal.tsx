@@ -1,4 +1,9 @@
 import { updateTask } from "@/sevices/taskActions";
+import {
+  getFormattedTime,
+  getFormattedTotalTime,
+  getTotalSpentTime,
+} from "@/sevices/timeActions";
 import { getLocalStorage } from "@/storage/storage";
 import { EditOutlined, SaveOutlined } from "@ant-design/icons";
 import { Button, Input, Modal } from "antd";
@@ -15,37 +20,12 @@ const TaskDetailsModal = ({ task, isModalOpen, setIsModalOpen }: Props) => {
   const [editing, SetEditing] = useState(false);
   const [currentTaskName, setCurrentTaskName] = useState(task?.title);
   const taskDetails = task;
+
   const handleOk = () => {
     setIsModalOpen(false);
   };
   const handleCancel = () => {
     setIsModalOpen(false);
-  };
-
-  const getTimeFromTimeStamp = (timestamp: any) => {
-    const pad = (num: any) => ("0" + num).slice(-2); // or use padStart
-    const date = new Date(timestamp * 1000);
-    let hours = date.getHours(),
-      minutes = date.getMinutes(),
-      seconds = date.getSeconds(),
-      day = date.getDate(),
-      month = date.getMonth(),
-      year = date.getFullYear();
-    return (
-      <div>
-        {pad(day) +
-          " " +
-          pad(month) +
-          " " +
-          year +
-          " " +
-          pad(hours) +
-          ":" +
-          pad(minutes) +
-          ":" +
-          pad(seconds)}
-      </div>
-    );
   };
 
   return (
@@ -107,33 +87,49 @@ const TaskDetailsModal = ({ task, isModalOpen, setIsModalOpen }: Props) => {
 
         <div>Status : {taskDetails?.status ? taskDetails?.status : ""}</div>
 
-        {/* <div>
-          Total Spent : {taskDetails?.total ? taskDetails?.total : 0} seconds{" "}
-        </div> */}
+        <div>Total Spent : {getTotalSpentTime(task.sessions)} seconds </div>
         <div className="w-full">
           <h3>Sessions</h3>
-          {/* {taskDetails?.timeArray?.map((time: any, index: number) => {
-            return (
-              <div
-                className="flex gap-4 "
-                key={Math.random()}
-                onClick={() => {
-                  getTimeFromTimeStamp(time.startTime);
-                }}
-              >
-                <div className="flex">
-                  {index + 1} {"> "} Start :{" "}
-                  {getTimeFromTimeStamp(time.startTime)}
+          {taskDetails?.sessions?.map((session: any, index: number) => {
+            const startTime: any = new Date(session.startTime);
+            const endTime: any = session.endTime
+              ? new Date(session.endTime)
+              : null;
+            if (endTime)
+              return (
+                <div className="flex gap-4 " key={session.id}>
+                  <div className="flex">
+                    {`${index + 1} > Start : ${getFormattedTime(startTime)}`}
+                  </div>
+                  <div className="flex">{`End : ${getFormattedTime(
+                    endTime
+                  )}`}</div>
+                  <div className="flex">
+                    Total :{" "}
+                    {endTime ? getFormattedTotalTime(endTime - startTime) : 0}{" "}
+                    seconds
+                  </div>
                 </div>
-                <div className="flex">
-                  End : {getTimeFromTimeStamp(time.endTime)}
+              );
+          })}
+        </div>
+        <div className="w-full">
+          <p>Current Session</p>
+          {taskDetails?.sessions?.map((session: any, index: number) => {
+            const startTime: any = new Date(session.startTime);
+            const endTime: any = session.endTime
+              ? new Date(session.endTime)
+              : null;
+
+            if (!endTime)
+              return (
+                <div className="flex gap-4 " key={session.id}>
+                  <div className="flex">
+                    {`${index + 1} > Start : ${getFormattedTime(startTime)}`}
+                  </div>
                 </div>
-                <div className="flex">
-                  Total : {time.endTime - time.startTime} seconds
-                </div>
-              </div>
-            );
-          })} */}
+              );
+          })}
         </div>
       </Modal>
     </>

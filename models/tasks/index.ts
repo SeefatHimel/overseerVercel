@@ -12,6 +12,7 @@ export type TaskDto = {
   priority: string;
   labels: string[];
   createdAt: string;
+  sessions: any;
   updatedAt: string;
   userId: any;
 };

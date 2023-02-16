@@ -13,9 +13,15 @@ type Props = {
   task: TaskDto;
   isModalOpen: boolean;
   setIsModalOpen: Function;
+  handleDelete: Function;
 };
 
-const TaskDetailsModal = ({ task, isModalOpen, setIsModalOpen  }: Props) => {
+const TaskDetailsModal = ({
+  task,
+  isModalOpen,
+  setIsModalOpen,
+  handleDelete,
+}: Props) => {
   const [editing, SetEditing] = useState(false);
   const [currentTaskName, setCurrentTaskName] = useState(task?.title);
   const [currentSession, setCurrentSession] = useState(null);
@@ -68,6 +74,17 @@ const TaskDetailsModal = ({ task, isModalOpen, setIsModalOpen  }: Props) => {
                 SetEditing(true);
               }}
             />
+          )}
+          {editing && (
+            <div
+              className="hover:text-red-600"
+              onClick={() => {
+                handleDelete();
+                setIsModalOpen(false);
+              }}
+            >
+              Delete
+            </div>
           )}
         </div>
         <div>

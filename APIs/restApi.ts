@@ -69,6 +69,22 @@ export async function createTaskRest(data: CreateTaskDto) {
   }
 }
 
+export async function deleteTaskRest(taskId: CreateTaskDto) {
+  try {
+    const res = await axios.delete(`${apiEndPoints.tasks}/${taskId}`, {
+      headers: {
+        Authorization: `Bearer ${GetCookie("access_token")}`,
+      },
+    });
+    // console.log(res);
+
+    return res.data;
+  } catch (error: any) {
+    toast.error("Failed to Create Task : " + error.message);
+    return false;
+  }
+}
+
 export async function getTasksRest(token?: string) {
   console.log("🚀 ~ file: restApi.ts:73 ~ getTasksRest ~ token", token);
   console.log("<><><>", getLocalStorage("access_token"));
@@ -118,12 +134,15 @@ export async function stopSessionRest(taskId: string) {
   );
 
   try {
-    const res = await axios.post(`${apiEndPoints.sessions}/${taskId}`, {}, {
-      headers: {
-        Authorization: `Bearer ${GetCookie("access_token")}`,
-      },
-      
-    });
+    const res = await axios.post(
+      `${apiEndPoints.sessions}/${taskId}`,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${GetCookie("access_token")}`,
+        },
+      }
+    );
     console.log("getTasksRest", res);
     return res.data;
   } catch (error: any) {

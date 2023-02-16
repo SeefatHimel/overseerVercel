@@ -1,6 +1,6 @@
 export const getFormattedTotalTime = (time: number) => {
   let tmp = time;
-  tmp = Math.floor(tmp / 1000);
+  tmp = Math.ceil(tmp / 1000);
   const seconds = tmp % 60;
   tmp = Math.floor(tmp / 60);
   const mins = tmp % 60;

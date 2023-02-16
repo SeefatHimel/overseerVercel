@@ -3,6 +3,7 @@ import { apiFunction } from "utils/types";
 import {
   createSessionRest,
   createTaskRest,
+  deleteTaskRest,
   getTasksRest,
   loginRest,
   logoutRest,
@@ -16,6 +17,7 @@ const graphqlApi: apiFunction = {
   logout: logoutRest,
   createTask: createTaskRest,
   getTasks: getTasksRest,
+  deleteTask: deleteTaskRest,
   createSession: createSessionRest,
   stopSession: stopSessionRest,
 };
@@ -26,6 +28,7 @@ const restApi: apiFunction = {
   logout: logoutRest,
   createTask: createTaskRest,
   getTasks: getTasksRest,
+  deleteTask: deleteTaskRest,
   createSession: createSessionRest,
   stopSession: stopSessionRest,
 };

@@ -7,9 +7,10 @@ import { TaskDto } from "../../models/tasks/index";
 
 type Props = {
   task: TaskDto;
+  deleteTask: Function;
 };
 
-const VerticalCard2 = ({ task }: Props) => {
+const VerticalCard2 = ({ task, deleteTask }: Props) => {
   const taskName = task ? task.title : "Task 1";
   task.estimation = 12;
   const addSession = (session: any) => {
@@ -20,6 +21,10 @@ const VerticalCard2 = ({ task }: Props) => {
       if (_session.id === session.id) return session;
       else return _session;
     });
+  };
+  const handleDelete = async () => {
+    console.log(task.id);
+    await deleteTask(task.id);
   };
   const [viewModalOpen, setViewModalOpen] = useState(false);
   return (
@@ -46,6 +51,7 @@ const VerticalCard2 = ({ task }: Props) => {
         task={task}
         isModalOpen={viewModalOpen}
         setIsModalOpen={setViewModalOpen}
+        handleDelete={handleDelete}
       />
     </>
   );

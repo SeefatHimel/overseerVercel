@@ -1,13 +1,8 @@
 import React, { useEffect, useState } from "react";
 import DisplayComponent from "./Components/DisplayComponent";
 import BtnComponent from "./Components/BtnComponent";
-import { getLocalStorage, setLocalStorage } from "../../storage/storage";
 import { userAPI } from "APIs";
-import {
-  getFormattedTime,
-  getFormattedTotalTime,
-  getTotalSpentTime,
-} from "@/sevices/timeActions";
+import { getTotalSpentTime } from "@/sevices/timeActions";
 import { toast } from "react-toastify";
 
 function StopWatch({ task, addSession, addEndTime }: any) {
@@ -19,10 +14,7 @@ function StopWatch({ task, addSession, addEndTime }: any) {
   const [interv, setInterv] = useState<any>();
   const [status, setStatus] = useState<any>(0);
   const [resumeTime, setResumeTime] = useState<boolean>(false);
-  // Not started = 0
-  // started = 1
-  // stopped = 2
-
+ 
   const startSession = async () => {
     console.log("start");
     const res = await userAPI.createSession(task.id);
@@ -37,10 +29,6 @@ function StopWatch({ task, addSession, addEndTime }: any) {
     res && toast.success("Session Ended");
     console.log("🚀 ~ file: reactStopWatch.tsx:19 ~ startSession ~ res", res);
   };
-
-  function getCurrentTimestamp() {
-    return Math.floor(Date.now() / 1000);
-  }
 
   const start = async () => {
     startSession();
@@ -102,7 +90,6 @@ function StopWatch({ task, addSession, addEndTime }: any) {
 
   const stop = () => {
     stopSession();
-    const currentTime = getCurrentTimestamp();
     const res = clearInterval(interv);
     setStatus(2);
   };
@@ -170,10 +157,6 @@ function StopWatch({ task, addSession, addEndTime }: any) {
         setResumeTime(true);
       }
     });
-
-    // if (taskDetails?.startTime) {
-    //   setResumeTime(true);
-    // }
   }, []);
   useEffect(() => {
     if (resumeTime) resumeTimeFunction();

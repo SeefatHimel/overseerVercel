@@ -1,7 +1,7 @@
 import { TaskContext } from "@/pages/taskList";
 import { Button } from "antd";
 import { userAPI } from "APIs";
-import { CreateTaskDto, TaskDto } from "models/tasks";
+import { TaskDto } from "models/tasks";
 import { useState, useEffect, useContext } from "react";
 import GlobalMOdal from "../modals/globalModal";
 import TaskInput from "../taskInput copy";
@@ -15,6 +15,14 @@ const TasksPage = () => {
   const createTask = async (data: any) => {
     try {
       const res = await userAPI.createTask(data);
+      console.log("🚀 ~ file: index.tsx:7 ~ createTask ~ res", res);
+      await getTasks();
+    } catch (error) {}
+  };
+  const deleteTask = async (taskId: any) => {
+    console.log("🚀 ~ file: index.tsx:23 ~ deleteTask ~ taskId", taskId);
+    try {
+      const res = await userAPI.deleteTask(taskId);
       console.log("🚀 ~ file: index.tsx:7 ~ createTask ~ res", res);
       await getTasks();
     } catch (error) {}
@@ -59,7 +67,9 @@ const TasksPage = () => {
       </div>
       {tasks &&
         tasks.map(
-          (task: TaskDto) => <VerticalCard2 key={task.id} task={task} />
+          (task: TaskDto) => (
+            <VerticalCard2 key={task.id} task={task} deleteTask={deleteTask} />
+          )
           // <div key={Math.random()}>{task.title}</div>
         )}
     </>

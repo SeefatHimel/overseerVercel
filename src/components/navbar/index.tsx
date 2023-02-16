@@ -19,7 +19,14 @@ function Navbar() {
   }, [userDetails]);
   return (
     <div className="flex justify-between items-center px-4">
-      <div className="text-2xl text-blue-500 py-6">Overseer </div>
+      <div
+        className="text-2xl text-blue-500 hover:text-green-500 py-6"
+        onClick={() => {
+          router.push("/");
+        }}
+      >
+        Overseer
+      </div>
       {path === "/login" || path === "/registration" ? (
         <Button
           type="primary"

@@ -30,11 +30,11 @@ const VerticalCard = ({ task }: any) => {
           </div>
         </div>
       </Card>
-      <TaskDetailsModal
+      {/* <TaskDetailsModal
         taskName={taskName}
         isModalOpen={viewModalOpen}
         setIsModalOpen={setViewModalOpen}
-      />
+      /> */}
     </>
   );
 };

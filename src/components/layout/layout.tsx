@@ -15,19 +15,10 @@ const CustomLayout = ({ children }: any) => {
     access_token
   );
   const path = router.asPath;
-  useEffect(() => {
-    if (
-      !path.includes("/login") &&
-      !path.includes("/register") &&
-      !access_token
-    ) {
-      GetCookie("access_token") && setAccessToken(GetCookie("access_token"));
-    }
-  }, [access_token, router.asPath]);
+
   return (
     <>
       <Navbar />
-
       <div className="flex">
         {!path.includes("/login") && !path.includes("/register") && (
           <>

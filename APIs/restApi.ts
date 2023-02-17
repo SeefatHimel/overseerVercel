@@ -15,6 +15,8 @@ export async function loginRest(
 ): Promise<LoginResponseDto | undefined> {
   console.log("🚀 ~ file: restApi.ts:19 ~ logInRest ~ data", data);
   try {
+    console.log(">>", axios.defaults.baseURL);
+
     const res = await axios.post(`${apiEndPoints.login}`, data);
     if (res?.data?.access_token) {
       SetCookie("access_token", res?.data?.access_token);

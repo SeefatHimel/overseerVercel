@@ -16,19 +16,6 @@ const RegistrationForm: React.FC = () => {
       "🚀 ~ file: registrationForm.tsx:11 ~ onFinish ~ values",
       values
     );
-    // // const validEmail = await CheckEmailValidity(values.email);
-    // console.log(
-    //   "🚀 ~ file: registrationForm.tsx:16 ~ onFinish ~ validEmail",
-    //   validEmail
-    // );
-
-    // if (validEmail) setEmailStatus("success");
-    // else setEmailStatus("error");
-    // if (validEmail) {
-    //
-    //   // console.log("Success:", values);
-    //
-    // }
     const temp = {
       email: values.email,
       firstName: values.firstName,

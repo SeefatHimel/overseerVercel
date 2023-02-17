@@ -1,5 +1,12 @@
+import MyTasks from "@/components/dashboard/myTasks";
+
 const DashBoard = () => {
-  return <>Dash Board</>;
+  return (
+    <>
+      <div> Dash Board</div>
+      <MyTasks />
+    </>
+  );
 };
 
 export default DashBoard;

@@ -19,6 +19,12 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/icons/stopIcon.jsx", "public/assets/icons/index.js"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "src/icons/stopIcon.jsx",
+    "public/assets/icons/index.js"
+  ],
   "exclude": ["node_modules"]
 }

@@ -17,7 +17,7 @@ function Navbar() {
     if (!userDetails && tmp) setUserDetails(tmp);
   }, [userDetails]);
   return (
-    <div className="flex h-20 justify-between items-center px-4">
+    <div className="flex h-20 w-full justify-between items-center px-4">
       <div
         className="text-2xl text-blue-500 hover:text-green-500 py-6"
         onClick={() => {

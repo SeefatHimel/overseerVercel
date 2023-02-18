@@ -1,4 +1,5 @@
 import { GetCookie } from "@/sevices/cookie.service";
+import { DoubleRightOutlined } from "@ant-design/icons";
 import { Button } from "antd";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
@@ -18,12 +19,11 @@ const CustomLayout = ({ children }: any) => {
 
   return (
     <>
-      <Navbar />
       <div className="flex">
         {!path.includes("/login") && !path.includes("/register") && (
           <>
             <div
-              className={`duration-500  ${showSideBar ? "pr-48" : "pr-20"} `}
+              className={`duration-500  ${showSideBar ? "pr-48" : "pr-8"} `}
               style={{ height: "calc(100vh - 80px)" }}
             >
               <SideBar
@@ -31,23 +31,24 @@ const CustomLayout = ({ children }: any) => {
                 setShowSideBar={setShowSideBar}
               />
             </div>
-            <Button
-              className={`absolute left-0  ${
+            <div
+              className={`absolute left-0 p-4 hover:text-green-500  ${
                 !showSideBar ? "delay-500 scale-x-100" : "scale-x-0 "
               } `}
               onClick={() => setShowSideBar(!showSideBar)}
             >
-              Show
-            </Button>
+              <DoubleRightOutlined />
+            </div>
           </>
         )}
         <div
-          className={`max-w-[720px] pt-2 ${
+          className={` w-full pt-2 px-8 ${
             !path.includes("/login") && !path.includes("/register")
               ? "pl-8 "
               : "mx-auto flex flex-col"
           } `}
         >
+          <Navbar />
           {children}
         </div>
       </div>

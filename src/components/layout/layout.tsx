@@ -1,8 +1,7 @@
 import { GetCookie } from "@/sevices/cookie.service";
 import { DoubleRightOutlined } from "@ant-design/icons";
-import { Button } from "antd";
 import { useRouter } from "next/router";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { ToastContainer } from "react-toastify";
 import Navbar from "../navbar";
 import SideBar from "../navbar/sideBar";
@@ -19,11 +18,12 @@ const CustomLayout = ({ children }: any) => {
 
   return (
     <>
+      <Navbar />
       <div className="flex">
         {!path.includes("/login") && !path.includes("/register") && (
           <>
             <div
-              className={`duration-500  ${showSideBar ? "pr-48" : "pr-8"} `}
+              className={`duration-500  ${showSideBar ? "pr-48" : "pr-0"} `}
               style={{ height: "calc(100vh - 80px)" }}
             >
               <SideBar
@@ -32,7 +32,7 @@ const CustomLayout = ({ children }: any) => {
               />
             </div>
             <div
-              className={`absolute left-0 p-4 hover:text-green-500  ${
+              className={`fixed left-0 p-4 hover:text-green-500  ${
                 !showSideBar ? "delay-500 scale-x-100" : "scale-x-0 "
               } `}
               onClick={() => setShowSideBar(!showSideBar)}
@@ -42,14 +42,19 @@ const CustomLayout = ({ children }: any) => {
           </>
         )}
         <div
-          className={` w-full pt-2 px-8 ${
-            !path.includes("/login") && !path.includes("/register")
-              ? "pl-8 "
-              : "mx-auto flex flex-col"
-          } `}
+          className="flex flex-col w-full py-4 mt-20 overflow-y-auto"
+          style={{ height: "calc(100vh - 100px)" }}
         >
-          <Navbar />
-          {children}
+          <div
+            className={` w-full pt-2 px-8 bg-white ${
+              !path.includes("/login") && !path.includes("/register")
+                ? "pl-8 "
+                : "mx-auto flex flex-col"
+            } `}
+            style={{ height: "calc(100vh - 80px)" }}
+          >
+            {children}
+          </div>
         </div>
       </div>
 

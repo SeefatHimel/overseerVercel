@@ -17,9 +17,9 @@ function Navbar() {
     if (!userDetails && tmp) setUserDetails(tmp);
   }, [userDetails]);
   return (
-    <div className="flex h-20 w-full justify-between items-center px-4">
+    <div className=" fixed flex h-20 w-full justify-between items-center px-4 shadow-lg mb-2">
       <div
-        className="text-2xl text-blue-500 hover:text-green-500 py-6"
+        className="text-2xl text-blue-500 hover:text-green-500 pl-8 py-6"
         onClick={() => {
           router.push("/");
         }}

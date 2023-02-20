@@ -25,9 +25,6 @@ export default function XYChart({ data }: any) {
     categoryAxis.renderer.labels.template.adapter.add(
       "dy",
       (dy: any, target) => {
-        if (target.dataItem && target.dataItem.index) {
-          return dy + 25;
-        }
         return dy;
       }
     );

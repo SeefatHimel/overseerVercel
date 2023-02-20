@@ -1,4 +1,4 @@
-import { RemoveAllCookies, RemoveCookie } from "@/sevices/cookie.service";
+import { RemoveAllCookies, RemoveCookie } from "@/services/cookie.service";
 import { LogoutOutlined } from "@ant-design/icons";
 import { Button } from "antd";
 import { useRouter } from "next/router";

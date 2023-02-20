@@ -2,7 +2,7 @@ import axios from "axios";
 import { LoginDto, LoginResponseDto, RegisterDto } from "models/auth";
 import { apiEndPoints } from "utils/apiEndPoints";
 import { toast } from "react-toastify";
-import { GetCookie, RemoveCookie, SetCookie } from "@/sevices/cookie.service";
+import { GetCookie, RemoveCookie, SetCookie } from "@/services/cookie.service";
 import { CreateTaskDto } from "models/tasks";
 import {
   deleteFromLocalStorage,

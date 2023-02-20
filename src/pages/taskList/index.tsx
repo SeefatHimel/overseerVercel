@@ -21,6 +21,7 @@ const TaskList: NextPage = ({ allTask }: any) => {
     // console.log(tasks, taskList, tasks !== taskList);
 
     if (tasks?.length !== taskList?.length) setTaskList(tasks);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [taskList]);
   return (
     <TaskContext.Provider value={{ tasklist: allTaskList }}>

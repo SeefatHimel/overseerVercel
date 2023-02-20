@@ -1,7 +1,7 @@
 // import  from 'jsonwebtoken';
 // const { verify } = require("jsonwebtoken");
 import { NextResponse } from "next/server";
-import { GetCookie } from "./sevices/cookie.service";
+import { GetCookie } from "./services/cookie.service";
 
 export default async function middleware(req: any) {
   const loginUrl = req.nextUrl.clone();

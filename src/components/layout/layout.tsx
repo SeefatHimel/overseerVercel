@@ -1,4 +1,4 @@
-import { GetCookie } from "@/sevices/cookie.service";
+import { GetCookie } from "@/services/cookie.service";
 import { DoubleRightOutlined } from "@ant-design/icons";
 import { useRouter } from "next/router";
 import { useState } from "react";

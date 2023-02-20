@@ -1,4 +1,4 @@
-import { GetCookie } from "@/sevices/cookie.service";
+import { GetCookie } from "@/services/cookie.service";
 import { Avatar, Button } from "antd";
 import LogOutButton from "../logOutButton";
 import { useRouter } from "next/router";

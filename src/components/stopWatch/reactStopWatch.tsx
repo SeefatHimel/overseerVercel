@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import DisplayComponent from "./Components/DisplayComponent";
 import BtnComponent from "./Components/BtnComponent";
 import { userAPI } from "APIs";
-import { getTotalSpentTime } from "@/sevices/timeActions";
+import { getTotalSpentTime } from "@/services/timeActions";
 import { toast } from "react-toastify";
 
 function StopWatch({ task, addSession, addEndTime }: any) {
@@ -14,7 +14,7 @@ function StopWatch({ task, addSession, addEndTime }: any) {
   const [interv, setInterv] = useState<any>();
   const [status, setStatus] = useState<any>(0);
   const [resumeTime, setResumeTime] = useState<boolean>(false);
- 
+
   const startSession = async () => {
     console.log("start");
     const res = await userAPI.createSession(task.id);

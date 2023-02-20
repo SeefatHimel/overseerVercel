@@ -1,6 +1,6 @@
 export const apiEndPoints = {
-  login: `/users/login`,
-  register: `/users/register`,
+  login: `/auth/login`,
+  register: `/auth/register`,
   tasks: `/tasks`,
   sessions: `/sessions`,
 };

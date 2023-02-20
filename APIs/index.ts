@@ -1,6 +1,7 @@
 import { config } from "config";
 import { apiFunction } from "utils/types";
 import {
+  authJiraRest,
   createSessionRest,
   createTaskRest,
   deleteTaskRest,
@@ -20,6 +21,7 @@ const graphqlApi: apiFunction = {
   deleteTask: deleteTaskRest,
   createSession: createSessionRest,
   stopSession: stopSessionRest,
+  authJira: authJiraRest,
 };
 
 const restApi: apiFunction = {
@@ -31,6 +33,7 @@ const restApi: apiFunction = {
   deleteTask: deleteTaskRest,
   createSession: createSessionRest,
   stopSession: stopSessionRest,
+  authJira: authJiraRest,
 };
 
 export const userAPI: apiFunction =

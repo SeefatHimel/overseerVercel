@@ -12,4 +12,5 @@ export interface apiFunction {
   getTasks: (token?: string) => Promise<any>;
   createSession: (taskID: string) => Promise<any>;
   stopSession: (taskID: string) => Promise<any>;
+  authJira: () => Promise<any>;
 }

@@ -152,3 +152,18 @@ export async function stopSessionRest(taskId: string) {
     return false;
   }
 }
+
+export async function authJiraRest() {
+  try {
+    const res = await axios.get(`${apiEndPoints.jira}`, {
+      headers: {
+        Authorization: `Bearer ${GetCookie("access_token")}`,
+      },
+    });
+    console.log("🚀 ~ file: restApi.ts:160 ~ authJiraRest ~ res:", res);
+    return res.data;
+  } catch (error: any) {
+    toast.error("Failed to Jira Auth : " + error.message);
+    return false;
+  }
+}

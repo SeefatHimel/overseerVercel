@@ -3,4 +3,5 @@ export const apiEndPoints = {
   register: `/auth/register`,
   tasks: `/tasks`,
   sessions: `/sessions`,
+  jira: `/auth/jira`,
 };

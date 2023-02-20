@@ -29,16 +29,18 @@ const VerticalCard2 = ({ task, deleteTask }: Props) => {
   const [viewModalOpen, setViewModalOpen] = useState(false);
   return (
     <>
-      <Card>
+      <Card className="w-full mb-2 px-2 border rounded-lg">
         <div className="flex justify-between items-center">
           <div
-            className="hover:text-blue-500 hover:cursor-pointer"
+            className="hover:text-blue-500 hover:cursor-pointer text-lg font-medium"
             onClick={() => setViewModalOpen(true)}
           >
             {taskName}
           </div>
           <div className="flex w-max items-center gap-2">
-            <div>{task?.status ? task.status : "To-Do"}</div>
+            <div className="text-sm font-medium text-gray-600">
+              {task?.status ? task.status : "To-Do"}
+            </div>
             <Stopwatch
               task={task}
               addSession={addSession}

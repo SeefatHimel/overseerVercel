@@ -1,13 +1,14 @@
-import { updateTask } from "@/sevices/taskActions";
+import { updateTask } from "@/services/taskActions";
 import {
   getFormattedTime,
   getFormattedTotalTime,
   getTotalSpentTime,
-} from "@/sevices/timeActions";
+} from "@/services/timeActions";
 import { EditOutlined, SaveOutlined } from "@ant-design/icons";
 import { Button, Input, Modal } from "antd";
 import { TaskDto } from "models/tasks";
 import { useState } from "react";
+import Sessions from "./components/sessions";
 
 type Props = {
   task: TaskDto;
@@ -37,120 +38,86 @@ const TaskDetailsModal = ({
   return (
     <>
       <Modal
-        title="TaskDetails Modal"
-        open={isModalOpen}
+        title="Task Details"
+        visible={isModalOpen}
         onOk={handleOk}
         onCancel={handleCancel}
-        width={720}
         footer={null}
+        width={720}
       >
-        <div className="flex gap-5 items-center">
-          <div className="flex items-center">
-            <span className="pr-2">Task Name : </span>
-            {editing ? (
-              <Input
-                size="small"
-                className="h-5 w-36"
-                value={currentTaskName}
-                onChange={(e) => setCurrentTaskName(e.target.value)}
-              />
-            ) : (
-              currentTaskName
-            )}{" "}
-          </div>
-          {editing ? (
-            <SaveOutlined
-              className="hover:text-green-600"
-              onClick={() => {
-                if (taskDetails) taskDetails.title = currentTaskName;
-                updateTask(task, taskDetails.title) ?? SetEditing(false);
-                handleCancel();
-              }}
-            />
-          ) : (
-            <EditOutlined
-              className="hover:text-green-600"
-              onClick={() => {
-                SetEditing(true);
-              }}
-            />
-          )}
-          {editing && (
-            <div
-              className="hover:text-red-600"
-              onClick={() => {
-                handleDelete();
-                setIsModalOpen(false);
-              }}
-            >
-              Delete
+        <div className="flex flex-col gap-4">
+          <div className="flex items-center gap-4">
+            <span className="w-20 text-right font-medium">Task Name:</span>
+            <div className="flex-1">
+              {editing ? (
+                <Input
+                  size="small"
+                  value={currentTaskName}
+                  onChange={(e) => setCurrentTaskName(e.target.value)}
+                />
+              ) : (
+                <div className="text-lg font-medium">{currentTaskName}</div>
+              )}
             </div>
-          )}
-        </div>
-        <div>
-          Description :{" "}
-          {taskDetails?.description ? taskDetails?.description : ""}
-        </div>
-        <div>
-          Estimation :{" "}
-          {taskDetails?.estimation ? taskDetails?.estimation : "No estimation"}
-        </div>
-        {/* <div>
-          Time Left :{" "}
-          {taskDetails?.estimation
-            ? taskDetails?.estimation - taskDetails.total
-            : "No estimation"}{" "}
-        </div> */}
-
-        <div>Status : {taskDetails?.status ? taskDetails?.status : ""}</div>
-
-        <div>
-          Total Spent :{" "}
-          {getFormattedTotalTime(getTotalSpentTime(task.sessions))} seconds{" "}
-        </div>
-        <div className="w-full">
-          <h3>Sessions</h3>
-          {taskDetails?.sessions?.map((session: any, index: number) => {
-            const startTime: any = new Date(session.startTime);
-            const endTime: any = session.endTime
-              ? new Date(session.endTime)
-              : null;
-            if (endTime)
-              return (
-                <div className="flex gap-4 " key={session.id}>
-                  <div className="flex">
-                    {`${index + 1} > Start : ${getFormattedTime(startTime)}`}
-                  </div>
-                  <div className="flex">{`End : ${getFormattedTime(
-                    endTime
-                  )}`}</div>
-                  <div className="flex">
-                    Total :{" "}
-                    {endTime ? getFormattedTotalTime(endTime - startTime) : 0}{" "}
-                    seconds
-                  </div>
-                </div>
-              );
-            else !currentSession && setCurrentSession(session);
-          })}
-        </div>
-        {taskDetails?.sessions?.map((session: any, index: number) => {
-          const startTime: any = new Date(session.startTime);
-          const endTime: any = session.endTime
-            ? new Date(session.endTime)
-            : null;
-          if (!endTime)
-            return (
-              <div className="w-full" key={session.id}>
-                <p>Current Session</p>
-                <div className="flex gap-4 ">
-                  <div className="flex">
-                    {`${index + 1} > Start : ${getFormattedTime(startTime)}`}
-                  </div>
-                </div>
+            {editing ? (
+              <div className="flex gap-2">
+                <Button
+                  type="primary"
+                  icon={<SaveOutlined />}
+                  onClick={() => {
+                    if (taskDetails) taskDetails.title = currentTaskName;
+                    updateTask(task, taskDetails.title);
+                    SetEditing(false);
+                  }}
+                >
+                  Save
+                </Button>
+                <Button onClick={() => SetEditing(false)}>Cancel</Button>
               </div>
-            );
-        })}
+            ) : (
+              <Button icon={<EditOutlined />} onClick={() => SetEditing(true)}>
+                Edit
+              </Button>
+            )}
+            {editing && (
+              <Button
+                danger
+                onClick={() => {
+                  handleDelete();
+                  setIsModalOpen(false);
+                }}
+              >
+                Delete
+              </Button>
+            )}
+          </div>
+          <div>
+            <span className="font-medium">Description:</span>{" "}
+            {taskDetails?.description ?? <em>No description provided.</em>}
+          </div>
+          <div>
+            <span className="font-medium">Estimation:</span>{" "}
+            {taskDetails?.estimation ?? <em>No estimation provided.</em>}
+          </div>
+          <div>
+            Time Left :{" "}
+            {taskDetails?.estimation
+              ? getFormattedTotalTime(
+                  taskDetails?.estimation * 3600000 -
+                    1000 -
+                    getTotalSpentTime(task.sessions)
+                )
+              : "No estimation"}{" "}
+          </div>
+
+          <div>Status : {taskDetails?.status ? taskDetails?.status : ""}</div>
+
+          <div>
+            Total Spent :{" "}
+            {getFormattedTotalTime(getTotalSpentTime(task.sessions))} seconds{" "}
+          </div>
+          <Sessions {...{ taskDetails, currentSession, setCurrentSession }} />
+        </div>
       </Modal>
     </>
   );

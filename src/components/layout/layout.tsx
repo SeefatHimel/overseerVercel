@@ -9,11 +9,6 @@ import SideBar from "../navbar/sideBar";
 const CustomLayout = ({ children }: any) => {
   const router = useRouter();
   const [showSideBar, setShowSideBar] = useState<boolean>(false);
-  const [access_token, setAccessToken] = useState(GetCookie("access_token"));
-  console.log(
-    "🚀 ~ file: layout.tsx:11 ~ CustomLayout ~ access_token",
-    access_token
-  );
   const path = router.asPath;
 
   return (

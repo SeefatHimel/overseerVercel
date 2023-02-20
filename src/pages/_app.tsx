@@ -14,7 +14,6 @@ import "react-toastify/dist/ReactToastify.css";
 // Axios.defaults.baseURL =
 //   "http://ec2-54-172-94-212.compute-1.amazonaws.com:3000";
 Axios.defaults.baseURL = config?.restPrefix;
-console.log("🚀 ~ file: _app.tsx:14 ~ config", config, Axios.defaults.baseURL);
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <CustomLayout>

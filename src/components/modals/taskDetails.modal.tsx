@@ -116,7 +116,7 @@ const TaskDetailsModal = ({
             Total Spent :{" "}
             {getFormattedTotalTime(getTotalSpentTime(task.sessions))} seconds{" "}
           </div>
-          <Sessions {...{ taskDetails, currentSession, setCurrentSession }} />
+          <Sessions {...{ taskDetails }} />
         </div>
       </Modal>
     </>

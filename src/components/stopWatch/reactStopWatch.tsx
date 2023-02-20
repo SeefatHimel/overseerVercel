@@ -157,9 +157,11 @@ function StopWatch({ task, addSession, addEndTime }: any) {
         setResumeTime(true);
       }
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   useEffect(() => {
     if (resumeTime) resumeTimeFunction();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [resumeTime]);
 
   return (

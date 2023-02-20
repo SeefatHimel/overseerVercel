@@ -1,77 +1,89 @@
 import { TaskContext } from "@/pages/taskList";
-import { Button } from "antd";
+import { Button, Empty, message, Spin } from "antd";
 import { userAPI } from "APIs";
 import { TaskDto } from "models/tasks";
 import { useState, useEffect, useContext } from "react";
-import GlobalMOdal from "../modals/globalModal";
+import GlobalModal from "../modals/globalModal";
 import TaskInput from "../taskInput copy";
 import VerticalCard2 from "../verticalCard2";
+
 const TasksPage = () => {
   const [viewModalOpen, setViewModalOpen] = useState<boolean>(false);
+  const [tasks, setTasks] = useState<TaskDto[]>([]);
+  const [loading, setLoading] = useState(false);
+  const { tasklist } = useContext(TaskContext);
 
-  const tmp = useContext(TaskContext);
-  console.log("🚀 ~ file: index.tsx:7 ~ TasksPage ~ tmp", tmp, tmp.tasklist);
-  const [tasks, setTasks] = useState<any>(tmp.tasklist);
   const createTask = async (data: any) => {
+    setLoading(true);
     try {
       const res = await userAPI.createTask(data);
-      console.log("🚀 ~ file: index.tsx:7 ~ createTask ~ res", res);
-      await getTasks();
-    } catch (error) {}
+      message.success("Task created successfully");
+      setTasks((tasks) => [res, ...tasks]);
+    } catch (error) {
+      message.error("Error creating task");
+    } finally {
+      setLoading(false);
+    }
   };
+
   const deleteTask = async (taskId: any) => {
-    console.log("🚀 ~ file: index.tsx:23 ~ deleteTask ~ taskId", taskId);
+    setLoading(true);
     try {
-      const res = await userAPI.deleteTask(taskId);
-      console.log("🚀 ~ file: index.tsx:7 ~ createTask ~ res", res);
-      await getTasks();
-    } catch (error) {}
+      await userAPI.deleteTask(taskId);
+      message.success("Task deleted successfully");
+      setTasks((tasks) => tasks.filter((task) => task.id !== taskId));
+    } catch (error) {
+      message.error("Error deleting task");
+    } finally {
+      setLoading(false);
+    }
   };
+
   const getTasks = async () => {
-    const res = await userAPI.getTasks();
-    res && setTasks(res);
-    console.log("🚀 ~ file: index.tsx:7 ~ createTask ~ res", res);
+    setLoading(true);
+    try {
+      const res = await userAPI.getTasks();
+      setTasks(res || []);
+    } catch (error) {
+      message.error("Error getting tasks");
+    } finally {
+      setLoading(false);
+    }
   };
-  useEffect(() => {}, [tasks]);
+
+  useEffect(() => {
+    getTasks();
+  }, []);
+
   return (
     <>
-      tasks
-      <Button onClick={() => createTask({ title: `${Math.random()}` })}>
-        Create task
-      </Button>
-      <Button onClick={() => getTasks()}>get tasks</Button>
-      <div className="py-2">
-        {!viewModalOpen && (
-          <Button
-            onClick={() => {
-              // setAddTask(true);
-              setViewModalOpen(true);
-            }}
-          >
-            Add Task
-          </Button>
-        )}
-        {viewModalOpen && (
-          <>
-            {/* <Button className="mb-2" onClick={() => setAddTask(false)}>
-                Cancel
-              </Button> */}
-            <GlobalMOdal
-              isModalOpen={viewModalOpen}
-              setIsModalOpen={setViewModalOpen}
-            >
-              <TaskInput taskList={tasks} createTask={createTask} />
-            </GlobalMOdal>
-          </>
-        )}
+      <div className="flex justify-between mb-4">
+        <h2 className="text-2xl font-bold">Tasks</h2>
+        <Button onClick={() => setViewModalOpen(true)}>Add Task</Button>
       </div>
-      {tasks &&
-        tasks.map(
-          (task: TaskDto) => (
-            <VerticalCard2 key={task.id} task={task} deleteTask={deleteTask} />
-          )
-          // <div key={Math.random()}>{task.title}</div>
+
+      <Spin spinning={loading}>
+        {tasks.length ? (
+          <div className="grid grid-cols-1  gap-4">
+            {tasks.map((task) => (
+              <VerticalCard2
+                key={task.id}
+                task={task}
+                deleteTask={deleteTask}
+              />
+            ))}
+          </div>
+        ) : (
+          <Empty description="No tasks" />
         )}
+      </Spin>
+
+      <GlobalModal
+        isModalOpen={viewModalOpen}
+        setIsModalOpen={setViewModalOpen}
+      >
+        <TaskInput taskList={tasklist} createTask={createTask} />
+      </GlobalModal>
     </>
   );
 };

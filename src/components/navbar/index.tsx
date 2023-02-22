@@ -15,7 +15,7 @@ function Navbar() {
   useEffect(() => {
     const tmp = getLocalStorage("userDetails");
     if (!userDetails && tmp) setUserDetails(tmp);
-  }, [userDetails]);
+  }, [userDetails, path]);
   return (
     <div className=" fixed flex h-20 w-full justify-between items-center px-4 shadow-lg mb-2">
       <div

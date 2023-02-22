@@ -16,13 +16,17 @@ export default async function middleware(req: any) {
   //   access_token,
   //   url
   // );
-  if (!url.includes("/_next"))
-    if (!url.includes("/login") && !url.includes("/registration")) {
-      // console.log("inf", access_token);
-      if (!access_token) return NextResponse.redirect(loginUrl);
-      else return NextResponse.next();
-    } else {
-      if (access_token) return NextResponse.redirect(baseUrl);
-      else return NextResponse.next();
-    }
+  // if (!url.includes("/_next"))
+  const publicRoutes = ["/login", "/register"];
+  const ignoreRoutes = ["/_next", "/assets", "/socialLogin/googleRedirectCB"];
+  // if (publicRoutes.includes(url))
+  if (publicRoutes.some((route) => url.includes(route))) {
+    // console.log("inf", access_token);
+    if (access_token) return NextResponse.redirect(baseUrl);
+    else return NextResponse.next();
+  } else if (!ignoreRoutes.some((route) => url.includes(route))) {
+    if (!access_token) return NextResponse.redirect(loginUrl);
+    else return NextResponse.next();
+  }
+  return NextResponse.next();
 }

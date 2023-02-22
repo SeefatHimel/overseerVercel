@@ -14,12 +14,12 @@ const GlobalMOdal = ({ children, isModalOpen, setIsModalOpen }: Props) => {
   };
   return (
     <Modal
-      title="TaskDetails Modal"
+      // title="TaskDetails Modal"
       open={isModalOpen}
       onOk={handleOk}
       onCancel={handleCancel}
-      width={720}
-      // footer={null}
+      width={'100%'}
+      footer={null}
     >
       {children}
     </Modal>

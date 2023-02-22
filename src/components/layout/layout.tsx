@@ -10,12 +10,14 @@ const CustomLayout = ({ children }: any) => {
   const router = useRouter();
   const [showSideBar, setShowSideBar] = useState<boolean>(false);
   const path = router.asPath;
+  const publicRoutes = ["/login", "/register"];
+  // if (path.includes("/socialLogin/googleRedirectCB")) return <>{children}</>;
 
   return (
     <>
       <Navbar />
       <div className="flex">
-        {!path.includes("/login") && !path.includes("/register") && (
+        {!publicRoutes.some((route) => path.includes(route)) && (
           <>
             <div
               className={`duration-500  ${showSideBar ? "pr-48" : "pr-0"} `}

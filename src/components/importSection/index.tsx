@@ -1,6 +1,7 @@
 import ImportCard from "@/components/importSection/importCard";
 import { Button, Card } from "antd";
 import { userAPI } from "APIs";
+import Link from "next/link";
 import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 
@@ -48,6 +49,13 @@ const ImportSection = () => {
       <div className="flex justify-end">
         <Button type="link">Skip ...</Button>{" "}
       </div>
+      <Link
+        href={"http://ec2-54-172-94-212.compute-1.amazonaws.com:3000/auth/jira"}
+      >
+        jira
+      </Link>
+
+      {/* <Link href={"http://localhost:3000/auth/google"}>Google</Link> */}
     </div>
   );
 };

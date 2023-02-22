@@ -1,5 +1,6 @@
+import SocialLogin from "@/components/login/socialLogin";
 import Link from "next/link";
-import LoginForm from "../../components/loginForm";
+import LoginForm from "../../components/login/loginForm";
 
 const Login = () => {
   return (
@@ -8,6 +9,7 @@ const Login = () => {
       <div className="mx-auto w-max p-2">
         <Link href="/registration">{"Don't have an account? .. Register"}</Link>
       </div>
+      <SocialLogin />
     </div>
   );
 };

@@ -20,6 +20,16 @@ const ImportSection = () => {
       full: true,
     },
   ];
+  const handleOnclick = async () => {
+    try {
+      const response = await userAPI.getJiraLink();
+      console.log(
+        "🚀 ~ file: index.tsx:26 ~ handleOnclick ~ response:",
+        response
+      );
+      window.open(response, "_self");
+    } catch (error) {}
+  };
   useEffect(() => {}, []);
   return (
     <div className="w-full flex flex-col gap-2">
@@ -54,7 +64,7 @@ const ImportSection = () => {
       >
         jira amazon
       </Link>
-      <Link href={"http://localhost:3000/auth/jira"}>jira local</Link>
+      <Button onClick={() => handleOnclick()}>jira link</Button>
       {/* <Link href={"http://localhost:3000/auth/google"}>Google</Link> */}
     </div>
   );

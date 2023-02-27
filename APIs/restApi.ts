@@ -167,3 +167,33 @@ export async function authJiraRest() {
     return false;
   }
 }
+
+export async function getJiraLinkRest() {
+  try {
+    const res = await axios.get(`${apiEndPoints.jira}`, {
+      headers: {
+        Authorization: `Bearer ${GetCookie("access_token")}`,
+      },
+    });
+    console.log("🚀 ~ file: restApi.ts:160 ~ authJiraRest ~ res:", res);
+    return res.data;
+  } catch (error: any) {
+    toast.error("Failed to Jira Auth : " + error.message);
+    return false;
+  }
+}
+
+export async function sendJiraCodeRest(code: string) {
+  try {
+    const res = await axios.post(`${apiEndPoints.jira}`, code, {
+      headers: {
+        Authorization: `Bearer ${GetCookie("access_token")}`,
+      },
+    });
+    console.log("🚀 ~ file: restApi.ts:160 ~ authJiraRest ~ res:", res);
+    return res.data;
+  } catch (error: any) {
+    toast.error("Failed to Jira Auth : " + error.message);
+    return false;
+  }
+}

@@ -13,7 +13,12 @@ export default async function middleware(req: any) {
   const access_token = cookies;
   // if (!url.includes("/_next"))
   const publicRoutes = ["/login", "/registration"];
-  const ignoreRoutes = ["/_next", "/assets", "/socialLogin/redirect"];
+  const ignoreRoutes = [
+    "/_next",
+    "/assets",
+    "/socialLogin/redirect",
+    "/integrations",
+  ];
   // console.log(
   //   "🚀 ~ file: _middleware.js:6 ~ middleware ~ cookies",
   //   access_token,

@@ -3,5 +3,6 @@ export const apiEndPoints = {
   register: `/auth/register`,
   tasks: `/tasks`,
   sessions: `/sessions`,
-  jira: `/auth/jira`,
+  jira: `/integrations/jira`,
+  authJira: `/auth/jira`,
 };

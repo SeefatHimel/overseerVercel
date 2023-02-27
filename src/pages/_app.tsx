@@ -13,7 +13,8 @@ import "react-toastify/dist/ReactToastify.css";
 // Axios.defaults.baseURL = process?.env?.NEXT_PUBLIC_API_PREFIX_REST;
 // Axios.defaults.baseURL =
 //   "http://ec2-54-172-94-212.compute-1.amazonaws.com:3000";
-Axios.defaults.baseURL = config?.restPrefix;
+// Axios.defaults.baseURL = config?.restPrefix;
+Axios.defaults.baseURL = config?.devPrefix;
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <CustomLayout>

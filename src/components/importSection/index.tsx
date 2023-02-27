@@ -52,9 +52,9 @@ const ImportSection = () => {
       <Link
         href={"http://ec2-54-172-94-212.compute-1.amazonaws.com:3000/auth/jira"}
       >
-        jira
+        jira amazon
       </Link>
-
+      <Link href={"http://localhost:3000/auth/jira"}>jira local</Link>
       {/* <Link href={"http://localhost:3000/auth/google"}>Google</Link> */}
     </div>
   );

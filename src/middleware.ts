@@ -11,22 +11,25 @@ export default async function middleware(req: any) {
   const url = req.url;
   const cookies = req.headers.get("cookie");
   const access_token = cookies;
+  // if (!url.includes("/_next"))
+  const publicRoutes = ["/login", "/registration"];
+  const ignoreRoutes = ["/_next", "/assets", "/socialLogin/redirect"];
   // console.log(
   //   "🚀 ~ file: _middleware.js:6 ~ middleware ~ cookies",
   //   access_token,
-  //   url
+  //   url,
+  //   publicRoutes.some((route) => url.includes(route))
   // );
-  // if (!url.includes("/_next"))
-  const publicRoutes = ["/login", "/register"];
-  const ignoreRoutes = ["/_next", "/assets", "/socialLogin/googleRedirectCB"];
   // if (publicRoutes.includes(url))
-  if (publicRoutes.some((route) => url.includes(route))) {
-    // console.log("inf", access_token);
-    if (access_token) return NextResponse.redirect(baseUrl);
-    else return NextResponse.next();
-  } else if (!ignoreRoutes.some((route) => url.includes(route))) {
-    if (!access_token) return NextResponse.redirect(loginUrl);
-    else return NextResponse.next();
+  if (!ignoreRoutes.some((route) => url.includes(route))) {
+    if (publicRoutes.some((route) => url.includes(route))) {
+      console.log("inf", access_token, url);
+      if (access_token) return NextResponse.redirect(baseUrl);
+      return NextResponse.next();
+    } else {
+      if (!access_token) return NextResponse.redirect(loginUrl);
+      else return NextResponse.next();
+    }
   }
   return NextResponse.next();
 }

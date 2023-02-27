@@ -15,7 +15,7 @@ export default function Home() {
       <h1 className="flex flex-col gap-3 pt-5">
         <Link href={"/taskList"}>Go to Tasks Page</Link>
         <Link href={"/dashboard"}>Go to DashBoard Page</Link>
-        <Link href={"/import"}>Go to Import Page</Link>
+        <Link href={"/integrations"}>Go to Import Page</Link>
         <Link href={"/onBoarding"}>Go to OnBoarding Page</Link>
       </h1>
     </div>

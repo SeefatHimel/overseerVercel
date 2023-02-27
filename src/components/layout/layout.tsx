@@ -10,7 +10,7 @@ const CustomLayout = ({ children }: any) => {
   const router = useRouter();
   const [showSideBar, setShowSideBar] = useState<boolean>(false);
   const path = router.asPath;
-  const publicRoutes = ["/login", "/register"];
+  const publicRoutes = ["/login", "/registration"];
   // if (path.includes("/socialLogin/googleRedirectCB")) return <>{children}</>;
 
   return (

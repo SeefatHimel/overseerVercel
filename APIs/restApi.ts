@@ -185,11 +185,15 @@ export async function getJiraLinkRest() {
 
 export async function sendJiraCodeRest(code: string) {
   try {
-    const res = await axios.post(`${apiEndPoints.jira}`, code, {
-      headers: {
-        Authorization: `Bearer ${GetCookie("access_token")}`,
-      },
-    });
+    const res = await axios.post(
+      `${apiEndPoints.jira}`,
+      { code: code },
+      {
+        headers: {
+          Authorization: `Bearer ${GetCookie("access_token")}`,
+        },
+      }
+    );
     console.log("🚀 ~ file: restApi.ts:160 ~ authJiraRest ~ res:", res);
     return res.data;
   } catch (error: any) {

@@ -1,4 +1,4 @@
-import { Spin } from "antd";
+import { Spin, message } from "antd";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { userAPI } from "APIs";
@@ -9,19 +9,19 @@ const CallbackPage = () => {
   const [status, setStatus] = useState(false);
 
   const codeFound = async (code: string) => {
-    try {
-      const res = await userAPI.sendJiraCode(code);
-      console.log("🚀 ~ file: callback.tsx:12 ~ codeFound ~ res:", res);
-      if (res) toast.success("Integration Successful");
-    } catch (error) {
-      toast.error("Integration Failed");
-    }
+    const res = await userAPI.sendJiraCode(code);
+    console.log("🚀 ~ file: callback.tsx:12 ~ codeFound ~ res:", res);
+    if (res) {
+      toast.success(res.message ? res.message : "Integration Successful");
+      router.push("/taskList");
+    } else router.push("/integrations");
   };
 
   useEffect(() => {
     const code = router.query.code;
     console.log("🚀 ~ file: callback.tsx:10 ~ useEffect ~ searchTerm:", code);
     if (typeof code === "string") codeFound(code);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router]);
 
   useEffect(() => {

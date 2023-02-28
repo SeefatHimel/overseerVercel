@@ -26,7 +26,11 @@ export async function loginRest(
     }
     return res.data;
   } catch (error: any) {
-    toast.error("Login Failed");
+    toast.error(
+      error.response?.data?.message
+        ? error.response?.data?.message
+        : "Login Failed"
+    );
     return error;
   }
 }
@@ -39,6 +43,11 @@ export async function registerRest(
     const res = await axios.post(`${apiEndPoints.register}`, data);
     return res.data;
   } catch (error: any) {
+    toast.error(
+      error.response?.data?.message
+        ? error.response?.data?.message
+        : "Registration Failed"
+    );
     return error;
   }
 }
@@ -194,10 +203,10 @@ export async function sendJiraCodeRest(code: string) {
         },
       }
     );
-    console.log("🚀 ~ file: restApi.ts:160 ~ authJiraRest ~ res:", res);
     return res.data;
   } catch (error: any) {
-    toast.error("Failed to Jira Auth : " + error.message);
+    console.log("🚀 ~ file: restApi.ts:210 ~ sendJiraCodeRest ~ error:", error);
+    toast.error("Failed to Jira Auth : " + error.response?.data?.message);
     return false;
   }
 }

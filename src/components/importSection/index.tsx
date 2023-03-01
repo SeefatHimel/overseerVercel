@@ -56,7 +56,6 @@ const ImportSection = ({ integrations }: any) => {
         jira amazon
       </Link>
       <Button onClick={() => handleOnclick()}>jira link</Button>
-      {/* <Link href={"http://localhost:3000/auth/google"}>Google</Link> */}
     </div>
   );
 };

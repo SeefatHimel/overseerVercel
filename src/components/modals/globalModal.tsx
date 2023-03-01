@@ -18,7 +18,7 @@ const GlobalMOdal = ({ children, isModalOpen, setIsModalOpen }: Props) => {
       open={isModalOpen}
       onOk={handleOk}
       onCancel={handleCancel}
-      width={'100%'}
+      width={"720px"}
       footer={null}
     >
       {children}

@@ -1,10 +1,14 @@
 import { Image, Modal, Spin, Tooltip } from "antd";
+import axios from "axios";
+import { config } from "config";
 import Link from "next/link";
 import { useState } from "react";
 import GlobalMOdal from "../modals/globalModal";
 
 const SocialLogin = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  console.log(axios);
+
   return (
     <div className="flex flex-col items-center w-full">
       <div>Or login with ..</div>
@@ -15,7 +19,7 @@ const SocialLogin = () => {
             title={"Login with Facebook"}
             color="purple"
           >
-            <Link href={"http://localhost:3000/auth/facebook/login"}>
+            <Link href={`${config?.baseUrl}/auth/facebook/login`}>
               <div
                 className="bg-blue-200 grayscale duration-1000 
               rounded-xl px-5 font-extrabold text-2xl py-2.5 
@@ -42,7 +46,7 @@ const SocialLogin = () => {
             title={"Login with Google"}
             color="purple"
           >
-            <Link href={"http://localhost:3000/auth/google"}>
+            <Link href={`${config?.baseUrl}/auth/google`}>
               <div className="flex flex-col bg-red-100 grayscale duration-1000 rounded-xl hover:grayscale-0 p-4">
                 <Image
                   height={20}

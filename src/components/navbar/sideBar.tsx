@@ -1,6 +1,7 @@
 import { DoubleLeftOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { menuOptions } from "utils/constants";
 
 type Props = {
   showSideBar: boolean;
@@ -8,14 +9,6 @@ type Props = {
 };
 const SideBar = ({ showSideBar, setShowSideBar }: Props) => {
   const router = useRouter();
-
-  const options = [
-    { link: "/taskList", title: "Tasks Page" },
-    { link: "/dashboard", title: "DashBoard Page" },
-    { link: "/integrations", title: "Integrations Page" },
-    { link: "/onBoarding", title: "OnBoarding Page" },
-  ];
-
   return (
     <div
       className={`fixed duration-500 origin-left w-48 px-2 ${
@@ -40,7 +33,7 @@ const SideBar = ({ showSideBar, setShowSideBar }: Props) => {
         Overseer
       </div>
       <div className="flex flex-col">
-        {options.map((option) => (
+        {menuOptions.map((option) => (
           <SideMenuOption
             key={Math.random()}
             option={option}

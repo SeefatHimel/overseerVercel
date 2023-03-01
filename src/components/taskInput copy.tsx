@@ -15,7 +15,7 @@ import { toast } from "react-toastify";
 
 const TaskInput = ({ taskList, createTask }: any) => {
   const [form] = Form.useForm();
-
+  const [priority, setPririty] = useState("NORMAL");
   const onFinish = async (values: any) => {
     console.log(values);
 

@@ -130,7 +130,7 @@ function StopWatch({ task, addSession, addEndTime }: any) {
     //   initialTime
     // );
 
-    sessions.forEach((session: any) => {
+    sessions?.forEach((session: any) => {
       if (session.startTime && !session.endTime) {
         setCurrentSession(session);
         const initialTime = { ms: 0, s: 0, m: 0, h: 0 };

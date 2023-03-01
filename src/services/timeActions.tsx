@@ -1,6 +1,10 @@
 export const getFormattedTotalTime = (time: number) => {
+  console.log(
+    "🚀 ~ file: timeActions.tsx:2 ~ getFormattedTotalTime ~ time:",
+    time
+  );
   let tmp = time;
-  tmp = Math.ceil(tmp / 1000);
+  tmp = Math.round(tmp / 1000);
   const seconds = tmp % 60;
   tmp = Math.floor(tmp / 60);
   const mins = tmp % 60;
@@ -10,7 +14,6 @@ export const getFormattedTotalTime = (time: number) => {
     seconds ?? seconds + "Seconds"
   }`;
 };
-
 
 export const getFormattedTime = (timestamp: any) => {
   // or use padStart
@@ -31,7 +34,7 @@ export const getTotalSpentTime = (sessions: any) => {
     sessions
   );
   let total: number = 0;
-  sessions.forEach((session: any) => {
+  sessions?.forEach((session: any) => {
     if (session.endTime) {
       const startTime: any = new Date(session.startTime);
       const endTime: any = new Date(session.endTime);

@@ -104,7 +104,6 @@ const TaskDetailsModal = ({
             {taskDetails?.estimation
               ? getFormattedTotalTime(
                   taskDetails?.estimation * 3600000 -
-                    1000 -
                     getTotalSpentTime(task.sessions)
                 )
               : "No estimation"}{" "}

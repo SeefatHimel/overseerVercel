@@ -1,9 +1,6 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-  reactStrictMode: true,
-};
+const withTM = require("next-transpile-modules")(["@amcharts/amcharts4"]);
 
-module.exports = {
+module.exports = withTM({
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/i,
@@ -13,4 +10,4 @@ module.exports = {
 
     return config;
   },
-};
+});

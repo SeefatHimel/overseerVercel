@@ -15,10 +15,17 @@
     "jsx": "preserve",
     "incremental": true,
     "baseUrl": ".",
+    "strictNullChecks": false,
     "paths": {
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/icons/stopIcon.jsx"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "src/icons/stopIcon.jsx",
+    "public/assets/icons/index.js"
+  ],
   "exclude": ["node_modules"]
 }

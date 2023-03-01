@@ -73,10 +73,6 @@ export async function getServerSideProps({ req }: any) {
     "🚀 ~ file: index.tsx:61 ~ getServerSideProps ~ req.headers",
     token.access_token
   );
-
-  // const allProducts = await userAPI.getPublicProducts();
-  // const featuredProducts = await userAPI.getFeaturedProducts();
-  // const cartData = await userAPI.getCart(token.token);
   const res = await userAPI.getTasks(token?.access_token as string);
   console.log("🚀 ~ file: index.tsx:65 ~ getServerSideProps ~ res", res);
   return {

@@ -10,6 +10,7 @@ export interface apiFunction {
   createTask: (data: CreateTaskDto) => Promise<TaskDto>;
   deleteTask: (data: CreateTaskDto) => Promise<CreateTaskDto | undefined>;
   getTasks: (token?: string) => Promise<any>;
+  getIntegrations: (token?: string) => Promise<any>;
   createSession: (taskID: string) => Promise<any>;
   stopSession: (taskID: string) => Promise<any>;
   authJira: () => Promise<any>;

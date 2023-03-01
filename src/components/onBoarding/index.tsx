@@ -1,11 +1,12 @@
 import { Input } from "antd";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import SearchResults from "./searchResults";
 import { toast } from "react-toastify";
 
 const { Search } = Input;
-const OnBoarding = () => {
+const OnBoarding = ({ integrations }: any) => {
   const [searchText, setSearchText] = useState("");
+  
   const [status, setStatus] = useState<"" | "error" | "warning">("");
   const handleOnchange = (text: string) => {
     if (status.length > 0 && text.length > 0) setStatus("");
@@ -17,6 +18,7 @@ const OnBoarding = () => {
       setStatus("error");
     }
   };
+  useEffect(() => {}, [integrations]);
   return (
     <>
       <Search
@@ -32,6 +34,13 @@ const OnBoarding = () => {
         onSearch={handleEnter}
         onPressEnter={handleEnter}
       />
+      {integrations && (
+        <div>
+          {integrations?.map((integration: any) => {
+            <div key={integration.id}>dsds{integration.type}</div>;
+          })}
+        </div>
+      )}
       <SearchResults searchText={searchText} />
     </>
   );

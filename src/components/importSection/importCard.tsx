@@ -13,23 +13,6 @@ const ImportCard = ({ data, selected, setSelected }: any) => {
       onClick={() => setSelected(data.title)}
     >
       <div className="flex h-10 items-center justify-center gap-2">
-        {/* {data.full ? (
-          <Image
-            height={60}
-            width={100}
-            preview={false}
-            src={`/assets/images/${data.logo}`}
-            alt="Error Loading Image"
-          />
-        ) : (
-          <Image
-            height={15}
-            width={15}
-            preview={false}
-            src={`/assets/images/${data.logo}`}
-            alt="Error Loading Image"
-          />
-        )} */}
         <Image
           height={data.full ? 60 : 15}
           width={data.full ? 100 : 15}

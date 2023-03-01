@@ -210,3 +210,23 @@ export async function sendJiraCodeRest(code: string) {
     return false;
   }
 }
+
+
+
+export async function getIntegrationsRest(token?: string) {
+  console.log("🚀 ~ file: restApi.ts:73 ~ getTasksRest ~ token", token);
+  console.log("<><><>", getLocalStorage("access_token"));
+
+  try {
+    const res = await axios.get(`${apiEndPoints.integrations}`, {
+      headers: {
+        Authorization: `Bearer ${token ? token : GetCookie("access_token")}`,
+      },
+    });
+    console.log("getTasksRest", res);
+    return res.data;
+  } catch (error: any) {
+    toast.error("Failed to Get Task : " + error.message);
+    return false;
+  }
+}

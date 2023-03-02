@@ -1,4 +1,5 @@
 import { TaskContext } from "@/pages/taskList";
+import { SyncOutlined } from "@ant-design/icons";
 import { Button, Empty, message, Spin } from "antd";
 import { userAPI } from "APIs";
 import { TaskDto } from "models/tasks";
@@ -8,9 +9,12 @@ import TaskInput from "../taskInput copy";
 import VerticalCard2 from "../verticalCard2";
 
 const TasksPage = () => {
+
+  
   const [viewModalOpen, setViewModalOpen] = useState<boolean>(false);
   const [tasks, setTasks] = useState<TaskDto[]>([]);
   const [loading, setLoading] = useState(false);
+  const [syncing, setSyncing] = useState(false);
   const { tasklist } = useContext(TaskContext);
 
   const createTask = async (data: any) => {
@@ -61,7 +65,17 @@ const TasksPage = () => {
     <>
       <div className="flex justify-between mb-4">
         <h2 className="text-2xl font-bold">Tasks</h2>
-        <Button onClick={() => setViewModalOpen(true)}>Add Task</Button>
+        <div className="flex gap-1">
+          <Button onClick={() => setViewModalOpen(true)}>Add Task</Button>
+          <Button
+            className={`flex justify-center items-center ${
+              syncing ? "text-green-500 border-green-500" : ""
+            }`}
+            onClick={() => setSyncing(!syncing)}
+          >
+            <SyncOutlined spin={syncing} />
+          </Button>
+        </div>
       </div>
 
       <Spin spinning={loading}>
@@ -84,10 +98,7 @@ const TasksPage = () => {
         isModalOpen={viewModalOpen}
         setIsModalOpen={setViewModalOpen}
       >
-        <TaskInput
-          taskList={tasklist}
-          createTask={createTask}
-        />
+        <TaskInput taskList={tasklist} createTask={createTask} />
       </GlobalModal>
     </>
   );

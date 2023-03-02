@@ -39,7 +39,7 @@ const TaskDetailsModal = ({
     <>
       <Modal
         title="Task Details"
-        visible={isModalOpen}
+        open={isModalOpen}
         onOk={handleOk}
         onCancel={handleCancel}
         footer={null}

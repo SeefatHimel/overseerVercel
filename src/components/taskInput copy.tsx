@@ -1,4 +1,3 @@
-import { getLocalStorage, setLocalStorage } from "@/storage/storage";
 import {
   Button,
   Form,
@@ -8,14 +7,10 @@ import {
   SelectProps,
 } from "antd";
 import { SizeType } from "antd/es/config-provider/SizeContext";
-import { userAPI } from "APIs";
-import { log } from "console";
 import React, { useState } from "react";
-import { toast } from "react-toastify";
 
 const TaskInput = ({ taskList, createTask }: any) => {
   const [form] = Form.useForm();
-  const [priority, setPririty] = useState("NORMAL");
   const onFinish = async (values: any) => {
     console.log(values);
 
@@ -30,16 +25,24 @@ const TaskInput = ({ taskList, createTask }: any) => {
   const handleSizeChange = (e: RadioChangeEvent) => {
     setSize(e.target.value);
   };
-  const handleChange = (value: string | string[]) => {
+  const handlePriorityChange = (value: string) => {
+    console.log(`Selected: ${value}`);
+  };
+  const handleTagsChange = (value: string[]) => {
     console.log(`Selected: ${value}`);
   };
   const options: SelectProps["options"] = [];
+  const initialValues = {
+    priority: "NORMAL",
+  };
+
   return (
     <Form
       form={form}
       name="control-hooks"
       labelCol={{ span: 7 }}
       onFinish={onFinish}
+      initialValues={initialValues}
       style={{ width: "500px" }}
     >
       <Form.Item name="title" label="Task Name" rules={[{ required: true }]}>
@@ -65,9 +68,8 @@ const TaskInput = ({ taskList, createTask }: any) => {
       <Form.Item name="priority" label="Priority" rules={[{ required: true }]}>
         {/* <Input /> */}
         <Select
-          defaultValue="NORMAL"
           style={{ width: 120 }}
-          onChange={handleChange}
+          onChange={handlePriorityChange}
           options={[
             { value: "LOW", label: "LOW" },
             { value: "NORMAL", label: "NORMAL" },
@@ -84,7 +86,7 @@ const TaskInput = ({ taskList, createTask }: any) => {
           size={size}
           placeholder="Please select"
           defaultValue={["Bug Fix"]}
-          onChange={handleChange}
+          onChange={handleTagsChange}
           style={{ width: "100%" }}
           options={options}
         />

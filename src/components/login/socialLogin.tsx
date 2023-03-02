@@ -3,11 +3,9 @@ import axios from "axios";
 import { config } from "config";
 import Link from "next/link";
 import { useState } from "react";
-import GlobalMOdal from "../modals/globalModal";
 
 const SocialLogin = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  console.log(axios);
 
   return (
     <div className="flex flex-col items-center w-full">

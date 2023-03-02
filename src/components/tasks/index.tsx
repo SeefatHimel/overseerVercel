@@ -19,8 +19,10 @@ const TasksPage = () => {
       const res = await userAPI.createTask(data);
       message.success("Task created successfully");
       setTasks((tasks) => [res, ...tasks]);
+      setViewModalOpen(false);
     } catch (error) {
       message.error("Error creating task");
+      setViewModalOpen(false);
     } finally {
       setLoading(false);
     }
@@ -82,7 +84,10 @@ const TasksPage = () => {
         isModalOpen={viewModalOpen}
         setIsModalOpen={setViewModalOpen}
       >
-        <TaskInput taskList={tasklist} createTask={createTask} />
+        <TaskInput
+          taskList={tasklist}
+          createTask={createTask}
+        />
       </GlobalModal>
     </>
   );

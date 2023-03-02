@@ -38,6 +38,7 @@ const LoginForm: React.FC = () => {
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
       autoComplete="off"
+      className="max-w-xl mx-auto"
     >
       <Form.Item
         label="Email"
@@ -72,7 +73,7 @@ const LoginForm: React.FC = () => {
       </Form.Item>
 
       <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-        <Button type="primary" htmlType="submit" className="bg-red-500">
+        <Button type="primary" htmlType="submit" className="bg-blue-600">
           Submit
         </Button>
       </Form.Item>

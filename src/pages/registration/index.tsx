@@ -23,14 +23,15 @@ const Registration = () => {
     // window.open(res?.data);
   };
   return (
-    <div className="w-[500px]">
-      <div className="mx-auto">
-        <Card title="Credentials" bordered={false}>
-          <RegistrationForm />
-        </Card>
-      </div>
+    <div className="w-[500px] mx-auto">
+      <Card title="Credentials" bordered={false}>
+        <RegistrationForm />
+      </Card>
       <div className="mx-auto w-max p-2">
-        <Link href="/login">{"Don't have an account? .. Login"}</Link>
+        Already have an account? ...{" "}
+        <Link href="/login">
+          <span className="hover:text-green-600"> Login</span>
+        </Link>
       </div>
     </div>
   );

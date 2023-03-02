@@ -97,7 +97,7 @@ export async function deleteTaskRest(taskId: CreateTaskDto) {
 }
 
 export async function getTasksRest(token?: string) {
-  console.log("🚀 ~ file: restApi.ts:73 ~ getTasksRest ~ token", token);
+  console.log("🚀 ~ file: restApi.ts:100 ~ getTasksRest ~ token:", token);
   console.log("<><><>", getLocalStorage("access_token"));
 
   try {
@@ -211,10 +211,11 @@ export async function sendJiraCodeRest(code: string) {
   }
 }
 
-
-
 export async function getIntegrationsRest(token?: string) {
-  console.log("🚀 ~ file: restApi.ts:73 ~ getTasksRest ~ token", token);
+  console.log(
+    "🚀 ~ file: restApi.ts:215 ~ getIntegrationsRest ~ token:",
+    token
+  );
   console.log("<><><>", getLocalStorage("access_token"));
 
   try {

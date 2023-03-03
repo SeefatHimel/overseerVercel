@@ -40,7 +40,7 @@ const VerticalCard = ({ task, deleteTask }: Props) => {
           <div>
             <div className="grid grid-cols-5 gap-1 w-72 items-center ">
               <div
-                className={`text-sm text-center font-medium col-span-2 border-2 p-1 rounded-xl`}
+                className={`text-sm text-center font-medium col-span-2 `}
                 style={{
                   color: statusColorEnum[task.status],
                 }}

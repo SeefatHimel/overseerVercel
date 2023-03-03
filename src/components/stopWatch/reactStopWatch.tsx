@@ -4,10 +4,10 @@ import BtnComponent from "./Components/BtnComponent";
 import { userAPI } from "APIs";
 import { getTotalSpentTime } from "@/services/timeActions";
 import { toast } from "react-toastify";
+import { message } from "antd";
 
 function StopWatch({ task, addSession, addEndTime }: any) {
   const { sessions } = task;
-  const [currentSession, setCurrentSession] = useState(null);
 
   const [time, setTime] = useState({ ms: 0, s: 0, m: 0, h: 0 });
   const [sessionTime, setSessionTime] = useState({ ms: 0, s: 0, m: 0, h: 0 });
@@ -19,14 +19,14 @@ function StopWatch({ task, addSession, addEndTime }: any) {
     console.log("start");
     const res = await userAPI.createSession(task.id);
     res && addSession(res);
-    res && toast.success("Session Started");
+    res && message.success("Session Started");
     console.log("🚀 ~ file: reactStopWatch.tsx:19 ~ startSession ~ res", res);
   };
   const stopSession = async () => {
     console.log("stop");
     const res = await userAPI.stopSession(task.id);
     res && addEndTime(res);
-    res && toast.success("Session Ended");
+    res && message.success("Session Ended");
     console.log("🚀 ~ file: reactStopWatch.tsx:19 ~ startSession ~ res", res);
   };
 
@@ -132,7 +132,6 @@ function StopWatch({ task, addSession, addEndTime }: any) {
 
     sessions?.forEach((session: any) => {
       if (session.startTime && !session.endTime) {
-        setCurrentSession(session);
         const initialTime = { ms: 0, s: 0, m: 0, h: 0 };
 
         const sessionStartTime: any = new Date(session.startTime);
@@ -165,7 +164,7 @@ function StopWatch({ task, addSession, addEndTime }: any) {
   }, [resumeTime]);
 
   return (
-    <div className="flex items-center w-max">
+    <div className="grid grid-cols-6 w-44">
       <DisplayComponent time={time} sessionTime={sessionTime} />
       <BtnComponent
         status={status}

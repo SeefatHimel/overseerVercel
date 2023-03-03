@@ -2,10 +2,9 @@ import React from "react";
 import { Button } from "antd";
 import { PlayIcon } from "../../../icons/playIcon";
 import { StopIcon } from "@/icons/stopIcon";
-import { PauseIcon } from "@/icons/pauseIcon";
 function BtnComponent(props) {
   return (
-    <div>
+    <div className="col-span-1">
       {props.status === 0 ? (
         <Button
           className="border-0"
@@ -24,12 +23,6 @@ function BtnComponent(props) {
             onClick={props.stop}
             icon={<StopIcon />}
           />
-          {/* <Button
-            className="border-0 hover:text-red-600"
-            type="ghost"
-            onClick={props.reset}
-            icon={<StopIcon />}
-          /> */}
         </div>
       ) : (
         ""
@@ -42,12 +35,6 @@ function BtnComponent(props) {
             onClick={props.resume}
             icon={<PlayIcon />}
           />
-          {/* <Button
-            className="border-0 hover:text-red-600"
-            type="ghost"
-            onClick={props.reset}
-            icon={<StopIcon />}
-          /> */}
         </div>
       ) : (
         ""

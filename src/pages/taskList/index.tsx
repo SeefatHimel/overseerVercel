@@ -1,6 +1,6 @@
 import TaskInput from "@/components/taskInput";
 import { createContext, useEffect, useState } from "react";
-import VerticalCard from "../../components/verticalCard";
+import VerticalCard from "../../components/tasks/components/verticalCard";
 import { getLocalStorage } from "@/storage/storage";
 import { Button } from "antd";
 import TasksPage from "@/components/tasks";
@@ -28,40 +28,6 @@ const TaskList: NextPage = ({ allTask }: any) => {
       <div>
         <div className="w-[720px] mx-auto mt-20">
           <TasksPage />
-          {/* <div className="py-2">
-            {!viewModalOpen && (
-              <Button
-                onClick={() => {
-                  // setAddTask(true);
-                  setViewModalOpen(true);
-                }}
-              >
-                Add Task
-              </Button>
-            )}
-            {viewModalOpen && (
-              <>
-                <GlobalMOdal
-                  isModalOpen={viewModalOpen}
-                  setIsModalOpen={setViewModalOpen}
-                >
-                  <TaskInput
-                    taskList={allTaskList}
-                    setTaskList={setAllTaskList}
-                  />
-                </GlobalMOdal>
-              </>
-            )}
-          </div> */}
-          {/* <VerticalCard /> */}
-          {/* {allTaskList?.map((task: any) => {
-            console.log("🚀 ~ file: index.tsx:60 ~ task", task);
-            return <VerticalCard key={Math.random()} task={task.title} />;
-            // ))}
-          })} */}
-          {/* {taskList?.map((task) => (
-            <VerticalCard key={Math.random()} task={task} />
-          ))} */}
         </div>
       </div>
     </TaskContext.Provider>

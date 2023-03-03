@@ -12,7 +12,7 @@ function DisplayComponent(props) {
   };
   // console.log(props.sessionTime);
   return (
-    <div className=" text-right">
+    <div className=" text-center m-auto col-span-5">
       <span>
         {props.sessionTime.h >= 10
           ? props.sessionTime.h

@@ -6,11 +6,9 @@ import { TaskDto } from "models/tasks";
 import { useState, useEffect, useContext } from "react";
 import GlobalModal from "../modals/globalModal";
 import TaskInput from "../taskInput copy";
-import VerticalCard2 from "../verticalCard2";
+import VerticalCard from "./components/verticalCard";
 
 const TasksPage = () => {
-
-  
   const [viewModalOpen, setViewModalOpen] = useState<boolean>(false);
   const [tasks, setTasks] = useState<TaskDto[]>([]);
   const [loading, setLoading] = useState(false);
@@ -82,11 +80,7 @@ const TasksPage = () => {
         {tasks.length ? (
           <div className="grid grid-cols-1  gap-4">
             {tasks.map((task) => (
-              <VerticalCard2
-                key={task.id}
-                task={task}
-                deleteTask={deleteTask}
-              />
+              <VerticalCard key={task.id} task={task} deleteTask={deleteTask} />
             ))}
           </div>
         ) : (

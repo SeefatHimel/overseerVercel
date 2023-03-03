@@ -1,6 +1,6 @@
 import TaskInput from "@/components/taskInput";
 import { createContext, useEffect, useState } from "react";
-import VerticalCard from "../../components/verticalCard";
+import VerticalCard from "../../components/tasks/components/verticalCard";
 import { getLocalStorage } from "@/storage/storage";
 import { Button } from "antd";
 import TasksPage from "@/components/tasks";

@@ -7,7 +7,7 @@ export type TaskDto = {
   title: string;
   description: string;
   estimation: number;
-  status: string;
+  status: "IN_PROGRESS" | "TODO" | "DONE";
   due: any;
   priority: string;
   labels: string[];

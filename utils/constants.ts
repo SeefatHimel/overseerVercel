@@ -11,7 +11,7 @@ export const taskStatusEnum = {
   DONE: "Done",
 };
 export enum statusColorEnum {
-  IN_PROGRESS = "orange",
-  TODO = "cyan",
-  DONE = "green",
+  IN_PROGRESS = "#bf80ff",
+  TODO = "#0099ff",
+  DONE = "#04AA6D",
 }

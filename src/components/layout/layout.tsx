@@ -18,7 +18,7 @@ const CustomLayout = ({ children }: any) => {
   return (
     <>
       <div className="flex">
-        <SideMenu />
+        {!publicRoutes.some((route) => path.includes(route)) && <SideMenu />}
         {/* {!publicRoutes.some((route) => path.includes(route)) && (
           <>
             <div

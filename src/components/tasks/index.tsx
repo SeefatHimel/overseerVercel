@@ -61,7 +61,7 @@ const TasksPage = ({ allTask }: any) => {
     try {
       const res = await userAPI.syncTasks();
       setTasks(res || []);
-      message.error("Sync Successful");
+      message.success("Sync Successful");
     } catch (error) {
       message.error("Error syncing tasks");
     } finally {
@@ -74,6 +74,7 @@ const TasksPage = ({ allTask }: any) => {
     getTasks();
   }, []);
 
+  useEffect(() => {}, [tasks]);
   return (
     <TaskContext.Provider value={{ tasklist: tasklist }}>
       <div className="mr-8">

@@ -17,14 +17,14 @@ function Navbar() {
     if (!userDetails && tmp) setUserDetails(tmp);
   }, [userDetails, path]);
   return (
-    <div className=" fixed flex h-20 w-full justify-between items-center px-4 shadow-lg mb-2">
+    <div className=" flex h-16 px-5 w-full justify-between items-center shadow mb-2">
       <div
-        className="text-2xl text-blue-500 hover:text-green-500 pl-8 py-6"
+        className="text-xl text-blue-500 hover:text-green-500  py-6"
         onClick={() => {
           router.push("/");
         }}
       >
-        Overseer
+        Tracker23
       </div>
       {path === "/login" || path === "/registration" ? (
         <Button
@@ -39,10 +39,12 @@ function Navbar() {
       ) : (
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-2">
-            {/* {user?.picture && <Avatar src={user.picture} alt="N" />} */}
+            {userDetails?.picture && (
+              <Avatar src={userDetails.picture} alt="N" />
+            )}
             {userDetails?.firstName}
           </div>
-          <LogOutButton />
+          {/* <LogOutButton /> */}
         </div>
       )}
     </div>

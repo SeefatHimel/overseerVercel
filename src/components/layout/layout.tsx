@@ -5,6 +5,8 @@ import { useState } from "react";
 import { ToastContainer } from "react-toastify";
 import Navbar from "../navbar";
 import SideBar from "../navbar/sideBar";
+import SideMenu from "../navbar/sideMenu";
+import TopBar from "../navbar/topBar";
 
 const CustomLayout = ({ children }: any) => {
   const router = useRouter();
@@ -15,9 +17,9 @@ const CustomLayout = ({ children }: any) => {
 
   return (
     <>
-      <Navbar />
       <div className="flex">
-        {!publicRoutes.some((route) => path.includes(route)) && (
+        <SideMenu />
+        {/* {!publicRoutes.some((route) => path.includes(route)) && (
           <>
             <div
               className={`duration-500  ${showSideBar ? "pr-48" : "pr-0"} `}
@@ -37,11 +39,12 @@ const CustomLayout = ({ children }: any) => {
               <DoubleRightOutlined />
             </div>
           </>
-        )}
+        )} */}
         <div
-          className="flex flex-col w-full py-4 mt-20 overflow-y-auto"
+          className="flex flex-col w-full overflow-y-auto"
           style={{ height: "calc(100vh - 100px)" }}
         >
+          <Navbar />
           <div
             className={` w-full pt-2 px-8 bg-white ${
               !path.includes("/login") && !path.includes("/register")
@@ -50,6 +53,7 @@ const CustomLayout = ({ children }: any) => {
             } `}
             style={{ height: "calc(100vh - 80px)" }}
           >
+            {/* <TopBar /> */}
             {children}
           </div>
         </div>

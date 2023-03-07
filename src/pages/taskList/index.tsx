@@ -8,7 +8,6 @@ import GlobalMOdal from "../../components/modals/globalModal";
 import { NextPage } from "next";
 import { userAPI } from "APIs";
 var cookie = require("cookie");
-export const TaskContext = createContext<any>({ taskList: [] });
 const TaskList: NextPage = ({ allTask }: any) => {
   console.log("🚀 ~ file: index.tsx:11 ~ tasksList", allTask);
   const [taskList, setTaskList] = useState([]);
@@ -24,13 +23,11 @@ const TaskList: NextPage = ({ allTask }: any) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [taskList]);
   return (
-    <TaskContext.Provider value={{ tasklist: allTaskList }}>
-      <div>
-        <div className="w-[720px] mx-auto mt-20">
-          <TasksPage />
-        </div>
+    <div>
+      <div className="w-full mx-8">
+        <TasksPage allTask={allTask} />
       </div>
-    </TaskContext.Provider>
+    </div>
   );
 };
 export async function getServerSideProps({ req }: any) {

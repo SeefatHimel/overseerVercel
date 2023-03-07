@@ -169,14 +169,16 @@ function ReactStopWatchCopy({ task }: any) {
   return (
     <div className="flex flex-col w-min mx-auto">
       <DisplayComponent time={time} sessionTime={sessionTime} />
-      <BtnComponent
-        status={status}
-        resume={resume}
-        reset={reset}
-        stop={stop}
-        start={start}
-        id={task.id}
-      />
+      <div className="py-16 w-min mx-auto">
+        <BtnComponent
+          status={status}
+          resume={resume}
+          reset={reset}
+          stop={stop}
+          start={start}
+          id={task.id}
+        />
+      </div>
     </div>
   );
 }

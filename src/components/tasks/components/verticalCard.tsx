@@ -105,12 +105,12 @@ const VerticalCard = ({
           </div>
         </div>
       </div>
-      {/* <TaskDetailsModal
+      <TaskDetailsModal
         task={task}
         isModalOpen={viewModalOpen}
         setIsModalOpen={setViewModalOpen}
         handleDelete={handleDelete}
-      /> */}
+      />
     </>
   );
 };

@@ -13,8 +13,8 @@ function DisplayComponent(props) {
   };
   // console.log(props.sessionTime);
   return (
-    <div className=" text-center m-auto col-span-5">
-      <Tooltip placement="bottom" title={"Current Session Time"} color="blue">
+    <div className=" text-center m-auto col-span-5 text-5xl font-bold pt-4">
+      <Tooltip placement="left" title={"Current Session Time"} color="blue">
         <span>
           {props.sessionTime.h >= 10
             ? props.sessionTime.h
@@ -35,11 +35,11 @@ function DisplayComponent(props) {
       </Tooltip>
       {/* &nbsp;:&nbsp;
       <span>{props.time.ms >= 10 ? props.time.ms : "0" + props.time.ms}</span> */}
-      <Tooltip placement="bottom" title={"Total Spent Time"} color="blue">
+      {/* <Tooltip placement="bottom" title={"Total Spent Time"} color="blue">
         <span className="font-bold">
           ({props.time.h + +(props.time.m / 60).toFixed(2)} h)
         </span>
-      </Tooltip>
+      </Tooltip> */}
       {/* &nbsp;:&nbsp;
       <span>{props.sessionTime.ms >= 10 ? props.sessionTime.ms : "0" + props.sessionTime.ms}</span> */}
     </div>

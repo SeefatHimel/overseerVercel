@@ -40,10 +40,7 @@ const CustomLayout = ({ children }: any) => {
             </div>
           </>
         )} */}
-        <div
-          className="flex flex-col w-full overflow-y-auto"
-          style={{ height: "calc(100vh - 100px)" }}
-        >
+        <div className="flex flex-col w-full overflow-y-auto">
           <Navbar />
           <div
             className={` w-full pt-2 px-8 bg-white ${

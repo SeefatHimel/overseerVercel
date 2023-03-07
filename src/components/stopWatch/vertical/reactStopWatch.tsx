@@ -32,11 +32,11 @@ function StopWatch({ task, addSession, addEndTime, disable }: any) {
 
   const start = async () => {
     startSession();
-    setSessionTime({ ms: 0, s: 0, m: 0, h: 0 });
-    (updatedSessionMs = 0),
-      (updatedSessionS = 0),
-      (updatedSessionM = 0),
-      (updatedSessionH = 0);
+    // setSessionTime({ ms: 0, s: 0, m: 0, h: 0 });
+    (updatedSessionMs = sessionTime.ms),
+      (updatedSessionS = sessionTime.s),
+      (updatedSessionM = sessionTime.m),
+      (updatedSessionH = sessionTime.h);
     run();
     setStatus(1);
     setInterv(setInterval(run, 100));
@@ -125,6 +125,7 @@ function StopWatch({ task, addSession, addEndTime, disable }: any) {
       }
     }
     setTime(initialTime);
+    setSessionTime(initialTime);
     // console.log(
     //   "🚀 ~ file: reactStopWatch.tsx:122 ~ useEffect ~ initialTime",
     //   initialTime
@@ -137,6 +138,8 @@ function StopWatch({ task, addSession, addEndTime, disable }: any) {
         const sessionStartTime: any = new Date(session.startTime);
 
         let totalTime: number = Date.now() - sessionStartTime;
+        const totalSpentTime = getTotalSpentTime(sessions);
+        if (totalSpentTime) totalTime += totalSpentTime;
         if (totalTime > 0) {
           initialTime.ms += totalTime % 1000;
           totalTime = Math.floor(totalTime / 1000);

@@ -4,6 +4,7 @@ import { AiOutlineLogout } from "react-icons/ai";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { userAPI } from "APIs";
+import { GrIntegration } from "react-icons/gr";
 const SideMenu = () => {
   const router = useRouter();
   const handleLogOut = async () => {
@@ -14,17 +15,15 @@ const SideMenu = () => {
   const SideMenuOption = ({ option, active }: any) => {
     const router = useRouter();
     return (
-      <li className="p-5">
-        <div
-          className={`hover:bg-indigo-500 hover:text-white hover:cursor-pointer rounded px-1 ${
-            active ? "bg-indigo-500 text-white scale-110" : ""
-          }`}
-          onClick={() => {
-            router.push(option.link);
-          }}
-        >
-          {option.icon}
-        </div>
+      <li
+        className={`m-5 h-6 w-6 flex flex-col justify-center hover:bg-indigo-500 hover:text-white hover:cursor-pointer rounded px-1 ${
+          active ? "bg-indigo-500 text-white scale-110" : ""
+        }`}
+        onClick={() => {
+          router.push(option.link);
+        }}
+      >
+        {option.icon}
       </li>
     );
   };
@@ -71,6 +70,10 @@ export default SideMenu;
 export const sideMenuOptions = [
   { link: "/taskList", title: "Tasks Page", icon: <UnorderedListOutlined /> },
   // { link: "/dashboard", title: "DashBoard Page" },
-  // { link: "/integrations", title: "Integrations Page" },
+  {
+    link: "/integrations",
+    title: "Integrations Page",
+    icon: <GrIntegration />,
+  },
   // { link: "/onBoarding", title: "OnBoarding Page" },
 ];

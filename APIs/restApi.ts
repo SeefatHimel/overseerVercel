@@ -114,6 +114,24 @@ export async function getTasksRest(token?: string) {
   }
 }
 
+export async function syncTasksRest(token?: string) {
+  console.log("🚀 ~ file: restApi.ts:100 ~ getTasksRest ~ token:", token);
+  console.log("<><><>", getLocalStorage("access_token"));
+
+  try {
+    const res = await axios.get(`${apiEndPoints.syncTasks}`, {
+      headers: {
+        Authorization: `Bearer ${token ? token : GetCookie("access_token")}`,
+      },
+    });
+    console.log("getTasksRest", res);
+    return res.data;
+  } catch (error: any) {
+    toast.error("Failed to Get Task : " + error.message);
+    return false;
+  }
+}
+
 export async function createSessionRest(taskId: string) {
   console.log("🚀 ~ file: restApi.ts:91 ~ createSessionRest ~ taskID", taskId);
   console.log("<><><>", getLocalStorage("access_token"));

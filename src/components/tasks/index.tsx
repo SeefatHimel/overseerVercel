@@ -56,6 +56,19 @@ const TasksPage = ({ allTask }: any) => {
       setLoading(false);
     }
   };
+  const syncTasks = async () => {
+    setLoading(true);
+    try {
+      const res = await userAPI.syncTasks();
+      setTasks(res || []);
+      message.error("Sync Successful");
+    } catch (error) {
+      message.error("Error syncing tasks");
+    } finally {
+      setLoading(false);
+    }
+    setSyncing(false);
+  };
 
   useEffect(() => {
     getTasks();
@@ -72,7 +85,10 @@ const TasksPage = ({ allTask }: any) => {
               className={`flex justify-center items-center ${
                 syncing ? "text-green-500 border-green-500" : ""
               }`}
-              onClick={() => setSyncing(!syncing)}
+              onClick={async () => {
+                setSyncing(true);
+                await syncTasks();
+              }}
             >
               <SyncOutlined spin={syncing} />
             </Button>

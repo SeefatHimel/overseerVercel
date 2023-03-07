@@ -16,8 +16,8 @@ const SideMenu = () => {
     return (
       <li className="p-5">
         <div
-          className={`hover:bg-blue-500 hover:text-white hover:cursor-pointer rounded-full p-1 pt-0 ${
-            active ? "bg-blue-500 text-white scale-110" : ""
+          className={`hover:bg-indigo-500 hover:text-white hover:cursor-pointer rounded px-1 ${
+            active ? "bg-indigo-500 text-white scale-110" : ""
           }`}
           onClick={() => {
             router.push(option.link);
@@ -29,7 +29,7 @@ const SideMenu = () => {
     );
   };
   return (
-    <div className="bg-blue-700 h-screen flex justify-center items-center">
+    <div className="bg-indigo-700 h-screen flex justify-center items-center">
       <div className="flex h-full w-16 flex-col justify-between">
         <div>
           {" "}
@@ -55,7 +55,7 @@ const SideMenu = () => {
         </div>
         <div className="flex items-center justify-center pb-5 text-white">
           <div
-            className="p-1 hover:scale-110  hover:bg-blue-500 rounded-full hover:cursor-pointer"
+            className="p-1 scale-110  hover:bg-indigo-500 rounded-full hover:cursor-pointer"
             onClick={handleLogOut}
           >
             <AiOutlineLogout />

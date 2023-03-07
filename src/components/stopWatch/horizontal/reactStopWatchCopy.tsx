@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import DisplayComponent from "./Components/DisplayComponent";
 import BtnComponent from "./Components/BtnComponent";
-import { userAPI } from "APIs";
 import { getTotalSpentTime } from "@/services/timeActions";
 import { toast } from "react-toastify";
 import { message } from "antd";
 
-function StopWatch({ task, addSession, addEndTime }: any) {
+function ReactStopWatchCopy({ task }: any) {
   const { sessions } = task;
 
   const [time, setTime] = useState({ ms: 0, s: 0, m: 0, h: 0 });
@@ -17,17 +16,17 @@ function StopWatch({ task, addSession, addEndTime }: any) {
 
   const startSession = async () => {
     console.log("start");
-    const res = await userAPI.createSession(task.id);
-    res && addSession(res);
-    res && message.success("Session Started");
-    console.log("🚀 ~ file: reactStopWatch.tsx:19 ~ startSession ~ res", res);
+    // const res = await userAPI.createSession(task.id);
+    // res && addSession(res);
+    // res && message.success("Session Started");
+    // console.log("🚀 ~ file: reactStopWatch.tsx:19 ~ startSession ~ res", res);
   };
   const stopSession = async () => {
     console.log("stop");
-    const res = await userAPI.stopSession(task.id);
-    res && addEndTime(res);
-    res && message.success("Session Ended");
-    console.log("🚀 ~ file: reactStopWatch.tsx:19 ~ startSession ~ res", res);
+    // const res = await userAPI.stopSession(task.id);
+    // res && addEndTime(res);
+    // res && message.success("Session Ended");
+    // console.log("🚀 ~ file: reactStopWatch.tsx:19 ~ startSession ~ res", res);
   };
 
   const start = async () => {
@@ -163,8 +162,12 @@ function StopWatch({ task, addSession, addEndTime }: any) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [resumeTime]);
 
+  useEffect(() => {
+    console.log(task);
+  }, [task]);
+
   return (
-    <div className="grid grid-cols-6 w-44">
+    <div className="flex flex-col w-min mx-auto">
       <DisplayComponent time={time} sessionTime={sessionTime} />
       <BtnComponent
         status={status}
@@ -172,9 +175,10 @@ function StopWatch({ task, addSession, addEndTime }: any) {
         reset={reset}
         stop={stop}
         start={start}
+        id={task.id}
       />
     </div>
   );
 }
 
-export default StopWatch;
+export default ReactStopWatchCopy;

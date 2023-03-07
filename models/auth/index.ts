@@ -7,6 +7,7 @@ export type LoginResponseDto = {
   firstName: string;
   lastName: string;
   email: string;
+  picture: string;
   access_token: string;
 };
 

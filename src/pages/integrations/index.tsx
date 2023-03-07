@@ -11,18 +11,18 @@ const ImportData = ({ integrations }: any) => {
   );
 };
 export async function getServerSideProps({ req }: any) {
-  let token = cookie?.parse(req.headers?.cookie);
-  console.log(
-    "🚀 ~ file: index.tsx:61 ~ getServerSideProps ~ req.headers",
-    token.access_token
-  );
+  // let token = cookie?.parse(req.headers?.cookie);
+  // console.log(
+  //   "🚀 ~ file: index.tsx:61 ~ getServerSideProps ~ req.headers",
+  //   token.access_token
+  // );
 
-  const { integrations } = await userAPI.getIntegrations(
-    token?.access_token as string
-  );
+  // const { integrations } = await userAPI.getIntegrations(
+  //   token?.access_token as string
+  // );
   return {
     props: {
-      integrations,
+      integrations : [] as any,
     },
   };
 }

@@ -1,7 +1,7 @@
 export function PlayIcon(props) {
   return (
     <svg
-      fill="none"
+      fill={`${props.fill ? props.fill : "none"}`}
       stroke="currentColor"
       strokeWidth={1.5}
       viewBox="0 0 24 24"

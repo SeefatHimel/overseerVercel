@@ -3,15 +3,14 @@ import { Button, Tooltip } from "antd";
 import { PlayIcon } from "@/icons/playIcon";
 import { StopIcon } from "@/icons/stopIcon";
 function BtnComponent(props) {
-  console.log(props.disable);
   return (
     <div className="col-span-1">
       {props.status === 0 ? (
-        <div className=" bg-gray-300 rounded-full">
+        <div className=" bg-indigo-700 rounded-full">
           <Tooltip placement="bottom" title={"Start Session"} color="blue">
             <div
               type="ghost"
-              className="border-0 text-black mx-auto w-min py-1"
+              className="border-0 text-white mx-auto w-min py-1"
               onClick={async () => {
                 await props.start();
                 document.getElementById(`horizontal-start${props.id}`)?.click();
@@ -19,7 +18,7 @@ function BtnComponent(props) {
               disabled={true}
               id={`vertical-start${props.id}`}
             >
-              <PlayIcon fill="black" className="h-5 w-5" />
+              <PlayIcon fill="white" className="h-5 w-5" />
             </div>
           </Tooltip>
         </div>
@@ -28,7 +27,7 @@ function BtnComponent(props) {
       )}
 
       {props.status === 1 ? (
-        <div className=" bg-blue-700 rounded-full">
+        <div className=" bg-indigo-700 rounded-full">
           <Tooltip
             placement="bottom"
             title={"Stop Session"}
@@ -54,11 +53,11 @@ function BtnComponent(props) {
       )}
 
       {props.status === 2 ? (
-        <div className=" bg-gray-300 rounded-full">
+        <div className=" bg-indigo-700 rounded-full">
           <Tooltip placement="bottom" title={"Start Session"} color="blue">
             <div
               type="ghost"
-              className="border-0 text-black mx-auto w-min py-1"
+              className="border-0 text-white mx-auto w-min py-1"
               onClick={async () => {
                 await props.start();
                 document
@@ -68,7 +67,7 @@ function BtnComponent(props) {
               id={`vertical-resume${props.id}`}
               disabled={props.disable}
             >
-              <PlayIcon fill="black" className="h-5 w-5" />
+              <PlayIcon fill="white" className="h-5 w-5" />
             </div>
           </Tooltip>
         </div>

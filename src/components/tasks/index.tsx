@@ -103,7 +103,7 @@ const TasksPage = ({ allTask }: any) => {
               style={{ maxHeight: "calc(100vh - 100px)" }}
             >
               <div
-                className="flex flex-col  gap-4 overflow-y-auto border-r-2 pr-2"
+                className="flex flex-col overflow-y-auto border-r-2 pr-2"
                 style={{ maxHeight: "calc(100vh - 100px)" }}
               >
                 {tasks.map((task) => (

@@ -14,7 +14,7 @@ function DisplayComponent(props) {
   // console.log(props.sessionTime);
   return (
     <div className=" text-center font-semibold m-auto col-span-5">
-      <Tooltip placement="bottom" title={"Current Session Time"} color="blue">
+      <Tooltip placement="bottom" title={"Total Spent Time"} color="blue">
         <span>
           {props.sessionTime.h >= 10
             ? props.sessionTime.h

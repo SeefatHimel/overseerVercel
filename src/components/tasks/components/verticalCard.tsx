@@ -1,4 +1,4 @@
-import { Card } from "antd";
+import { Card, Tooltip } from "antd";
 import Stopwatch from "../../stopWatch/vertical/reactStopWatch";
 import TaskDetailsModal from "../../modals/taskDetails.modal";
 import { getLocalStorage } from "@/storage/storage";
@@ -36,13 +36,16 @@ const VerticalCard = ({
   const handleDelete = async () => {
     await deleteTask(task.id);
   };
-  console.log(getTotalSpentTime(task.sessions) / (task?.estimation * 3600000));
+  const spentPercentage = Math.round(
+    getTotalSpentTime(task.sessions) / (task?.estimation * 36000)
+  );
+  console.log(getTotalSpentTime(task.sessions), task?.estimation * 3600000);
 
   return (
     <>
       <div
-        className={`w-full h-min disable p-2 border rounded-lg ${
-          task.id === selectedTask?.id ? "" : "bg-gray-200"
+        className={`w-full h-min disable p-2 border rounded ${
+          task.id !== selectedTask?.id ? "" : "bg-gray-200"
         }`}
         onClick={() => setSelectedTask(task)}
       >
@@ -51,13 +54,13 @@ const VerticalCard = ({
             className="hover:text-blue-500 flex gap-2 items-center hover:cursor-pointer text-lg font-medium"
             onClick={() => setViewModalOpen(true)}
           >
-            <div onClick={() => setCompleted(!completed)}>
+            {/* <div onClick={() => setCompleted(!completed)}>
               {completed ? (
                 <BsCircle className="text-gray-300" />
               ) : (
                 <BsCheck2Circle className="text-blue-700" />
               )}{" "}
-            </div>
+            </div> */}
             {taskName}
           </div>
           {/* <div className="w-32 h-1 bg-gray-200">
@@ -74,18 +77,33 @@ const VerticalCard = ({
           </div> */}
           <div>
             <div className="grid grid-cols-6 gap-1 w-80 items-center pr-3">
-              <div className="w-24 h-1 bg-gray-200 col-span-2">
-                <div
-                  className=" h-1 "
-                  style={{
-                    width: `${Math.round(
-                      getTotalSpentTime(task.sessions) /
-                        (task?.estimation * 3600000)
-                    )}%`,
-                    backgroundColor: statusColorEnum[task.status],
-                  }}
-                />
-              </div>
+              <Tooltip
+                placement="bottom"
+                title={`${spentPercentage}% Spent`}
+                color="blue"
+              >
+                {spentPercentage <= 100 ? (
+                  <div
+                    className={`w-24 col-span-2 h-1 ${
+                      task.id === selectedTask?.id ? "bg-white" : "bg-gray-200"
+                    }`}
+                  >
+                    <div
+                      className=" h-1 "
+                      style={{
+                        width: `${spentPercentage}%`,
+                        backgroundColor: statusColorEnum[task.status],
+                      }}
+                    />
+                  </div>
+                ) : (
+                  <div
+                    className={`w-24 col-span-2 h-1 ${
+                      task.id === selectedTask?.id ? "bg-red-500" : "bg-red-500"
+                    }`}
+                  />
+                )}
+              </Tooltip>
               {/* <div
                 className={`text-sm text-center font-medium col-span-2 `}
                 style={{

@@ -44,14 +44,14 @@ const VerticalCard = ({
   return (
     <>
       <div
-        className={`w-full h-min disable p-2 border rounded ${
-          task.id !== selectedTask?.id ? "" : "bg-gray-200"
+        className={`disable h-min w-full rounded border p-2  ${
+          task.id !== selectedTask?.id ? "hover:bg-gray-100" : "bg-gray-200"
         }`}
         onClick={() => setSelectedTask(task)}
       >
-        <div className="flex justify-between w-full items-center">
+        <div className="flex w-full items-center justify-between">
           <div
-            className="hover:text-blue-500 flex gap-2 items-center hover:cursor-pointer text-lg font-medium"
+            className="flex items-center gap-2 text-lg font-medium hover:cursor-pointer hover:text-blue-500"
             onClick={() => setViewModalOpen(true)}
           >
             {/* <div onClick={() => setCompleted(!completed)}>
@@ -76,7 +76,7 @@ const VerticalCard = ({
             />
           </div> */}
           <div>
-            <div className="grid grid-cols-6 gap-1 w-80 items-center pr-3">
+            <div className="grid w-80 grid-cols-6 items-center gap-1 pr-3">
               <Tooltip
                 placement="bottom"
                 title={`${spentPercentage}% Spent`}
@@ -84,7 +84,7 @@ const VerticalCard = ({
               >
                 {spentPercentage <= 100 ? (
                   <div
-                    className={`w-24 col-span-2 h-1 ${
+                    className={`col-span-2 h-1 w-24 ${
                       task.id === selectedTask?.id ? "bg-white" : "bg-gray-200"
                     }`}
                   >
@@ -98,7 +98,7 @@ const VerticalCard = ({
                   </div>
                 ) : (
                   <div
-                    className={`w-24 col-span-2 h-1 ${
+                    className={`col-span-2 h-1 w-24 ${
                       task.id === selectedTask?.id ? "bg-red-500" : "bg-red-500"
                     }`}
                   />

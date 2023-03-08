@@ -7,7 +7,7 @@ function BtnComponent(props) {
     <div className="col-span-1">
       {props.status === 0 ? (
         <div
-          className=" bg-indigo-700 rounded-full p-5 transition-all duration-1000"
+          className=" bg-indigo-700 rounded-full p-3 transition-all duration-1000"
           onClick={() => {
             props.start();
             document.getElementById(`vertical-start${props.id}`)?.click();
@@ -26,7 +26,7 @@ function BtnComponent(props) {
 
       {props.status === 1 ? (
         <div
-          className=" bg-indigo-700 rounded-full p-5"
+          className=" bg-indigo-700 rounded-full p-3"
           id={`horizontal-stop${props.id}`}
           onClick={() => {
             props.stop();
@@ -53,7 +53,7 @@ function BtnComponent(props) {
 
       {props.status === 2 ? (
         <div
-          className=" bg-indigo-700 rounded-full p-5 "
+          className=" bg-indigo-700 rounded-full p-3 "
           id={`horizontal-resume${props.id}`}
           onClick={() => {
             props.start();

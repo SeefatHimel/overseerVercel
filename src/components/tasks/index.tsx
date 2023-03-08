@@ -77,7 +77,7 @@ const TasksPage = ({ allTask }: any) => {
   useEffect(() => {}, [tasks]);
   return (
     <TaskContext.Provider value={{ tasklist: tasklist }}>
-      <div className="mr-8 " style={{ height: "calc(100vh - 100px)" }}>
+      <div className="mr-8 overflow-y-clip" style={{ height: "calc(100vh - 100px)" }}>
         <div className="flex justify-between mb-4">
           <h2 className="text-2xl font-bold">Tasks</h2>
           <div className="flex gap-1">
@@ -99,12 +99,12 @@ const TasksPage = ({ allTask }: any) => {
         <Spin spinning={loading}>
           {tasks.length ? (
             <div
-              className="grid grid-cols-2  gap-4 "
-              style={{ maxHeight: "calc(100vh - 100px)" }}
+              className="grid grid-cols-2 gap-4 "
+              // style={{ maxHeight: "calc(100vh - 100px)" }}
             >
               <div
                 className="flex flex-col overflow-y-auto border-r-2 pr-2"
-                style={{ maxHeight: "calc(100vh - 100px)" }}
+                // style={{ maxHeight: "calc(100vh - 100px)" }}
               >
                 {tasks.map((task) => (
                   <VerticalCard

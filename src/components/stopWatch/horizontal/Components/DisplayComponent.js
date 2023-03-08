@@ -13,7 +13,7 @@ function DisplayComponent(props) {
   };
   // console.log(props.sessionTime);
   return (
-    <div className=" text-center m-auto col-span-5 text-5xl font-bold pt-4">
+    <div className="col-span-5 m-auto text-center text-2xl font-bold">
       <Tooltip placement="left" title={"Current Session Time"} color="blue">
         <span>
           {props.sessionTime.h >= 10

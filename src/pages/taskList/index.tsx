@@ -24,7 +24,7 @@ const TaskList: NextPage = ({ allTask }: any) => {
   }, [taskList]);
   return (
     <div>
-      <div className="w-full mx-8">
+      <div className="w-full">
         <TasksPage allTask={allTask} />
       </div>
     </div>

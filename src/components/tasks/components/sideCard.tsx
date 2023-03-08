@@ -28,18 +28,20 @@ const SideCard = ({ task }: Props) => {
     if (newTask !== task) setNewTask(task);
   }, [task, newTask]);
   return (
-    <div className="bg--300" style={{ maxHeight: "calc(100vh - 150px)" }}>
+    <div className="" 
+    // style={{ maxHeight: "calc(100vh - 150px)" }}
+    >
       <Spin spinning={newTask !== task}></Spin>
       {newTask === task && (
         <div
-          className="w-full max-w-xl mb-2 px-2 border rounded-lg flex flex-col items-center gap-1  py-5"
-          style={{ maxHeight: "calc(100vh - 250px)" }}
+          className="mb-2 flex w-full max-w-xl flex-col items-center gap-0 rounded-lg  px-2  py-5"
+          // style={{ maxHeight: "calc(100vh - 250px)" }}
         >
-          <span className="text-xl font-bold w-full text-left">
+          <span className="w-full text-left text-xl font-bold">
             Time Tracking
           </span>
           <div
-            className="text-gray-400 w-min mx-auto pt-4 hover:cursor-pointer font-medium"
+            className="mx-auto w-max pt-2 font-medium text-xs text-gray-400 hover:cursor-pointer"
             onClick={() => setViewModalOpen(true)}
           >
             {taskName}
@@ -53,7 +55,7 @@ const SideCard = ({ task }: Props) => {
             {typeof task?.status === "string" && taskStatusEnum[task.status]}
           </div> */}
           <div>{newTask === task && <ReactStopWatchCopy task={newTask} />}</div>
-          <Divider className="px-0"/>
+          <Divider className="p-0 my-2" />
           <Sessions taskDetails={task} />
         </div>
       )}

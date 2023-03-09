@@ -47,11 +47,11 @@ const ImportSection = ({ integrations }: any) => {
     <div className="flex w-full flex-col gap-2">
       <ImportSelect {...{ data }} />
 
-      <IntegratedServices {...{ data }} />
+      {/* <IntegratedServices {...{ data }} /> */}
       <div className="flex justify-end">
         <Button type="link">Skip ...</Button>{" "}
       </div>
-      <Button onClick={() => handleOnclick()}>jira link</Button>
+      {/* <Button onClick={() => handleOnclick()}>jira link</Button> */}
     </div>
   );
 };

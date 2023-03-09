@@ -7,9 +7,9 @@ import ImportCard from "./importCard";
 const ImportSelect = ({ data }: any) => {
   const [selected, setSelected] = useState("");
   return (
-    <div className="w-full flex flex-col gap-2">
+    <div className="mx-auto flex max-w-[900px] flex-col gap-2">
       <div className="mx-auto">Select Source of Import</div>
-      <div className="p-4 border-2 rounded flex gap-4">
+      <div className="flex gap-4 rounded border-2 p-4">
         {data.map((d: any) => (
           <ImportCard
             key={Math.random()}
@@ -19,7 +19,7 @@ const ImportSelect = ({ data }: any) => {
           />
         ))}
       </div>
-      <Button
+      {/* <Button
         className="mx-auto w-52"
         onClick={async () => {
           if (selected === "Jira Software") {
@@ -29,7 +29,7 @@ const ImportSelect = ({ data }: any) => {
         }}
       >
         {selected.length > 0 ? "Import from " + selected : "Select"}{" "}
-      </Button>
+      </Button> */}
     </div>
   );
 };

@@ -20,19 +20,20 @@ const Sessions = ({ taskDetails }: Props) => {
   return (
     <>
       <h3 className="w-full  text-left">Sessions</h3>
-      <div className="w-full overflow-y-scroll max-h-40">
+      <div className="max-h-40 w-full overflow-y-scroll">
         {endedSessions?.map((session: any, index: number) => {
           const startTime: any = formatDate(session.startTime);
           const endTime: any = formatDate(session.endTime);
 
           const totalTime = getFormattedTotalTime(endTime - startTime);
           return (
-            <div className="grid grid-cols-3 " key={session.id}>
-              <div className="flex">{`${index + 1} > Start : ${getFormattedTime(
-                startTime
-              )}`}</div>
-              <div className="flex">{`End : ${getFormattedTime(endTime)}`}</div>
-              <div className="flex">Total : {totalTime} seconds</div>
+            <div className="grid grid-cols-3 gap-4 " key={session.id}>
+              <div className="col-span-2 flex justify-between">
+                <span>{`${index + 1} : ${getFormattedTime(startTime)}`}</span>
+                <span>to</span>
+                <span>{`${getFormattedTime(endTime)}`}</span>
+              </div>
+              <div className="flex">Total : {totalTime} s</div>
             </div>
           );
         })}

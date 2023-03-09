@@ -1,3 +1,5 @@
+import { monthsList } from "utils/constants";
+
 export const getFormattedTotalTime = (time: number) => {
   let tmp = time;
   tmp = Math.round(tmp / 1000);
@@ -6,8 +8,8 @@ export const getFormattedTotalTime = (time: number) => {
   const mins = tmp % 60;
   tmp = Math.floor(tmp / 60);
 
-  return `${tmp ? tmp + " hours " : ""}${mins ? mins + " Mins " : ""}${
-    seconds ?? seconds + "Seconds"
+  return `${tmp ? tmp + " h " : ""}${mins ? mins + " m " : ""}${
+    seconds ?? seconds + "s"
   }`;
 };
 
@@ -20,9 +22,33 @@ export const getFormattedTime = (timestamp: any) => {
     day = date?.getDate(),
     month = date?.getMonth(),
     year = date?.getFullYear();
+  let time = "am";
+  let zeroM = "";
+  let zeroH = "";
+  if (hours === 0) hours = 12;
+  else if (hours > 12) {
+    hours -= 12;
+    time = "pm";
+  }
+  if (minutes < 10) zeroM = "0";
+  if (hours < 10) zeroH = "0";
   return (
-    hours + ":" + minutes + ":" + seconds + " " + day + "/" + month + "/" + year
+    zeroH +
+    hours +
+    ":" +
+    zeroM +
+    minutes +
+    time +
+    ", " +
+    day +
+    " " +
+    monthsList[month] +
+    "," +
+    year
   );
+  // return (
+  //   hours + ":" + minutes + ":" + seconds + " " + day + "/" + month + "/" + year
+  // );
 };
 export const getTotalSpentTime = (sessions: any) => {
   let total: number = 0;

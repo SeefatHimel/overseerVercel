@@ -7,15 +7,16 @@ function BtnComponent(props) {
     <div className="col-span-1">
       {props.status === 0 ? (
         <div
-          className=" bg-indigo-700 rounded-full p-3 transition-all duration-1000"
+          className=" rounded-full bg-indigo-700 p-3 transition-all duration-1000"
           onClick={() => {
-            props.start();
             document.getElementById(`vertical-start${props.id}`)?.click();
+            document.getElementById(`vertical-resume${props.id}`)?.click();
+            props.start();
           }}
           id={`horizontal-start${props.id}`}
         >
           <Tooltip placement="bottom" title={"Start Session"} color="blue">
-            <div type="ghost" className="border-0 text-white mx-auto w-min">
+            <div type="ghost" className="mx-auto w-min border-0 text-white">
               <PlayIcon fill="white" className="h-6 w-6" />
             </div>
           </Tooltip>
@@ -26,11 +27,12 @@ function BtnComponent(props) {
 
       {props.status === 1 ? (
         <div
-          className=" bg-indigo-700 rounded-full p-3"
+          className=" rounded-full bg-indigo-700 p-3"
           id={`horizontal-stop${props.id}`}
           onClick={() => {
-            props.stop();
             document.getElementById(`vertical-stop${props.id}`)?.click();
+
+            props.stop();
           }}
         >
           <Tooltip
@@ -40,7 +42,7 @@ function BtnComponent(props) {
             className="mx-auto w-min"
           >
             <div
-              className="border-0 text-white mx-auto w-min"
+              className="mx-auto w-min border-0 text-white"
               // type="ghost"
             >
               <StopIcon fill="white" className="h-6 w-6" />
@@ -53,15 +55,16 @@ function BtnComponent(props) {
 
       {props.status === 2 ? (
         <div
-          className=" bg-indigo-700 rounded-full p-3 "
+          className=" rounded-full bg-indigo-700 p-3 "
           id={`horizontal-resume${props.id}`}
           onClick={() => {
-            props.start();
+            document.getElementById(`vertical-start${props.id}`)?.click();
             document.getElementById(`vertical-resume${props.id}`)?.click();
+            props.start();
           }}
         >
           <Tooltip placement="bottom" title={"Start Session"} color="blue">
-            <div type="ghost" className="border-0 text-white mx-auto w-min">
+            <div type="ghost" className="mx-auto w-min border-0 text-white">
               <PlayIcon fill="white" className="h-6 w-6" />
             </div>
           </Tooltip>

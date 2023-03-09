@@ -1,6 +1,7 @@
 import ImportCard from "@/components/importSection/importCard";
 import { Button } from "antd";
 import { userAPI } from "APIs";
+import { config } from "config";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
@@ -43,18 +44,13 @@ const ImportSection = ({ integrations }: any) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
-    <div className="w-full flex flex-col gap-2">
+    <div className="flex w-full flex-col gap-2">
       <ImportSelect {...{ data }} />
 
       <IntegratedServices {...{ data }} />
       <div className="flex justify-end">
         <Button type="link">Skip ...</Button>{" "}
       </div>
-      <Link
-        href={"http://ec2-54-172-94-212.compute-1.amazonaws.com:3000/auth/jira"}
-      >
-        jira amazon
-      </Link>
       <Button onClick={() => handleOnclick()}>jira link</Button>
     </div>
   );

@@ -8,7 +8,7 @@ import TaskInput from "../taskInput copy";
 import SideCard from "./components/sideCard";
 import VerticalCard from "./components/verticalCard";
 
-export const TaskContext = createContext<any>({ taskList: [] });
+export const TaskContext = createContext<any>({ taskList: [], task: null });
 const TasksPage = ({ allTask }: any) => {
   const [viewModalOpen, setViewModalOpen] = useState<boolean>(false);
   const [tasks, setTasks] = useState<TaskDto[]>([]);
@@ -77,14 +77,17 @@ const TasksPage = ({ allTask }: any) => {
   useEffect(() => {}, [tasks]);
   return (
     <TaskContext.Provider value={{ tasklist: tasklist }}>
-      <div className="mr-8 overflow-y-clip" style={{ height: "calc(100vh - 100px)" }}>
-        <div className="flex justify-between mb-4">
+      <div
+        className="mr-8 overflow-y-clip"
+        style={{ height: "calc(100vh - 100px)" }}
+      >
+        <div className="mb-4 flex justify-between">
           <h2 className="text-2xl font-bold">Tasks</h2>
           <div className="flex gap-1">
             <Button onClick={() => setViewModalOpen(true)}>Add Task</Button>
             <Button
-              className={`flex justify-center items-center ${
-                syncing ? "text-green-500 border-green-500" : ""
+              className={`flex items-center justify-center ${
+                syncing ? "border-green-500 text-green-500" : ""
               }`}
               onClick={async () => {
                 setSyncing(true);
@@ -118,11 +121,7 @@ const TasksPage = ({ allTask }: any) => {
               </div>
               <div>
                 {selectedTask ? (
-                  <SideCard
-                    task={
-                      tasks?.filter((task) => task.id === selectedTask?.id)[0]
-                    }
-                  />
+                  <SideCard task={selectedTask} />
                 ) : (
                   <Empty description="No task selected" />
                 )}

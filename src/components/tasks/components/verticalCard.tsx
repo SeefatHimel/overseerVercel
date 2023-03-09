@@ -26,12 +26,14 @@ const VerticalCard = ({
   const addSession = (session: any) => {
     if (!task.sessions) task.sessions = [];
     task.sessions?.push(session);
+    setSelectedTask({ ...task });
   };
   const addEndTime = (session: any) => {
     task.sessions = task.sessions?.map((_session: any) => {
       if (_session.id === session.id) return session;
       else return _session;
     });
+    setSelectedTask({ ...task });
   };
   const handleDelete = async () => {
     await deleteTask(task.id);
@@ -79,7 +81,11 @@ const VerticalCard = ({
             <div className="grid w-80 grid-cols-6 items-center gap-1 pr-3">
               <Tooltip
                 placement="bottom"
-                title={`${spentPercentage}% Spent`}
+                title={`${
+                  task?.estimation
+                    ? `${spentPercentage}% Spent`
+                    : "No Estimation"
+                }`}
                 color="blue"
               >
                 {spentPercentage <= 100 ? (

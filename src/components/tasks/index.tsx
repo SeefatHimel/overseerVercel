@@ -35,9 +35,8 @@ const TasksPage = ({ allTask }: any) => {
   const deleteTask = async (taskId: any) => {
     setLoading(true);
     try {
-      await userAPI.deleteTask(taskId);
-      message.success("Task deleted successfully");
-      setTasks((tasks) => tasks.filter((task) => task.id !== taskId));
+      const res = await userAPI.deleteTask(taskId);
+      if (res) setTasks((tasks) => tasks.filter((task) => task.id !== taskId));
     } catch (error) {
       message.error("Error deleting task");
     } finally {

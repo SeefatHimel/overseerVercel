@@ -88,10 +88,10 @@ export async function deleteTaskRest(taskId: CreateTaskDto) {
       },
     });
     // console.log(res);
-
-    return res.data;
+    toast.success("Task Deleted");
+    return true;
   } catch (error: any) {
-    toast.error("Failed to Create Task : " + error.message);
+    toast.error("Failed to Delete Task : " + error.message);
     return false;
   }
 }

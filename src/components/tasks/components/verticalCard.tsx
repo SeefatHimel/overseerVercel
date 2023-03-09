@@ -86,29 +86,36 @@ const VerticalCard = ({
                     ? `${spentPercentage}% Spent`
                     : "No Estimation"
                 }`}
-                color="blue"
+                color={`${spentPercentage > 100 ? "red" : "blue"}  `}
               >
-                {spentPercentage <= 100 ? (
-                  <div
-                    className={`col-span-2 h-1 w-24 ${
-                      task.id === selectedTask?.id ? "bg-white" : "bg-gray-200"
-                    }`}
-                  >
+                <div className="col-span-2 flex h-full items-center ">
+                  {" "}
+                  {spentPercentage <= 100 ? (
                     <div
-                      className=" h-1 "
-                      style={{
-                        width: `${spentPercentage}%`,
-                        backgroundColor: statusColorEnum[task.status],
-                      }}
+                      className={`col-span-2 h-1 w-24 ${
+                        task.id === selectedTask?.id
+                          ? "bg-white"
+                          : "bg-gray-200"
+                      }`}
+                    >
+                      <div
+                        className=" h-1 "
+                        style={{
+                          width: `${spentPercentage}%`,
+                          backgroundColor: statusColorEnum[task.status],
+                        }}
+                      />
+                    </div>
+                  ) : (
+                    <div
+                      className={`col-span-2 h-1 w-24 ${
+                        task.id === selectedTask?.id
+                          ? "bg-red-500"
+                          : "bg-red-500"
+                      }`}
                     />
-                  </div>
-                ) : (
-                  <div
-                    className={`col-span-2 h-1 w-24 ${
-                      task.id === selectedTask?.id ? "bg-red-500" : "bg-red-500"
-                    }`}
-                  />
-                )}
+                  )}
+                </div>
               </Tooltip>
               {/* <div
                 className={`text-sm text-center font-medium col-span-2 `}

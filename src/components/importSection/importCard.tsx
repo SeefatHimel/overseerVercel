@@ -1,4 +1,5 @@
 import { Image } from "antd";
+import { userAPI } from "APIs";
 import { useEffect } from "react";
 
 const ImportCard = ({ data, selected, setSelected }: any) => {
@@ -7,10 +8,22 @@ const ImportCard = ({ data, selected, setSelected }: any) => {
 
   return (
     <div
-      className={`w-40 grayscale border-blue-600 border-2 p-2 rounded ${
-        selected === data.title ? "grayscale-0" : "grayscale"
-      } hover:grayscale-0`}
-      onClick={() => setSelected(data.title)}
+      className={`w-40 rounded border-2 border-blue-600 p-2 grayscale ${
+        data.type === "JIRA" ? "grayscale-0" : "grayscale"
+      }`}
+      onClick={async () => {
+        // setSelected(data.title);
+        if (data.type === "JIRA") {
+          try {
+            const response = await userAPI.getJiraLink();
+            console.log(
+              "🚀 ~ file: index.tsx:26 ~ handleOnclick ~ response:",
+              response
+            );
+            window.open(response, "_self");
+          } catch (error) {}
+        }
+      }}
     >
       <div className="flex h-10 items-center justify-center gap-2">
         <Image

@@ -8,7 +8,7 @@ export interface apiFunction {
   logout: () => {};
   registerUser: (data: RegisterDto) => Promise<RegisterDto | undefined>;
   createTask: (data: CreateTaskDto) => Promise<TaskDto>;
-  deleteTask: (data: CreateTaskDto) => Promise<CreateTaskDto | undefined>;
+  deleteTask: (data: any) => Promise<any | undefined>;
   getTasks: (token?: string) => Promise<any>;
   syncTasks: (token?: string) => Promise<any>;
   getIntegrations: (token?: string) => Promise<any>;

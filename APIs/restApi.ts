@@ -80,7 +80,7 @@ export async function createTaskRest(data: CreateTaskDto) {
   }
 }
 
-export async function deleteTaskRest(taskId: CreateTaskDto) {
+export async function deleteTaskRest(taskId: any) {
   try {
     const res = await axios.delete(`${apiEndPoints.tasks}/${taskId}`, {
       headers: {

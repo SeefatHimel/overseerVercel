@@ -23,7 +23,7 @@ const TaskDetailsModal = ({
   setIsModalOpen,
   handleDelete,
 }: Props) => {
-  const [editing, SetEditing] = useState(false);
+  const [editing, SetEditing] = useState(true);
   const [currentTaskName, setCurrentTaskName] = useState(task?.title);
   const [currentSession, setCurrentSession] = useState(null);
   const taskDetails = task;
@@ -49,7 +49,7 @@ const TaskDetailsModal = ({
           <div className="flex items-center gap-4">
             <span className="w-20 text-right font-medium">Task Name:</span>
             <div className="flex-1">
-              {editing ? (
+              {editing && false ? (
                 <Input
                   size="small"
                   value={currentTaskName}
@@ -59,7 +59,7 @@ const TaskDetailsModal = ({
                 <div className="text-lg font-medium">{currentTaskName}</div>
               )}
             </div>
-            {editing ? (
+            {/* {editing ? (
               <div className="flex gap-2">
                 <Button
                   type="primary"
@@ -78,7 +78,7 @@ const TaskDetailsModal = ({
               <Button icon={<EditOutlined />} onClick={() => SetEditing(true)}>
                 Edit
               </Button>
-            )}
+            )} */}
             {editing && (
               <Button
                 danger

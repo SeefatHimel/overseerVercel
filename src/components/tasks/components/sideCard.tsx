@@ -28,10 +28,7 @@ const SideCard = ({ task }: Props) => {
     if (newTask !== task) setNewTask(task);
   }, [task, newTask]);
   return (
-    <div
-      className=""
-      // style={{ maxHeight: "calc(100vh - 150px)" }}
-    >
+    <div className="" style={{ maxHeight: "calc(100vh - 155px)" }}>
       <Spin spinning={newTask !== task}></Spin>
       {newTask === task && (
         <div

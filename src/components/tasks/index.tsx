@@ -101,13 +101,10 @@ const TasksPage = ({ allTask }: any) => {
 
         <Spin spinning={loading}>
           {tasks.length ? (
-            <div
-              className="grid grid-cols-2 gap-4 "
-              // style={{ maxHeight: "calc(100vh - 100px)" }}
-            >
+            <div className="grid grid-cols-2 gap-4 overflow-y-auto">
               <div
-                className="flex flex-col overflow-y-auto border-r-2 pr-2"
-                // style={{ maxHeight: "calc(100vh - 100px)" }}
+                className="flex flex-col overflow-y-auto border-r-2 pr-2 "
+                style={{ height: "calc(100vh - 155px)" }}
               >
                 {tasks.map((task) => (
                   <VerticalCard

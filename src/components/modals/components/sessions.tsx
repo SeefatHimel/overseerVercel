@@ -20,7 +20,7 @@ const Sessions = ({ taskDetails }: Props) => {
   return (
     <>
       <h3 className="w-full  text-left">Sessions</h3>
-      <div className="max-h-40 w-full overflow-y-scroll">
+      <div className="max-h-64 w-full overflow-y-scroll">
         {endedSessions?.map((session: any, index: number) => {
           const startTime: any = formatDate(session.startTime);
           const endTime: any = formatDate(session.endTime);

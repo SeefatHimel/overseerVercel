@@ -8,7 +8,7 @@ const ImportCard = ({ data, selected, setSelected }: any) => {
 
   return (
     <div
-      className={`w-40 rounded border-2 border-blue-600 p-2 grayscale ${
+      className={`w-40 rounded border-2 border-blue-600 p-2 grayscale hover:cursor-pointer ${
         data.type === "JIRA" ? "grayscale-0" : "grayscale"
       }`}
       onClick={async () => {

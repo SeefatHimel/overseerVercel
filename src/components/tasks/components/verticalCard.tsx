@@ -1,12 +1,11 @@
-import { Card, Tooltip } from "antd";
 import Stopwatch from "../../stopWatch/vertical/reactStopWatch";
 import TaskDetailsModal from "../../modals/taskDetails.modal";
-import { getLocalStorage } from "@/storage/storage";
 import { TaskDto } from "../../../../models/tasks/index";
-import { statusColorEnum, taskStatusEnum } from "utils/constants";
-import { BsCheck2Circle, BsCircle } from "react-icons/bs";
-import { useState } from "react";
+import { Tooltip } from "antd";
 import { getTotalSpentTime } from "@/services/timeActions";
+import { statusColorEnum } from "utils/constants";
+import { useState } from "react";
+
 type Props = {
   task: TaskDto;
   deleteTask: Function;
@@ -46,7 +45,7 @@ const VerticalCard = ({
   return (
     <>
       <div
-        className={`disable h-min w-full rounded border p-2  ${
+        className={`disable h-min w-full rounded border p-2 hover:cursor-pointer ${
           task.id !== selectedTask?.id ? "hover:bg-gray-100" : "bg-gray-200"
         }`}
         onClick={() => setSelectedTask(task)}

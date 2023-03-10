@@ -2,20 +2,23 @@ import { Button, Empty, Spin, message } from "antd";
 import { createContext, useEffect, useState } from "react";
 
 import GlobalModal from "../modals/globalModal";
+import SessionStartWarning from "./components/warning";
 import SideCard from "./components/sideCard";
 import { SyncOutlined } from "@ant-design/icons";
 import { TaskDto } from "models/tasks";
-import TaskInput from "../taskInput copy";
+import TaskInput from "./components/taskInput";
 import VerticalCard from "./components/verticalCard";
 import { userAPI } from "APIs";
 
 export const TaskContext = createContext<any>({ taskList: [], task: null });
 const TasksPage = () => {
   const [viewModalOpen, setViewModalOpen] = useState<boolean>(false);
+  const [warningModalOpen, setWarningModalOpen] = useState<boolean>(false);
   const [tasks, setTasks] = useState<TaskDto[]>([]);
   const [loading, setLoading] = useState(false);
   const [syncing, setSyncing] = useState(false);
   const [selectedTask, setSelectedTask] = useState<TaskDto | null>(null);
+  const [runningTask, setRunningTask] = useState<TaskDto | null>(null);
   const [tasklist, setTasklist] = useState();
 
   const createTask = async (data: any) => {
@@ -24,10 +27,37 @@ const TasksPage = () => {
       const res = await userAPI.createTask(data);
       message.success("Task created successfully");
       setTasks((tasks) => [res, ...tasks]);
+      if (tasks) {
+        tasks.map((task) => {
+          if (task.sessions[task.sessions.length - 1]?.status === "STARTED") {
+            setRunningTask(task);
+          }
+        });
+      }
       setViewModalOpen(false);
     } catch (error) {
       message.error("Error creating task");
       setViewModalOpen(false);
+    } finally {
+      setLoading(false);
+    }
+  };
+  const handleWarning = async (data: any) => {
+    try {
+      const res = await userAPI.createTask(data);
+      message.success("Task created successfully");
+      setTasks((tasks) => [res, ...tasks]);
+      if (tasks) {
+        tasks.map((task) => {
+          if (task.sessions[task.sessions.length - 1]?.status === "STARTED") {
+            setRunningTask(task);
+          }
+        });
+      }
+      setWarningModalOpen(false);
+    } catch (error) {
+      message.error("Error creating task");
+      setWarningModalOpen(false);
     } finally {
       setLoading(false);
     }
@@ -103,7 +133,7 @@ const TasksPage = () => {
           {tasks.length ? (
             <div className="grid grid-cols-2 gap-4 overflow-y-auto">
               <div
-                className="flex flex-col overflow-y-auto border-r-2 pr-2 "
+                className="flex flex-col gap-2 overflow-y-auto border-r-2 pr-2"
                 style={{ height: "calc(100vh - 155px)" }}
               >
                 {tasks.map((task) => (
@@ -134,6 +164,15 @@ const TasksPage = () => {
           setIsModalOpen={setViewModalOpen}
         >
           <TaskInput taskList={tasklist} createTask={createTask} />
+        </GlobalModal>
+        <GlobalModal
+          isModalOpen={warningModalOpen}
+          setIsModalOpen={setWarningModalOpen}
+        >
+          <SessionStartWarning
+            runningTask={runningTask}
+            handleWarning={handleWarning}
+          />
         </GlobalModal>
       </div>
     </TaskContext.Provider>

@@ -1,10 +1,10 @@
-import { LogoutOutlined, UnorderedListOutlined } from "@ant-design/icons";
-import { Image, Tooltip } from "antd";
 import { AiOutlineLogout } from "react-icons/ai";
-import Link from "next/link";
+import { BiImport } from "react-icons/bi";
+import { TiExport } from "react-icons/ti";
+import { UnorderedListOutlined } from "@ant-design/icons";
 import { useRouter } from "next/router";
 import { userAPI } from "APIs";
-import { GrIntegration } from "react-icons/gr";
+
 const SideMenu = () => {
   const router = useRouter();
   const handleLogOut = async () => {
@@ -16,8 +16,8 @@ const SideMenu = () => {
     const router = useRouter();
     return (
       <li
-        className={`m-5 h-6 w-6 flex flex-col justify-center hover:bg-indigo-500 hover:text-white hover:cursor-pointer rounded px-1 ${
-          active ? "bg-indigo-500 text-white scale-110" : ""
+        className={`m-5 flex h-6 w-6 flex-col justify-center rounded px-1  hover:cursor-pointer hover:bg-indigo-500 hover:text-white ${
+          active ? "scale-110 bg-indigo-500 text-white" : "text-black"
         }`}
         onClick={() => {
           router.push(option.link);
@@ -28,7 +28,7 @@ const SideMenu = () => {
     );
   };
   return (
-    <div className="bg-indigo-700 h-screen flex justify-center items-center">
+    <div className="flex h-screen items-center justify-center bg-indigo-700">
       <div className="flex h-full w-16 flex-col justify-between">
         <div>
           {" "}
@@ -54,7 +54,7 @@ const SideMenu = () => {
         </div>
         <div className="flex items-center justify-center pb-5 text-white">
           <div
-            className="p-1 scale-110  hover:bg-indigo-500 rounded-full hover:cursor-pointer"
+            className="scale-110 rounded-full  p-1 hover:cursor-pointer hover:bg-indigo-500"
             onClick={handleLogOut}
           >
             <AiOutlineLogout />
@@ -73,7 +73,12 @@ export const sideMenuOptions = [
   {
     link: "/integrations",
     title: "Integrations Page",
-    icon: <GrIntegration />,
+    icon: <BiImport />,
+  },
+  {
+    link: "/exports",
+    title: "Exports",
+    icon: <TiExport />,
   },
   // { link: "/onBoarding", title: "OnBoarding Page" },
 ];

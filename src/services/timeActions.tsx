@@ -12,7 +12,7 @@ export const getFormattedTotalTime = (time: number) => {
     seconds ?? seconds + "s"
   }`;
 };
-
+export const formatDate = (time: any) => (time ? new Date(time) : null);
 export const getFormattedTime = (timestamp: any) => {
   // or use padStart
   const date = timestamp;

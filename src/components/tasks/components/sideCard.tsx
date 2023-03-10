@@ -1,10 +1,9 @@
-import Sessions from "@/components/modals/components/sessions";
-import StopWatch from "@/components/stopWatch/vertical/reactStopWatch";
+import { Divider, Spin } from "antd";
+import { useEffect, useState } from "react";
+
 import ReactStopWatchCopy from "@/components/stopWatch/horizontal/reactStopWatchCopy";
-import { Card, Divider, Spin } from "antd";
+import Sessions from "@/components/modals/components/sessions";
 import { TaskDto } from "models/tasks";
-import { useState, useEffect } from "react";
-import { statusColorEnum, taskStatusEnum } from "utils/constants";
 
 type Props = {
   task: TaskDto;

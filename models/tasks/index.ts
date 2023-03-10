@@ -9,7 +9,7 @@ export type TaskDto = {
   estimation: number;
   status: "IN_PROGRESS" | "TODO" | "DONE";
   due: any;
-  priority: string;
+  priority: "NORMAL" | "HIGH" | "LOW";
   labels: string[];
   createdAt: string;
   sessions: any;

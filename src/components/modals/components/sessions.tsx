@@ -1,4 +1,5 @@
 import {
+  formatDate,
   getFormattedTime,
   getFormattedTotalTime,
 } from "@/services/timeActions";
@@ -8,7 +9,6 @@ type Props = {
 };
 
 const Sessions = ({ taskDetails }: Props) => {
-  const formatDate = (time: any) => new Date(time);
 
   const endedSessions = taskDetails?.sessions?.filter(
     (session: any) => session.endTime

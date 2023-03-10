@@ -1,14 +1,15 @@
-import axios from "axios";
-import { LoginDto, LoginResponseDto, RegisterDto } from "models/auth";
-import { apiEndPoints } from "utils/apiEndPoints";
-import { toast } from "react-toastify";
 import { GetCookie, RemoveCookie, SetCookie } from "@/services/cookie.service";
-import { CreateTaskDto } from "models/tasks";
+import { LoginDto, LoginResponseDto, RegisterDto } from "models/auth";
 import {
   deleteFromLocalStorage,
   getLocalStorage,
   setLocalStorage,
 } from "@/storage/storage";
+
+import { CreateTaskDto } from "models/tasks";
+import { apiEndPoints } from "utils/apiEndPoints";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 export async function loginRest(
   data: LoginDto
@@ -242,7 +243,7 @@ export async function getIntegrationsRest(token?: string) {
         Authorization: `Bearer ${token ? token : GetCookie("access_token")}`,
       },
     });
-    console.log("getTasksRest", res);
+    console.log("getIntegrationsRest", res);
     return res.data;
   } catch (error: any) {
     toast.error("Failed to Get Task : " + error.message);

@@ -1,14 +1,10 @@
-import ImportCard from "@/components/importSection/importCard";
-import { Button } from "antd";
-import { userAPI } from "APIs";
-import { config } from "config";
-import Link from "next/link";
-import { useState, useEffect } from "react";
-import { toast } from "react-toastify";
-import IntegratedServices from "./imported";
-import ImportSelect from "./importSelect";
+import { useEffect, useState } from "react";
 
-const ImportSection = ({ integrations }: any) => {
+import { Button } from "antd";
+import ImportSelect from "./importSelect";
+import { userAPI } from "APIs";
+
+const ImportSection = () => {
   const [integratedTypes, setIntegratedTypes] = useState([]);
 
   const data = [
@@ -35,14 +31,24 @@ const ImportSection = ({ integrations }: any) => {
       window.open(response, "_self");
     } catch (error) {}
   };
-  useEffect(() => {
-    if (integrations) {
+
+  const getIntegrations = async () => {
+    if (integratedTypes.length <= 0) {
       const tmp: string[] = [];
-      integrations.forEach((i: any) => tmp.push(i.type));
-      setIntegratedTypes(tmp);
+      const integrations = await userAPI.getIntegrations();
+      if (integrations) {
+        integrations.forEach((i: any) => tmp.push(i.type));
+        setIntegratedTypes(tmp);
+      }
     }
+  };
+
+  useEffect(() => {
+    getIntegrations();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  console.log(integratedTypes);
+
   return (
     <div className="flex w-full flex-col gap-2">
       <ImportSelect {...{ data }} />

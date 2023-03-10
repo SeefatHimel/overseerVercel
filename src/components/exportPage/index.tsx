@@ -1,6 +1,15 @@
+import { Empty, Spin, Table, message } from "antd";
 import React, { useEffect, useState } from "react";
-import { Empty, message, Space, Spin, Table, Tag } from "antd";
-import type { ColumnsType, TableProps } from "antd/es/table";
+import {
+  formatDate,
+  getFormattedTotalTime,
+  getTotalSpentTime,
+} from "@/services/timeActions";
+
+import type { TableProps } from "antd/es/table";
+import { TaskDto } from "models/tasks";
+import { getFormattedTime } from "../../services/timeActions";
+import { userAPI } from "APIs";
 
 interface DataType {
   key: string;
@@ -130,16 +139,6 @@ const columns: any = [
   // },
 ];
 
-import { NextPage } from "next";
-import { TaskDto } from "models/tasks";
-import { userAPI } from "APIs";
-import {
-  formatDate,
-  getFormattedTotalTime,
-  getTotalSpentTime,
-} from "@/services/timeActions";
-import { getFormattedTime } from "../../services/timeActions";
-
 const ExportPageComponent = () => {
   const [tasks, setTasks] = useState<TaskDto[]>([]);
   const [loading, setLoading] = useState(false);
@@ -160,6 +159,7 @@ const ExportPageComponent = () => {
           : "Not Started";
         const total = getFormattedTotalTime(getTotalSpentTime(task.sessions));
         return {
+          id: task.id,
           title: task.title,
           description: task.description,
           estimation: task.estimation,
@@ -203,6 +203,7 @@ const ExportPageComponent = () => {
               columns={columns}
               dataSource={tasks}
               onChange={onChange}
+              rowKey={"id"}
               pagination={{ position: ["bottomCenter"] }}
             />
           </div>

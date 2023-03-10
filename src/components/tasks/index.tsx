@@ -1,21 +1,22 @@
-import { SyncOutlined } from "@ant-design/icons";
-import { Button, Empty, message, Spin } from "antd";
-import { userAPI } from "APIs";
-import { TaskDto } from "models/tasks";
-import { useState, useEffect, useContext, createContext } from "react";
+import { Button, Empty, Spin, message } from "antd";
+import { createContext, useEffect, useState } from "react";
+
 import GlobalModal from "../modals/globalModal";
-import TaskInput from "../taskInput copy";
 import SideCard from "./components/sideCard";
+import { SyncOutlined } from "@ant-design/icons";
+import { TaskDto } from "models/tasks";
+import TaskInput from "../taskInput copy";
 import VerticalCard from "./components/verticalCard";
+import { userAPI } from "APIs";
 
 export const TaskContext = createContext<any>({ taskList: [], task: null });
-const TasksPage = ({ allTask }: any) => {
+const TasksPage = () => {
   const [viewModalOpen, setViewModalOpen] = useState<boolean>(false);
   const [tasks, setTasks] = useState<TaskDto[]>([]);
   const [loading, setLoading] = useState(false);
   const [syncing, setSyncing] = useState(false);
   const [selectedTask, setSelectedTask] = useState<TaskDto | null>(null);
-  const [tasklist, setTasklist] = useState(allTask);
+  const [tasklist, setTasklist] = useState();
 
   const createTask = async (data: any) => {
     setLoading(true);
